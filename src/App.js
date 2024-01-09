@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import Details from './components/Details';
+import PlantingDiagram from './components/PlantingDiagram';
 import './App.css';
 
 function App() {
-  return (
+  const [selectedSpecies, setSelectedSpecies] = useState(null);
+
+  // Add a function to set the selected species in App component
+  const handleSpeciesChange = (species) => {
+    setSelectedSpecies(species);
+  };
+
+  return (    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <h3>Saf Design</h3>
+      <Sidebar onSpeciesChange={handleSpeciesChange} />
+      <div className="main-view">
+        {/* Conditionally render PlantingDiagram and Details */}
+        {selectedSpecies && (
+          <>
+            <PlantingDiagram selectedSpecies={selectedSpecies} />
+            <Details species={selectedSpecies} />
+          </>
+        )}
+      </div>
+    </div>    
   );
 }
 
