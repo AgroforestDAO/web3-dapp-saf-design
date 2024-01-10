@@ -28,15 +28,21 @@ class PlantingDiagram extends React.Component {
     return (
       <div style={styles.plantingDiagram}>
         {/* Horizontal row with 10 PlantingAreas */}
-        {[...Array(10)].map((_, colIndex) => (
-          <PlantingArea key={colIndex} spacing="100px">
-            {selectedSpecies && (
-              <Plant
-                image={selectedSpecies.image}
-                isSelected={selectedSpecies === colIndex}
-              />
-            )}
-          </PlantingArea>
+        {[...Array(5)].map((_, colIndex) => (
+          <React.Fragment key={colIndex}>
+            {/* PlantingArea with the planted species */}
+            <PlantingArea spacing="50px">
+              {selectedSpecies && (
+                <Plant
+                  image={selectedSpecies.image}
+                  isSelected={colIndex === 0}
+                />
+              )}
+            </PlantingArea>
+            {/* Two empty PlantingAreas to the right */}
+            <PlantingArea spacing="50px" />
+            <PlantingArea spacing="50px" />
+          </React.Fragment>
         ))}
       </div>
     );
