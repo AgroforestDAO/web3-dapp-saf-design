@@ -20,12 +20,19 @@ function Home() {
         {selectedSpecies && (
           <>
             <PlantingDiagram selectedSpecies={selectedSpecies} />
-            <Details species={selectedSpecies} />
+            <Details species={selectedSpecies} style={detailsStyle} />
           </>
         )}
       </div>
     </div>    
   );
+};
+
+const detailsStyle = {
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
+  marginBottom: '50px'
 };
 
 export default Home;

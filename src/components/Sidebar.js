@@ -4,7 +4,7 @@ import Dropdown from './Dropdown';
 const Sidebar = ({ onSpeciesChange }) => {
   return (
     <div style={styles.sidebar}>
-      <h3>Ferramentas</h3>
+      <h3>Tools</h3>
       <Dropdown onSpeciesChange={onSpeciesChange} />
     </div>
   );
