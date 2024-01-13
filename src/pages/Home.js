@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../components/Sidebar';
 import Details from '../components/Details';
-import PlantingDiagram from '../components/PlantingDiagram';
 import Navbar from '../components/Navbar';
 
 function Home() {
@@ -15,13 +13,11 @@ function Home() {
   return (    
     <div className="App">
       <Navbar />
-      <h3>Saf Design</h3>
-      <Sidebar onSpeciesChange={handleSpeciesChange} />
+      <h3>Saf Design</h3>    
       <div className="main-view">
         {/* Conditionally render PlantingDiagram and Details */}
         {selectedSpecies && (
-          <>
-            <PlantingDiagram selectedSpecies={selectedSpecies} />
+          <>           
             <Details species={selectedSpecies} style={detailsStyle} />
           </>
         )}
