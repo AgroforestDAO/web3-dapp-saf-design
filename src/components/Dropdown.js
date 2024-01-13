@@ -16,7 +16,6 @@ const Dropdown = ({ onSpeciesChange }) => {
 
   return (
     <>
-      <label>Species(1/3)</label>
       <select value={selectedSpecies} onChange={handleChange}>
         <option value="">Select...</option>
         {speciesList.map((species, index) => (

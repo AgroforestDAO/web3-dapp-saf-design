@@ -11,8 +11,8 @@ const Details = ({ species, style }) => {
   return (
     <div style={style}>
       <h3>Details</h3>
-      <img src={require(`../assets/${image}`)} alt={`Image of ${name}`} width={50} />
-      <p><strong>Name:</strong> {name}</p>
+      <img src={require(`../assets/species/${image}`)} alt={`Image of ${name}`} width={50} />
+      <apeciesp><strong>Name:</strong> {name}</apeciesp>
       <p><strong>Stratum:</strong> {stratum}</p>
       <p><strong>Occupied Space:</strong> {occupied_space}</p>
       <p><strong>Growth Time:</strong> {growth_time}</p>
