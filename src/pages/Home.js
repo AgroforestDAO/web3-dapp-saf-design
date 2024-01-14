@@ -1,19 +1,14 @@
 // Home.js
 import React from 'react';
 import Navbar from '../components/Navbar';
-import Dropdown from '../components/Dropdown';
-import Details from '../components/Details';
-import { SpeciesProvider } from '../context/SpeciesContext';
+import SafPlaning from '../components/SafPlaning';
 
 function Home() {
   return (    
     <div className="App">
       <Navbar />
-      <h3>Saf Design</h3>    
-      <SpeciesProvider>
-        <Dropdown />
-        <Details />
-      </SpeciesProvider>
+      <h3>Planejamento de SAF</h3>    
+      <SafPlaning />
     </div>    
   );
 };

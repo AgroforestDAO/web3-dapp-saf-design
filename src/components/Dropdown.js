@@ -1,29 +1,30 @@
 import React from 'react';
 import speciesList from '../species';
-import { useSpecies } from '../context/SpeciesContext';
 
-const Dropdown = () => {
-  const { selectedSpecies, setSelectedSpecies } = useSpecies();
-
-  const handleChange = (event) => {
+function Dropdown(props) {
+  const handleChange = function(event) {
     const selectedName = event.target.value;
-    const selected = speciesList.find(species => species.name === selectedName);
+    const selected = speciesList.find(function(species) {
+      return species.name === selectedName;
+    });
     
-    setSelectedSpecies(selected);
+    props.onSelect(selected);
   };
 
   return (
     <>
-      <select value={selectedSpecies?.name || ''} onChange={handleChange}>
+      <select value={props.selected?.name || ''} onChange={handleChange}>
         <option value="">Select...</option>
-        {speciesList.map((species, index) => (
-          <option key={index} value={species.name}>
-            {species.name}
-          </option>
-        ))}
+        {speciesList.map(function(species, index) {
+          return (
+            <option key={index} value={species.name}>
+              {species.name}
+            </option>
+          );
+        })}
       </select>
     </>
   );
-};
+}
 
 export default Dropdown;
