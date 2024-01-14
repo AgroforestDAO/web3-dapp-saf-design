@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import speciesList from '../species';
+import { useSpecies } from '../context/SpeciesContext';
 
-const Dropdown = ({ onSpeciesChange }) => {
-  const [selectedSpecies, setSelectedSpecies] = useState('');
+const Dropdown = () => {
+  const { selectedSpecies, setSelectedSpecies } = useSpecies();
 
   const handleChange = (event) => {
     const selectedName = event.target.value;
     const selected = speciesList.find(species => species.name === selectedName);
     
-    setSelectedSpecies(selectedName);
-
-    // Pass the selected species to the parent component
-    onSpeciesChange(selected);
+    setSelectedSpecies(selected);
   };
 
   return (
     <>
-      <select value={selectedSpecies} onChange={handleChange}>
+      <select value={selectedSpecies?.name || ''} onChange={handleChange}>
         <option value="">Select...</option>
         {speciesList.map((species, index) => (
           <option key={index} value={species.name}>
