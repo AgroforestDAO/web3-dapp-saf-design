@@ -1,19 +1,21 @@
 import React from 'react';
-import speciesList from '../species';
+import { useSpecies } from '../context/SpeciesContext';
 
-function Dropdown(props) {
+function Dropdown({ selected, onSelect }) {
+  const { speciesList } = useSpecies();
+
   const handleChange = function(event) {
     const selectedName = event.target.value;
     const selected = speciesList.find(function(species) {
       return species.name === selectedName;
     });
     
-    props.onSelect(selected);
+    onSelect(selected);
   };
 
   return (
     <>
-      <select value={props.selected?.name || ''} onChange={handleChange}>
+      <select value={selected?.name || ''} onChange={handleChange} style={{ backgroundColor: selected ? 'green' : 'white' }}>
         <option value="">Select...</option>
         {speciesList.map(function(species, index) {
           return (
@@ -26,5 +28,4 @@ function Dropdown(props) {
     </>
   );
 }
-
 export default Dropdown;

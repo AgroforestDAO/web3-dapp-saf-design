@@ -5,7 +5,7 @@ import { useSpecies } from '../context/SpeciesContext';
 
 function StratumRow({ stratumName }) {
   const { selectedSpecies, setSelectedSpecies } = useSpecies();
-  const timePeriods = ['0-6 months', '6-18 months', '2-10 years', '10-30 years'];
+  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos'];
 
   function handleSpeciesSelection(timePeriod, species) {
     setSelectedSpecies(prev => ({
@@ -19,10 +19,11 @@ function StratumRow({ stratumName }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      <h3 style={{ marginRight: '10px' }}>{stratumName}</h3>
+      <h3 style={{ marginRight: '100px' }}>{stratumName}</h3>
       {timePeriods.map((timePeriod) => (
-        <div key={timePeriod} style={{ margin: '0 10px' }}>
+        <div key={timePeriod} style={{ margin: '0 20px' }}>
           <span>{timePeriod}</span>
+          <br />
           <Dropdown
             selected={selectedSpecies[stratumName] ? selectedSpecies[stratumName][timePeriod] : "Selecione..."}
             onSelect={(selectedSpecies) => handleSpeciesSelection(timePeriod, selectedSpecies)}

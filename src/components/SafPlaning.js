@@ -1,50 +1,62 @@
-// SafPlaning.js
 import React, { useState } from 'react';
-import StratumRow from './StratumRow';
+import Dropdown from './Dropdown';
 import { SpeciesProvider } from '../context/SpeciesContext';
 
 function SafPlaning() {
-  const [selectedSpecies, setSelectedSpecies] = useState({
-    Emergente: {
-      '0-6 months': null,
-      '6-18 months': null,
-      '2-10 years': null,
-      '10-30 years': null
-    },
-    Alto: {
-      '0-6 months': null,
-      '6-18 months': null,
-      '2-10 years': null,
-      '10-30 years': null
-    },
-    Médio: {
-      '0-6 months': null,
-      '6-18 months': null,
-      '2-10 years': null,
-      '10-30 years': null
-    },
-    Baixo: {
-      '0-6 months': null,
-      '6-18 months': null,
-      '2-10 years': null,
-      '10-30 years': null
-    }
-  });
+  const [selectedSpecies, setSelectedSpecies] = useState({});
+  const [savedData, setSavedData] = useState({});
+
+  const stratumNames = ["Emergente", "Alto", "Médio", "Baixo"];
+  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos'];
+
+  function handleSpeciesSelection(stratumName, timePeriod, species) {
+    setSelectedSpecies(prev => ({
+      ...prev,
+      [stratumName]: {
+        ...prev[stratumName],
+        [timePeriod]: species
+      }
+    }));
+  }
 
   function handleSave() {
-    // Aqui você pode lidar com a lógica de salvar as seleções do usuário
-    console.log(selectedSpecies);
+   setSavedData(selectedSpecies);
   }
 
   return (
     <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        <StratumRow stratumName="Emergente" />
-        <StratumRow stratumName="Alto" />
-        <StratumRow stratumName="Médio" />
-        <StratumRow stratumName="Baixo" />
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Estrato</th>
+            {timePeriods.map((timePeriod) => (
+              <th key={timePeriod}>{timePeriod}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {stratumNames.map((stratumName) => (
+            <tr key={stratumName}>
+              <td>{stratumName}</td>
+              {timePeriods.map((timePeriod) => (
+                <td key={timePeriod}>
+                  <Dropdown
+                    selected={selectedSpecies[stratumName] ? selectedSpecies[stratumName][timePeriod] : null}
+                    onSelect={(species) => handleSpeciesSelection(stratumName, timePeriod, species)}
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <button onClick={handleSave} style={{ marginTop: '10px' }}>Salvar</button>
+      {savedData && (
+        <div>
+          <h2>Dados salvos:</h2>
+          <pre>{JSON.stringify(savedData, null, 2)}</pre>
+        </div>
+      )}
     </SpeciesProvider>
   );
 }
