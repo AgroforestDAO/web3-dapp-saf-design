@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import speciesList from '../species';
+import speciesList from '../especies';
 
 const SpeciesContext = createContext();
 
