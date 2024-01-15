@@ -25,7 +25,9 @@ function SafPlaning() {
 
   return (
     <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
-      <table>
+      
+      <div style={styles.container}>
+        <table style={styles.table}>
         <thead>
           <tr>
             <th>Estratos</th>
@@ -57,8 +59,25 @@ function SafPlaning() {
           <pre>{JSON.stringify(savedData, null, 2)}</pre>
         </div>
       )}
+      </div>
     </SpeciesProvider>
   );
 }
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '20px', // Adjust the margin as needed
+  },
+  table: {
+    borderCollapse: 'collapse',
+    width: '80%', // Adjust the width as needed
+  },
+  button: {
+    marginTop: '10px',
+  },
+};
 
 export default SafPlaning;
