@@ -28,7 +28,7 @@ function SafPlaning() {
   return (
     <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
       <div style={styles.container}>
-      <img src={image} alt="Descrição da imagem" style={{ width: '63%' }} />
+      <img src={image} alt="Descrição da imagem" style={{ width: '69%' }} />
         <table style={styles.table}>
           <thead>
             <tr>
