@@ -7,7 +7,7 @@ function SafPlaning() {
   const [savedData, setSavedData] = useState({});
 
   const stratumNames = ["Emergente", "Alto", "Médio", "Baixo"];
-  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 years'];
+  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 years', '10-30 years'];
 
   function handleSpeciesSelection(stratumName, timePeriod, species) {
     setSelectedSpecies(prev => ({
