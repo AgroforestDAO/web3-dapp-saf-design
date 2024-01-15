@@ -28,7 +28,7 @@ function SafPlaning() {
       <table>
         <thead>
           <tr>
-            <th>Estrato</th>
+            <th>Estratos</th>
             {timePeriods.map((timePeriod) => (
               <th key={timePeriod}>{timePeriod}</th>
             ))}
