@@ -15,7 +15,7 @@ function Dropdown({ selected, onSelect }) {
 
   return (
     <>
-      <select value={selected?.name || ''} onChange={handleChange} style={{ backgroundColor: selected ? '#617c59' : 'white' }}>
+      <select value={selected?.name || ''} onChange={handleChange}>
         <option value="">Select...</option>
         {speciesList.map(function(species, index) {
           return (
