@@ -106,12 +106,6 @@ const especies = [
     stratum: "MÉDIO",
     occupied_space: "60%",
     growth_time: "+18 MESES"
-  },
-  {
-    name: "FRE",
-    stratum: "BAIXO",
-    occupied_space: "80%",
-    growth_time: "ATÉ 45 DIAS"
   }
 ];
 
