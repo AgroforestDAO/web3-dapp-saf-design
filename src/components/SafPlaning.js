@@ -74,7 +74,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: '20px', // Ajuste a margem conforme necessário
+    marginTop: '20px',
+    marginBottom: '40px' // Ajuste a margem conforme necessário
   },
   table: {
     borderCollapse: 'collapse',
