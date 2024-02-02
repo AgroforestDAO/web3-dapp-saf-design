@@ -3,6 +3,7 @@ import Dropdown from './Dropdown';
 import { SpeciesProvider } from '../context/SpeciesContext';
 import PlaningView from './PlaningView';
 import image from '../assets/Tempo.jpeg';
+import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 
 function SafPlaning() {
   const [selectedSpecies, setSelectedSpecies] = useState({});
@@ -27,63 +28,55 @@ function SafPlaning() {
 
   return (
     <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
-      <div style={styles.container}>
-        <img src={image} alt="Descrição da imagem" style={{ width: '69%' }} />
-        <table style={styles.table}>
-          <thead>
-            <tr>
-              <th>Estratos</th>
-              {timePeriods.map((timePeriod) => (
-                <th key={timePeriod}>{timePeriod}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {stratumNames.map((stratumName) => (
-              <tr key={stratumName}>
-                <td>{stratumName}</td>
-                {timePeriods.map((timePeriod) => (
-                  <td key={timePeriod}>
-                    <Dropdown
-                      selected={
-                        selectedSpecies[stratumName]
-                          ? selectedSpecies[stratumName][timePeriod]
-                          : []
-                      }
-                      onSelect={(species) =>
-                        handleSpeciesSelection(stratumName, timePeriod, species)
-                      }
-                    />
-                  </td>
+      <Container maxWidth="lg">
+        <Box my={4}>
+          <Typography variant="h4" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
+            Planejamento de SAF
+          </Typography>
+          <img src={image} alt="Descrição da imagem" style={{ width: '100%' }} />
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Estratos</TableCell>
+                  {timePeriods.map((timePeriod) => (
+                    <TableCell key={timePeriod}>{timePeriod}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {stratumNames.map((stratumName) => (
+                  <TableRow key={stratumName}>
+                    <TableCell>{stratumName}</TableCell>
+                    {timePeriods.map((timePeriod) => (
+                      <TableCell key={timePeriod}>
+                        <Dropdown
+                          selected={
+                            selectedSpecies[stratumName]
+                              ? selectedSpecies[stratumName][timePeriod]
+                              : []
+                          }
+                          onSelect={(species) =>
+                            handleSpeciesSelection(stratumName, timePeriod, species)
+                          }
+                        />
+                      </TableCell>
+                    ))}
+                  </TableRow>
                 ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <button onClick={handleSave} style={{ marginTop: '10px' }}>
-          Salvar
-        </button>
-        {savedData && <PlaningView savedData={savedData} stratumNames={stratumNames} timePeriods={timePeriods} />}
-      </div>
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Box my={4} display="flex" justifyContent="center">
+            <Button variant="contained" style={{ backgroundColor: '#617c59' }} onClick={handleSave}>
+              Salvar
+            </Button>
+          </Box>
+          {savedData && <PlaningView savedData={savedData} stratumNames={stratumNames} timePeriods={timePeriods} />}
+        </Box>
+      </Container>
     </SpeciesProvider>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: '20px',
-    marginBottom: '40px'
-  },
-  table: {
-    borderCollapse: 'collapse',
-    width: '80%',
-  },
-  button: {
-    marginTop: '10px',
-  },
-};
 
 export default SafPlaning;

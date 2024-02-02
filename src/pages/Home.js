@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="App">
       <Navbar />
-      <h3>Planejamento de SAF</h3>
+      
       <SafPlaning />      
     </div>
   );
