@@ -19,7 +19,7 @@ function Dropdown({ selected = [], onSelect }) {
       options={speciesList}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => (
-        <TextField {...params} label="Selecine as espécies" placeholder="Selecionar..." />
+        <TextField {...params} label="Selecione as espécies" placeholder="Selecionar..." />
       )}
     />
   );
