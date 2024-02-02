@@ -1,31 +1,28 @@
 import React from 'react';
 import { useSpecies } from '../context/SpeciesContext';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
-function Dropdown({ selected, onSelect }) {
-  const { speciesList } = useSpecies();
+function Dropdown({ selected = [], onSelect }) {
+  const { speciesList = [] } = useSpecies();
 
-  const handleChange = function(event) {
-    const selectedName = event.target.value;
-    const selected = speciesList.find(function(species) {
-      return species.name === selectedName;
-    });
-    
-    onSelect(selected);
+  const handleChange = function(event, newValue) {
+    onSelect(newValue);
   };
 
   return (
-    <>
-      <select value={selected?.name || ''} onChange={handleChange}>
-        <option value="">Select...</option>
-        {speciesList.map(function(species, index) {
-          return (
-            <option key={index} value={species.name}>
-              {species.name}
-            </option>
-          );
-        })}
-      </select>
-    </>
+    <Autocomplete
+      multiple
+      id="species-autocomplete"
+      value={selected}
+      onChange={handleChange}
+      options={speciesList}
+      getOptionLabel={(option) => option.name}
+      renderInput={(params) => (
+        <TextField {...params} label="Select species" placeholder="Select..." />
+      )}
+    />
   );
 }
+
 export default Dropdown;

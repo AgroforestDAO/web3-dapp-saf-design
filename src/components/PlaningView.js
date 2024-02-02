@@ -1,34 +1,37 @@
 import React from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 function PlaningView({ savedData, stratumNames, timePeriods }) {
   return (
     <div>
       <h2>Dados salvos:</h2>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            {timePeriods.map((timePeriod) => (
-              <th key={timePeriod}>{timePeriod}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {stratumNames.map((stratumName) => (
-            <tr key={stratumName}>
-              <td>{stratumName}</td>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
               {timePeriods.map((timePeriod) => (
-                <td key={timePeriod}>
-                  {savedData[stratumName] &&
-                  savedData[stratumName][timePeriod] !== undefined
-                    ? savedData[stratumName][timePeriod].name // Ajuste para a propriedade que deseja exibir
-                    : '-'}
-                </td>
+                <TableCell key={timePeriod}>{timePeriod}</TableCell>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {stratumNames.map((stratumName) => (
+              <TableRow key={stratumName}>
+                <TableCell>{stratumName}</TableCell>
+                {timePeriods.map((timePeriod) => (
+                  <TableCell key={timePeriod}>
+                    {savedData[stratumName] &&
+                    savedData[stratumName][timePeriod] !== undefined
+                      ? savedData[stratumName][timePeriod].map(species => species.name).join(', ') // Ajuste para a propriedade que deseja exibir
+                      : '-'}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

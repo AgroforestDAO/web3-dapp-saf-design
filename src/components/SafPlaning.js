@@ -9,7 +9,7 @@ function SafPlaning() {
   const [savedData, setSavedData] = useState({});
 
   const stratumNames = ["Emergente", "Alto", "Médio", "Baixo"];
-  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos']; // Corrigindo o valor de '2-10 years'
+  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos'];
 
   function handleSpeciesSelection(stratumName, timePeriod, species) {
     setSelectedSpecies((prev) => ({
@@ -28,7 +28,7 @@ function SafPlaning() {
   return (
     <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
       <div style={styles.container}>
-      <img src={image} alt="Descrição da imagem" style={{ width: '69%' }} />
+        <img src={image} alt="Descrição da imagem" style={{ width: '69%' }} />
         <table style={styles.table}>
           <thead>
             <tr>
@@ -48,7 +48,7 @@ function SafPlaning() {
                       selected={
                         selectedSpecies[stratumName]
                           ? selectedSpecies[stratumName][timePeriod]
-                          : null
+                          : []
                       }
                       onSelect={(species) =>
                         handleSpeciesSelection(stratumName, timePeriod, species)
@@ -63,7 +63,7 @@ function SafPlaning() {
         <button onClick={handleSave} style={{ marginTop: '10px' }}>
           Salvar
         </button>
-        {savedData && <PlaningView savedData={savedData} stratumNames={stratumNames} timePeriods={timePeriods} />} {/* Adicionando timePeriods como propriedade */}
+        {savedData && <PlaningView savedData={savedData} stratumNames={stratumNames} timePeriods={timePeriods} />}
       </div>
     </SpeciesProvider>
   );
@@ -75,11 +75,11 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: '20px',
-    marginBottom: '40px' // Ajuste a margem conforme necessário
+    marginBottom: '40px'
   },
   table: {
     borderCollapse: 'collapse',
-    width: '80%', // Ajuste a largura conforme necessário
+    width: '80%',
   },
   button: {
     marginTop: '10px',

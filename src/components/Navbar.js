@@ -1,21 +1,25 @@
 import React from 'react';
-import styles from '../styles/styles';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import logo from '../assets/logo_agroforestDAO_round.png';
 
 const NavBar = () => {
   return (
-    <div style={styles.navbar}>
-      {/* Logo à esquerda */}
-      <div>
-        <img src={require(`../assets/logo_agroforestDAO_round.png`)} alt="Logo" style={{ maxWidth: '130px', maxHeight: '60px', marginLeft: '10px' }} />
-      </div>
+    <AppBar position="static" style={{ backgroundColor: '#617c59' }}>
+      <Toolbar>
+        {/* Logo à esquerda */}
+        <IconButton edge="start" color="inherit" aria-label="menu">
+          <img src={logo} alt="Logo" style={{ maxWidth: '130px', maxHeight: '60px' }} />
+        </IconButton>
+        <Typography variant="h6">
+          AgroforestDAO
+        </Typography>
 
-      {/* Links à direita */}
-      {/* <div>
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div> */}
-    </div>
+        {/* Links à direita */}
+        {/* <Button color="inherit">Link 1</Button>
+        <Button color="inherit">Link 2</Button>
+        <Button color="inherit">Link 3</Button> */}
+      </Toolbar>
+    </AppBar>
   );
 };
 
