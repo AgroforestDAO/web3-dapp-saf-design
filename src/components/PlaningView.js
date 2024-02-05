@@ -23,7 +23,7 @@ function PlaningView({ savedData, stratumNames, timePeriods }) {
                   <TableCell key={timePeriod}>
                     {savedData[stratumName] &&
                     savedData[stratumName][timePeriod] !== undefined
-                      ? savedData[stratumName][timePeriod].map(species => species.name).join(', ') // Ajuste para a propriedade que deseja exibir
+                      ? savedData[stratumName][timePeriod].map(species => species.name).join(', ')
                       : '-'}
                   </TableCell>
                 ))}

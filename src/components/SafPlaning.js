@@ -24,6 +24,7 @@ function SafPlaning() {
 
   function handleSave() {
     setSavedData(selectedSpecies);
+    console.log(selectedSpecies);
   }
 
   return (
