@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Dropdown from './Dropdown';
+import TimePeriodStepper from './TimePeriodStepper'; // Importe o componente Stepper aqui
 import { SpeciesProvider } from '../context/SpeciesContext';
 import PlaningView from './PlaningView';
 import image from '../assets/Tempo.jpeg';
@@ -25,17 +26,18 @@ function SafPlaning() {
   function handleSave() {
     setSavedData(selectedSpecies);
     console.log(selectedSpecies);
-  }
-  
+  }  
 
   return (
     <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xlg">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
             Planejamento de SAF
           </Typography>
+          {/* Inclua o componente Stepper aqui */}
           <img src={image} alt="Descrição da imagem" style={{ width: '100%' }} />
+          <TimePeriodStepper /> 
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
