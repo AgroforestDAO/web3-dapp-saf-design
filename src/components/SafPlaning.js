@@ -31,28 +31,28 @@ function SafPlaning() {
 
   return (
     <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
-      <Container maxWidth="xlg">
+      <Container maxWidth="lg">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
             Planejamento de SAF
           </Typography>
           {/* Inclua o componente Stepper aqui */}
-          <img src={image} alt="Descrição da imagem" style={{ width: '100%' }} />
+          <img src={image} alt="Descrição da imagem" style={{ width: '100%' }}  />
           <TimePeriodStepper /> 
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Estratos</TableCell>
+                  <TableCell></TableCell>
                   {timePeriods.map((timePeriod) => (
-                    <TableCell key={timePeriod}>{timePeriod}</TableCell>
+                    <TableCell align="center" style={{ fontWeight: 'bold' }} key={timePeriod}>{timePeriod}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
                 {stratumNames.map((stratumName) => (
                   <TableRow key={stratumName}>
-                    <TableCell>{stratumName}</TableCell>
+                    <TableCell align="center" style={{ fontWeight: 'bold' }}>{stratumName}</TableCell>
                     {timePeriods.map((timePeriod) => (
                       <TableCell key={timePeriod}>
                         <Dropdown
