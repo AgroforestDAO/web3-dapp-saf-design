@@ -11,16 +11,16 @@ function PlaningView({ savedData, stratumNames, timePeriods }) {
             <TableRow>
               <TableCell></TableCell>
               {timePeriods.map((timePeriod) => (
-                <TableCell key={timePeriod}>{timePeriod}</TableCell>
+                <TableCell align="center" style={{ fontWeight: 'bold' }} key={timePeriod}>{timePeriod}</TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {stratumNames.map((stratumName) => (
               <TableRow key={stratumName}>
-                <TableCell>{stratumName}</TableCell>
+                <TableCell align="center" style={{ fontWeight: 'bold' }}>{stratumName}</TableCell>
                 {timePeriods.map((timePeriod) => (
-                  <TableCell key={timePeriod}>
+                  <TableCell align="center" key={timePeriod}>
                     {savedData[stratumName] &&
                     savedData[stratumName][timePeriod] !== undefined
                       ? savedData[stratumName][timePeriod].map(species => species.name).join(', ')
