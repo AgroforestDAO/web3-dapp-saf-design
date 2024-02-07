@@ -6,6 +6,7 @@ import PlaningView from './PlaningView';
 import image from '../assets/Tempo.jpeg';
 import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 
+
 function SafPlaning() {
   const [selectedSpecies, setSelectedSpecies] = useState({});
   const [savedData, setSavedData] = useState({});
