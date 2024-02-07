@@ -61,6 +61,7 @@ function SafPlaning() {
                           onSelect={(species) =>
                             handleSpeciesSelection(stratumName, timePeriod, species)
                           }
+                          stratumName={stratumName}
                         />
                       </TableCell>
                     ))}

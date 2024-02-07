@@ -11,8 +11,8 @@ function Dropdown({ selected = [], onSelect, stratumName }) {
     onSelect(newValue);
   };
   
-  // Filtra as espécies com stratum igual a "ALTO"
-  const filteredSpeciesList = speciesList.filter(species => species.stratum === "ALTO");
+  // Filtra as espécies com o estrato especificado
+  const filteredSpeciesList = speciesList.filter(species => species.stratum === stratumName);
 
   return (
     <Autocomplete
