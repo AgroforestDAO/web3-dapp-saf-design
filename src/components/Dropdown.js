@@ -4,12 +4,15 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 
-function Dropdown({ selected = [], onSelect }) {
+function Dropdown({ selected = [], onSelect, stratumName }) {
   const { speciesList = [] } = useSpecies();
 
   const handleChange = function(event, newValue) {
     onSelect(newValue);
   };
+  
+  // Filtra as espécies com stratum igual a "ALTO"
+  const filteredSpeciesList = speciesList.filter(species => species.stratum === "ALTO");
 
   return (
     <Autocomplete
@@ -17,7 +20,7 @@ function Dropdown({ selected = [], onSelect }) {
       id="species-autocomplete"
       value={selected}
       onChange={handleChange}
-      options={speciesList}
+      options={filteredSpeciesList}
       getOptionLabel={(option) => option.name}
       renderTags={(value, getTagProps) =>
         value.map((option, index) => (
