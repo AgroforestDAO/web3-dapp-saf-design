@@ -6,9 +6,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import TextField from '@mui/material/TextField';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -104,11 +104,17 @@ export default function SignInSide() {
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h3">
               Entrar
             </Typography>
+            <Typography component="h1" variant="h5">
+              levando a web3 pra roça             
+            </Typography>
+            <Typography component="h1" variant="h5">              
+              e a roça pra a web3
+            </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
+              {/* <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -139,7 +145,7 @@ export default function SignInSide() {
                 sx={{ mt: 3, mb: 2 }}
               >
                 Entrar
-              </Button>
+              </Button> */}
               <Button
                 fullWidth
                 variant="outlined"
@@ -148,7 +154,7 @@ export default function SignInSide() {
               >
                 Entrar com Google
               </Button>
-              <Grid container>
+              {/* <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Esqueceu a senha?
@@ -159,7 +165,7 @@ export default function SignInSide() {
                     {"Não tem conta? Criar conta"}
                   </Link>
                 </Grid>
-              </Grid>
+              </Grid> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
