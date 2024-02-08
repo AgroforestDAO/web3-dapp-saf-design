@@ -1,11 +1,11 @@
 import React from 'react';
-import { useSpecies } from '../context/SpeciesContext';
+import { useAppContext } from '../context/AppContext';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Chip from '@mui/material/Chip';
 
 function Dropdown({ selected = [], onSelect, stratumName }) {
-  const { speciesList = [] } = useSpecies();
+  const { speciesList = [] } = useAppContext();
 
   const handleChange = function(event, newValue) {
     onSelect(newValue);

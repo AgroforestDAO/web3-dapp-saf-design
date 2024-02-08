@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { auth } from '../firebase'; // Importe o auth do seu arquivo firebase.js
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useAppContext } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
@@ -36,6 +37,8 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
   const navigate = useNavigate();
+  const { setUser } = useAppContext();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,13 +62,22 @@ export default function SignInSide() {
   };
 
   const handleGoogleSignIn = () => {
+     // Use o useAppContext para obter o setUser
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         // Usuário logado com Google
         var user = result.user;
-        console.log('Usuário logado com Google:', user);
+        console.log('Usuário logado com Google:', user);  
   
+        // Salva o usuário no contexto
+        setUser({
+          displayName: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          photoURL: user.photoURL
+        });
+
         // Adiciona o usuário ao Firestore
         addUser({
           displayName: user.displayName,
@@ -116,7 +128,7 @@ export default function SignInSide() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h3">
-              Entrar
+              AgroforestDAO
             </Typography>
             <img src={image} alt="Descrição da imagem" style={{ width: '36%' }}  />
             <Typography component="h1" variant="h5">
