@@ -15,7 +15,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import backgroundImage from "../assets/LoginBanner.png"
+import backgroundImage from "../assets/LoginBanner.png";
+import image from "../assets/safWeb3.png";
+import { addUser } from '../services/firestoreFunctions';
 
 function Copyright(props) {
   return (
@@ -63,6 +65,15 @@ export default function SignInSide() {
         // Usuário logado com Google
         var user = result.user;
         console.log('Usuário logado com Google:', user);
+  
+        // Adiciona o usuário ao Firestore
+        addUser({
+          displayName: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          photoURL: user.photoURL
+        });
+  
         navigate('/home');
       })
       .catch((error) => {
@@ -107,11 +118,12 @@ export default function SignInSide() {
             <Typography component="h1" variant="h3">
               Entrar
             </Typography>
+            <img src={image} alt="Descrição da imagem" style={{ width: '36%' }}  />
             <Typography component="h1" variant="h5">
-              levando a web3 pra roça             
+              Levando a web3 pra roça             
             </Typography>
             <Typography component="h1" variant="h5">              
-              e a roça pra a web3
+              e a roça para a web3
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               {/* <TextField
