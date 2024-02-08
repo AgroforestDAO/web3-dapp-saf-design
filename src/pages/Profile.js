@@ -62,6 +62,7 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
+      <h1 style={{ color: 'black' }}>Perfil</h1>
       {user && photoURL ? <ProfileAvatar src={photoURL} /> : <ProfileAvatar />}
         <h1 style={{ color: 'black' }}>{displayName}</h1>
         <p style={{ color: 'black' }}>Email: {email}</p>
