@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import TimePeriodStepper from './TimePeriodStepper'; // Importe o componente Stepper aqui
-import { SpeciesProvider } from '../context/SpeciesContext';
+import { AppProvider } from '../context/AppContext';
 import PlaningView from './PlaningView';
 import image from '../assets/Tempo.jpeg';
 import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
@@ -30,7 +30,7 @@ function SafPlaning() {
   }  
 
   return (
-    <SpeciesProvider value={{ selectedSpecies, setSelectedSpecies }}>
+    <AppProvider value={{ selectedSpecies, setSelectedSpecies }}>
       <Container maxWidth="lg">
         <Box my={4}>
           <Typography variant="h4" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
@@ -81,7 +81,7 @@ function SafPlaning() {
           {savedData && <PlaningView savedData={savedData} stratumNames={stratumNames} timePeriods={timePeriods} />}
         </Box>
       </Container>
-    </SpeciesProvider>
+    </AppProvider>
   );
 }
 

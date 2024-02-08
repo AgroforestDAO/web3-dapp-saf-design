@@ -1,13 +1,13 @@
 import React from "react";
 import AppRouter from "./routes/router";
-import { SpeciesProvider } from './context/SpeciesContext'; // Importe o SpeciesProvider
+import { AppProvider } from './context/AppContext'; // Importe o AppProvider
 
 function App() {
   return (
     <div className="App">
-      <SpeciesProvider> {/* Envolver a aplicação com o SpeciesProvider */}
+      <AppProvider> {/* Envolver a aplicação com o AppProvider */}
         <AppRouter />
-      </SpeciesProvider>
+      </AppProvider>
     </div>
   );
 }
