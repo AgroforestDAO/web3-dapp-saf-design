@@ -5,6 +5,7 @@ import { AppProvider } from '../context/AppContext';
 import PlaningView from './PlaningView';
 import image from '../assets/Tempo.jpeg';
 import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import { addSaf } from '../services/firestoreFunctions';
 
 
 function SafPlaning() {
@@ -26,7 +27,7 @@ function SafPlaning() {
 
   function handleSave() {
     setSavedData(selectedSpecies);
-    console.log(selectedSpecies);
+    addSaf(selectedSpecies);
   }  
 
   return (

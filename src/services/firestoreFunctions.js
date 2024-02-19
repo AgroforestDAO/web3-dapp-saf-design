@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
 async function addUser(user) {
@@ -34,5 +34,23 @@ async function addUser(user) {
   }
 }
 
+async function addSaf(selectedSpecies) {  
+  const currentTime = new Date();
+  let data = {    
+    createdAt: currentTime,
+    updatedAt: currentTime,
+    species: selectedSpecies
+    }
 
-export { addUser };
+  await addDoc(collection(db, "safs"), data)
+      .then((docRef) => {
+          console.log("Documento escrito com ID: ", docRef.id);
+      })
+      .catch((error) => {
+          console.error("Erro ao adicionar o documento: ", error);
+      });
+  
+};
+
+
+export { addUser, addSaf };
