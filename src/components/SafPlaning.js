@@ -6,6 +6,7 @@ import PlaningView from './PlaningView';
 import image from '../assets/Tempo.jpeg';
 import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import { addSaf } from '../services/firestoreFunctions';
+import { getCurrentUser } from '../functions/users';
 
 
 function SafPlaning() {
@@ -25,9 +26,15 @@ function SafPlaning() {
     }));
   }
 
-  function handleSave() {
-    setSavedData(selectedSpecies);
-    addSaf(selectedSpecies);
+  async function handleSave() {
+    const _user = await getCurrentUser();
+    let payload = {
+      uid: _user.uid,
+      species: selectedSpecies
+    }
+    console.log(_user.uid); 
+    setSavedData(payload);
+    addSaf(payload);
   }  
 
   return (

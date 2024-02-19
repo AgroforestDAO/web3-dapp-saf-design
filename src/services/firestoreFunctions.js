@@ -34,12 +34,13 @@ async function addUser(user) {
   }
 }
 
-async function addSaf(selectedSpecies) {  
+async function addSaf(payload) {  
   const currentTime = new Date();
   let data = {    
     createdAt: currentTime,
     updatedAt: currentTime,
-    species: selectedSpecies
+    uid: payload.uid,
+    species: payload.species
     }
 
   await addDoc(collection(db, "safs"), data)
