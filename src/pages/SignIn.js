@@ -18,7 +18,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import backgroundImage from "../assets/LoginBanner.png";
 import image from "../assets/safWeb3.png";
-import { addUser } from '../services/firestoreFunctions';
+import { addUser } from '../services/firebaseService';
 
 function Copyright(props) {
   return (

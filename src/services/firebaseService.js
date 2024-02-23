@@ -1,7 +1,47 @@
-import { doc, setDoc, getDoc, updateDoc, addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase';
+// firebaseService.js
+import { doc, setDoc, getDoc, updateDoc, addDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../firebase'; // Importando db de firebase.js
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-async function addUser(user) {
+export async function getCurrentUser() {
+  const auth = getAuth();
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      async (user) => {
+        unsubscribe();
+        if (user) {
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            resolve(docSnap.data());
+          } else {
+            reject("No such user!");
+          }
+        } else {
+          reject("No user is signed in.");
+        }
+      },
+      (error) => {
+        unsubscribe();
+        reject(error);
+      }
+    );
+  });
+}
+
+export async function getSaf(uid) {
+  const safsRef = collection(db, 'safs');
+  const q = query(safsRef, where('uid', '==', uid));
+  const querySnapshot = await getDocs(q);
+  let data = null;
+  querySnapshot.forEach((doc) => {
+    data = doc.data();
+  });
+  return data;
+}
+
+export async function addUser(user) {
   const userRef = doc(db, 'users', user.uid);
   const docSnap = await getDoc(userRef);
   const currentTime = new Date();
@@ -34,7 +74,7 @@ async function addUser(user) {
   }
 }
 
-async function addSaf(payload) {  
+export async function addSaf(payload) {  
   const currentTime = new Date();
   let data = {    
     createdAt: currentTime,
@@ -52,6 +92,3 @@ async function addSaf(payload) {
       });
   
 };
-
-
-export { addUser, addSaf };

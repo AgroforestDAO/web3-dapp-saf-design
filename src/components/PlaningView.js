@@ -1,10 +1,22 @@
-import React,{ useState } from 'react';
+// PlaningView.js
+
+import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { getSaf, getCurrentUser } from '../services/firebaseService';
 
 function PlaningView() {
   const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
   const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos'];
-  const [savedData] = useState({});
+  const [savedData, setSavedData] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      const user = await getCurrentUser();
+      const data = await getSaf(user.uid);
+      setSavedData(data.species); // Atualizado para lidar com a estrutura de dados
+    }
+    fetchData();
+  }, []);
 
   return (
     <div>

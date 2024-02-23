@@ -5,8 +5,8 @@ import TimePeriodStepper from './TimePeriodStepper'; // Importe o componente Ste
 import { AppProvider } from '../context/AppContext';
 import image from '../assets/Tempo.jpeg';
 import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
-import { addSaf } from '../services/firestoreFunctions';
-import { getCurrentUser } from '../functions/api';
+import { addSaf } from '../services/firebaseService';
+import { getCurrentUser } from '../services/firebaseService';
 
 
 function SafPlaning() {
