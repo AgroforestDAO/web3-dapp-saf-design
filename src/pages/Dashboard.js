@@ -7,7 +7,7 @@ function Dashboard() {
   return (
     <>
     <Navbar />
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: '100px' }}>
       <Typography variant="h4" gutterBottom>
         Dashboard
       </Typography>

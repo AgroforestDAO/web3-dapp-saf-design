@@ -1,7 +1,7 @@
 // PlaningView.js
 
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Table, TableBody, TableCell, Container, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import { getSaf, getCurrentUser } from '../services/firebaseService';
 
 function PlaningView() {
@@ -13,14 +13,17 @@ function PlaningView() {
     async function fetchData() {
       const user = await getCurrentUser();
       const data = await getSaf(user.uid);
-      setSavedData(data.species); // Atualizado para lidar com a estrutura de dados
+      setSavedData(data ? data.species : {}); // Atualizado para lidar com a estrutura de dados
     }
     fetchData();
   }, []);
 
   return (
     <div>
-      <h2>Dados salvos:</h2>
+      <Container maxWidth="lg">
+      <Typography variant="h4" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
+            Meu SAF
+        </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -37,10 +40,9 @@ function PlaningView() {
                 <TableCell align="center" style={{ fontWeight: 'bold' }}>{stratumName}</TableCell>
                 {timePeriods.map((timePeriod) => (
                   <TableCell align="center" key={timePeriod}>
-                    {savedData[stratumName] &&
-                    savedData[stratumName][timePeriod] !== undefined
+                    {savedData[stratumName] && savedData[stratumName][timePeriod]
                       ? savedData[stratumName][timePeriod].map(species => species.name).join(', ')
-                      : '-'}
+                      : ''}
                   </TableCell>
                 ))}
               </TableRow>
@@ -48,6 +50,7 @@ function PlaningView() {
           </TableBody>
         </Table>
       </TableContainer>
+      </Container>
     </div>
   );
 }
