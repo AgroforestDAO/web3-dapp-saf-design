@@ -1,7 +1,11 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
-function PlaningView({ savedData, stratumNames, timePeriods }) {
+function PlaningView() {
+  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
+  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos'];
+  const [savedData] = useState({});
+
   return (
     <div>
       <h2>Dados salvos:</h2>
