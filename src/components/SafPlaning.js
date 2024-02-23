@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Dropdown from './Dropdown';
 import TimePeriodStepper from './TimePeriodStepper'; // Importe o componente Stepper aqui
 import { AppProvider } from '../context/AppContext';
-import PlaningView from './PlaningView';
 import image from '../assets/Tempo.jpeg';
 import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import { addSaf } from '../services/firestoreFunctions';
@@ -10,9 +10,9 @@ import { getCurrentUser } from '../functions/users';
 
 
 function SafPlaning() {
+  const navigate = useNavigate();
   const [selectedSpecies, setSelectedSpecies] = useState({});
-  const [savedData, setSavedData] = useState({});
-
+  
   const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
   const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos'];
 
@@ -33,8 +33,10 @@ function SafPlaning() {
       species: selectedSpecies
     }
     console.log(_user.uid); 
-    setSavedData(payload);
-    addSaf(payload);
+    setSelectedSpecies(selectedSpecies);
+
+    await addSaf(payload);
+    navigate('/dashboard');
   }  
 
   return (
@@ -86,7 +88,6 @@ function SafPlaning() {
               Salvar
             </Button>
           </Box>
-          {savedData && <PlaningView savedData={savedData} stratumNames={stratumNames} timePeriods={timePeriods} />}
         </Box>
       </Container>
     </AppProvider>
