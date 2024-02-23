@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from '../components/Navbar';
 import { db } from '../firebase';
 import { doc, getDoc } from "firebase/firestore";
-import { Avatar, Button, TextField } from '@mui/material';
+import { Avatar, Button, TextField, Typography, Container, Grid } from '@mui/material';
 import { Edit as EditIcon } from '@mui/icons-material';
+import { useAppContext } from '../context/AppContext';
 import styled from '@emotion/styled';
-import '@fontsource/roboto';
-import { useAppContext } from '../context/AppContext'; // Importe o useAppContext
 
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+const ProfileContainer = styled(Container)`
+  && {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+  }
 `;
 
 const ProfileAvatar = styled(Avatar)`
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
+  && {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
 `;
 
 const Profile = () => {
-  const { user, setUser } = useAppContext(); // Use o useAppContext para obter o usuário
+  const { user, setUser } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [displayName, setDisplayName] = useState(user ? user.displayName : '');
   const [email, setEmail] = useState(user ? user.email : '');
@@ -29,7 +34,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      const docRef = doc(db, 'users', user.uid); // Crie uma referência para o documento
+      const docRef = doc(db, 'users', user.uid);
       getDoc(docRef)
         .then((docSnapshot) => {
           if (docSnapshot.exists()) {
@@ -55,29 +60,36 @@ const Profile = () => {
       displayName,
       email,
     }).then(() => {
-      setUser({ ...user, displayName, email }); // Atualize o usuário no contexto após salvar no banco de dados
+      setUser({ ...user, displayName, email });
     });
     setIsEditing(false);
   };
 
   return (
-    <ProfileContainer>
-      <h1 style={{ color: 'black' }}>Perfil</h1>
-      {user && photoURL ? <ProfileAvatar src={photoURL} /> : <ProfileAvatar />}
-        <h1 style={{ color: 'black' }}>{displayName}</h1>
-        <p style={{ color: 'black' }}>Email: {email}</p>
-      {isEditing ? (
-        <>
-          <TextField label="Nome" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
-          <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Button onClick={handleSave}>Salvar</Button>
-        </>
-      ) : (
-        <Button startIcon={<EditIcon />} onClick={handleEdit}>
-          Editar
-        </Button>
-      )}
-    </ProfileContainer>
+    <>
+      <NavBar />
+      <ProfileContainer>
+        <Typography variant="h4" gutterBottom style={{ color: 'black' }}>Perfil</Typography>
+        {user && photoURL ? <ProfileAvatar src={photoURL} /> : <ProfileAvatar />}
+        <Typography variant="h5" style={{ color: 'black' }}>{displayName}</Typography>
+        <Typography variant="body1" style={{ color: 'black' }}>Email: {email}</Typography>
+        {isEditing ? (
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item xs={12} md={6}>
+              <TextField label="Nome" fullWidth value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField label="Email" fullWidth value={email} onChange={(e) => setEmail(e.target.value)} />
+            </Grid>
+            <Grid item xs={12}>
+              <Button variant="contained" onClick={handleSave}>Salvar</Button>
+            </Grid>
+          </Grid>
+        ) : (
+          <Button startIcon={<EditIcon />} onClick={handleEdit} style={{ marginTop: '20px' }}>Editar</Button>
+        )}
+      </ProfileContainer>
+    </>
   );
 };
 

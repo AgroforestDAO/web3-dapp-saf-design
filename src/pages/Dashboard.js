@@ -1,8 +1,11 @@
 import React from 'react';
+import Navbar from "../components/Navbar";
 import { Typography, Grid, Card, CardContent } from '@mui/material';
 
 function Dashboard() {
   return (
+    <>
+    <Navbar />
     <div style={{ padding: '20px' }}>
       <Typography variant="h4" gutterBottom>
         Dashboard
@@ -42,6 +45,7 @@ function Dashboard() {
         </Grid>
       </Grid>
     </div>
+    </>
   );
 }
 
