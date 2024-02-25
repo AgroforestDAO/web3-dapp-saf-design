@@ -1,7 +1,7 @@
 // Home.js
 import React from "react";
 import Navbar from "../components/Navbar";
-import SafPlaning from "../components/SafPlaning";
+import SafPlaning from "../components/saf/SafPlaning";
 
 
 function Home() {

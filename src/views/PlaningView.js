@@ -1,5 +1,3 @@
-// PlaningView.js
-
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, Container, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import { getSaf, getCurrentUser } from '../services/firebaseService';

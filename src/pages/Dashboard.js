@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
-import PlaningView from '../components/PlaningView';
+import PlaningView from '../views/PlaningView';
 import { Typography } from '@mui/material';
 
 function Dashboard() {

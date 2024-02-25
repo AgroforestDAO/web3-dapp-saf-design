@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Dropdown from './Dropdown';
+import Dropdown from '../basic/Dropdown';
 import TimePeriodStepper from './TimePeriodStepper'; // Importe o componente Stepper aqui
-import { AppProvider } from '../context/AppContext';
-import image from '../assets/Tempo.jpeg';
+import { AppProvider } from '../../context/AppContext';
+import image from '../../assets/Tempo.jpeg';
 import { Box, Button, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
-import { addSaf } from '../services/firebaseService';
-import { getCurrentUser } from '../services/firebaseService';
+import { addSaf } from '../../services/firebaseService';
+import { getCurrentUser } from '../../services/firebaseService';
 
 
 function SafPlaning() {
