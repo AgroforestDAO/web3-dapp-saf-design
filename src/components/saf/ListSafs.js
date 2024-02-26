@@ -44,7 +44,7 @@ const ListSafs = ({ onSafSelect }) => {
         >
           <CardContent>
             <Typography variant="h5" component="div" style={{ fontFamily: "Roboto" }}>
-              SAF: {saf.safName}
+              {saf.safName}
             </Typography>
             <Typography color="text.secondary" style={{ fontFamily: "Roboto" }}>
               Mentor: {saf.mentor}
