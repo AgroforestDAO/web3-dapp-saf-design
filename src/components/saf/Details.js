@@ -22,19 +22,22 @@ function Details() {
   return (
     <div>
       <Container maxWidth="lg">
-      <Typography variant="h4" component="h1" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
-        {savedData.safName}
+      <Typography variant="h4" component="h4" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
+        Detalhes
       </Typography>   
-      <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
+      <Typography variant="h4" component="h4" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
+        SAF: {savedData.safName}
+      </Typography>   
+      <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
         Guardião: {savedData.guardian}
       </Typography>      
-      <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
+      <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
         Mentor: {savedData.mentor}
       </Typography>      
-      <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
+      <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
         Tipo: {savedData.safType}
       </Typography>      
-      <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
+      <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
         Local: {savedData.local}
       </Typography>      
       <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold', marginTop: '33px' }}>
