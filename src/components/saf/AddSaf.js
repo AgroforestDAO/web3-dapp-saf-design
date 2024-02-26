@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../basic/Dropdown";
-import TimePeriodStepper from "./TimePeriodStepper";
+import TimePeriodStepper from "./TimePeriodStepper"; 
 import { AppProvider } from "../../context/AppContext";
 import image from "../../assets/Tempo.jpeg";
 import {
