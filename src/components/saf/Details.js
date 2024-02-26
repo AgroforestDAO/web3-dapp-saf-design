@@ -23,11 +23,8 @@ function Details() {
     <div>
       <Container maxWidth="lg">
       <Typography variant="h4" component="h1" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
-        Meu SAF
-      </Typography>
-      <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
-        Nome: {savedData.safName}
-      </Typography>      
+        {savedData.safName}
+      </Typography>   
       <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
         Guardião: {savedData.guardian}
       </Typography>      
@@ -35,12 +32,12 @@ function Details() {
         Mentor: {savedData.mentor}
       </Typography>      
       <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
-        Tipo de SAF: {savedData.safType}
+        Tipo: {savedData.safType}
       </Typography>      
       <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto' }}>
         Local: {savedData.local}
       </Typography>      
-      <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
+      <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold', marginTop: '33px' }}>
         Planejamento geral
       </Typography>
       <TableContainer component={Paper}>
