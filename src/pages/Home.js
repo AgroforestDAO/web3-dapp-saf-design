@@ -1,7 +1,7 @@
 // Home.js
 import React from "react";
 import Navbar from "../components/Navbar";
-import SafPlaning from "../components/saf/SafPlaning";
+import AddSaf from "../components/saf/AddSaf";
 
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
     <div className="App">
       <Navbar />      
       
-      <SafPlaning />      
+      <AddSaf />      
     </div>
   );
 }

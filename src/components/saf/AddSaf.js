@@ -21,7 +21,7 @@ import {
 
 import { getCurrentUser, addSaf } from "../../services/firebaseService";
 
-function SafPlaning() {
+function AddSaf() {
   const navigate = useNavigate();
 
   const [safName, setSafName] = useState("");
@@ -199,4 +199,4 @@ function SafPlaning() {
   );
 }
 
-export default SafPlaning;
+export default AddSaf;
