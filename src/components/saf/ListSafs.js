@@ -5,8 +5,9 @@ import { getCurrentUser } from '../../services/firebaseService'; // Importando a
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
-const ListSafs = () => {
+const ListSafs = ({ onSafSelect }) => {
   const [safs, setSafs] = useState([]);
 
   useEffect(() => {
@@ -29,7 +30,18 @@ const ListSafs = () => {
           Meus SAF´s
         </Typography>
       {safs.map((saf, index) => (
-        <Card key={index} style={{ marginBottom: "15px", width: "600px" }}>
+        <Box 
+          component={Card} 
+          key={index} 
+          sx={{ 
+            marginBottom: "15px", 
+            width: "600px", 
+            cursor: "pointer", 
+            transition: "0.3s", 
+            '&:hover': { transform: "scale(1.02)", backgroundColor: "#C3E3B9" } 
+          }} 
+          onClick={() => onSafSelect(saf)}
+        >
           <CardContent>
             <Typography variant="h5" component="div" style={{ fontFamily: "Roboto" }}>
               SAF: {saf.safName}
@@ -38,7 +50,7 @@ const ListSafs = () => {
               Mentor: {saf.mentor}
             </Typography>
           </CardContent>
-        </Card>
+        </Box>
       ))}
     </div>
   );

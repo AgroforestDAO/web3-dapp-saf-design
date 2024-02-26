@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import Navbar from "../components/Navbar";
-import ListSafs from "../components/saf/ListSafs"; 
+import MainSaf from "../views/MainSaf"; 
 //import SafDetails from '../components/saf/Details';
 
 function Dashboard() {
@@ -12,7 +12,7 @@ function Dashboard() {
       <Typography variant="h4" gutterBottom>
         Dashboard
       </Typography>
-      <ListSafs />
+      <MainSaf />
       {/* <SafDetails />       */}
     </div>
     </>
