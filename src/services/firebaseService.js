@@ -50,6 +50,7 @@ export async function addUser(user) {
     await setDoc(userRef, {
       displayName: user.displayName,
       email: user.email,
+      phoneNumber: user.phoneNumber,
       uid: user.uid,
       photoURL: user.photoURL,
       createdAt: currentTime,
@@ -79,8 +80,14 @@ export async function addSaf(payload) {
   let data = {    
     createdAt: currentTime,
     updatedAt: currentTime,
-    uid: payload.uid,
-    species: payload.species
+    uid: payload.uid,    
+    userName: payload.userName,
+    safName: payload.safName,
+    guardian: payload.guardian,
+    mentor: payload.mentor,
+    local: payload.local,
+    species: payload.species,
+    safType: "Lavouras Agroflorestais",
     }
 
   await addDoc(collection(db, "safs"), data)

@@ -1,7 +1,7 @@
 import React from 'react';
+import { Typography } from '@mui/material';
 import Navbar from "../components/Navbar";
 import PlaningView from '../views/PlaningView';
-import { Typography } from '@mui/material';
 
 function Dashboard() {
   return (
