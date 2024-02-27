@@ -28,8 +28,8 @@ const ProfileContainer = styled(Container)`
 
 const ProfileAvatar = styled(Avatar)`
   && {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     margin-bottom: 20px;
   }
 `;
@@ -87,7 +87,7 @@ const Profile = () => {
     <>
       <NavBar />
       <ProfileContainer>
-        <Card elevation={4} style={{ marginTop: "63px" }}>
+        <Card elevation={4} style={{ marginTop: "63px", width:"400px" }}>
           <CardContent>
             <Typography variant="h4" gutterBottom style={{ color: "black" }}>
               Perfil
