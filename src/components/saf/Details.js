@@ -74,7 +74,7 @@ function Details() {
               gutterBottom
               style={{ fontFamily: "Roboto" }}
             >
-              Guardião: {safDetails.guardian}
+              Guardião: {safDetails.guardianName}
             </Typography>
             <Typography
               variant="h5"
@@ -82,7 +82,7 @@ function Details() {
               gutterBottom
               style={{ fontFamily: "Roboto" }}
             >
-              Mentor: {safDetails.mentor}
+              Mentor: {safDetails.mentorName}
             </Typography>
             <Typography
               variant="h5"

@@ -46,9 +46,10 @@ function AddSaf() {
   async function handleSave() {
     const _user = await getCurrentUser();
     let payload = {
+      safName: safName,
       uid: _user.uid,
       userName: _user.displayName,
-      safName: safName,
+      email: _user.email,
       guardian: guardian,
       mentor: mentor,
       local: local,
@@ -63,7 +64,7 @@ function AddSaf() {
 
   return (
     <AuthProvider value={{ selectedSpecies, setSelectedSpecies }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xlg">
         <Box
           component="form"
           noValidate
@@ -187,7 +188,7 @@ function AddSaf() {
           <Box my={4} display="flex" justifyContent="center">
             <Button
               variant="contained"
-              style={{ backgroundColor: "#617c59" }}
+              style={{ backgroundColor: "#617c59", marginBottom:"50px" }}
               onClick={handleSave}
             >
               Salvar

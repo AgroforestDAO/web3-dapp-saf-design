@@ -2,6 +2,7 @@
 import React from 'react';
 import { List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 import { Home as HomeIcon, Settings as SettingsIcon } from '@mui/icons-material';
+import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -25,11 +26,16 @@ const Sidebar = () => {
         </ListItem>
         <ListItem button component={Link} to="/add-saf" style={{ color: 'white' }}>
           <ListItemIcon>
-            <SettingsIcon style={{ color: 'white' }} />
+            <AddIcon style={{ color: 'white' }} />
           </ListItemIcon>
           <ListItemText primary="Novo SAF" primaryTypographyProps={{ style: { color: 'white' } }} />
         </ListItem>
-        {/* Adicione mais itens conforme necessário */}
+        <ListItem button component={Link} to="/admin" style={{ color: 'white' }}>
+          <ListItemIcon>
+            <SettingsIcon style={{ color: 'white' }} />
+          </ListItemIcon>
+          <ListItemText primary="Admin" primaryTypographyProps={{ style: { color: 'white' } }} />
+        </ListItem>
       </List>
     </div>
  );

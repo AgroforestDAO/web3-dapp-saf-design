@@ -18,7 +18,7 @@ const ListSafs = () => {
        try {
          const currentUser = await getCurrentUser();
          const safsRef = collection(db, 'safs');
-         const q = query(safsRef, where('uid', '==', currentUser.uid));
+         const q = query(safsRef, where('createdByUID', '==', currentUser.uid));
          
          const querySnapshot = await getDocs(q);
          const safsData = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
@@ -42,7 +42,6 @@ const ListSafs = () => {
          key={saf.id}
          sx={{ marginBottom: "15px", width: "600px", cursor: "pointer", transition: "0.3s", '&:hover': { transform: "scale(1.02)", backgroundColor: "#C3E3B9" } }} 
          onClick={() => {
-           console.log("SAF selecionado:", saf);
            navigate(`/details/${saf.id}`); // Navegação programática para a página de detalhes
           }}
          >
@@ -51,7 +50,10 @@ const ListSafs = () => {
                {saf.safName}
              </Typography>
              <Typography color="text.secondary" style={{ fontFamily: "Roboto" }}>
-               Mentor: {saf.mentor}
+               Mentor: {saf.mentorName}
+             </Typography>
+             <Typography color="text.secondary" style={{ fontFamily: "Roboto" }}>
+               Guardião: {saf.guardianName}
              </Typography>
            </CardContent>
          </Box>

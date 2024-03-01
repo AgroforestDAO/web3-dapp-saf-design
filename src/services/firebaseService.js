@@ -3,6 +3,11 @@ import { doc, setDoc, getDoc, updateDoc, addDoc, collection, query, where, getDo
 import { db } from '../firebase'; // Importando db de firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+
+//export const usersRef = db.collection("users");
+//export const safsRef = db.collection("safs");
+//export const mentorsRef = db.collection("mentors");
+
 export async function getCurrentUser() {
   const auth = getAuth();
   return new Promise((resolve, reject) => {
@@ -78,24 +83,62 @@ export async function addUser(user) {
 export async function addSaf(payload) {  
   const currentTime = new Date();
   let data = {    
+    safName: payload.safName,
+    createdByUID: payload.uid,    
+    createdByName: payload.userName,
+    createdByEmail: payload.email,
+    mentorName: payload.mentor,
+    guardianName: payload.guardian,
+    local: payload.local,
+    safType: "Lavouras Agroflorestais",
+    species: payload.species,
     createdAt: currentTime,
     updatedAt: currentTime,
-    uid: payload.uid,    
-    userName: payload.userName,
-    safName: payload.safName,
-    guardian: payload.guardian,
-    mentor: payload.mentor,
-    local: payload.local,
-    species: payload.species,
-    safType: "Lavouras Agroflorestais",
-    }
+  }
 
   await addDoc(collection(db, "safs"), data)
-      .then((docRef) => {
-          console.log("Documento escrito com ID: ", docRef.id);
-      })
-      .catch((error) => {
-          console.error("Erro ao adicionar o documento: ", error);
-      });
+    .then((docRef) => {
+        console.log("Documento escrito com ID: ", docRef.id);
+    })
+    .catch((error) => {
+        console.error("Erro ao adicionar o documento: ", error);
+  });
   
 };
+
+export async function getMentors() {
+  const mentorsRef = collection(db, "mentors");
+  let mentors = [];
+ 
+  try {
+     const querySnapshot = await getDocs(mentorsRef);
+     querySnapshot.forEach((doc) => {
+       mentors.push({ id: doc.id, ...doc.data() });
+     });
+  } catch (error) {
+     console.error("Erro ao buscar mentores: ", error);
+  }
+ 
+  return mentors;
+ }
+ 
+
+export async function addMentor(payload){
+  const currentTime = new Date();
+  let data = {
+    name: payload.name,
+    email: payload.email,
+    createdByUID: payload.uid,
+    createdByName: payload.displayName,
+    createdByEmail: payload.email,
+    createdAt: currentTime,
+    updatedAt: currentTime
+  }
+  await addDoc(collection(db, "mentors"), data)
+  .then((docRef) => {
+    console.log("Mentor registrado com sucesso no ID: ", docRef.id);
+  })
+  .catch((error) => {
+    console.error("Erro ao adicionar mentor", error)
+  })
+}

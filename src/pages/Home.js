@@ -2,11 +2,11 @@
 import React from "react";
 import ListSafs from "../components/saf/ListSafs";
 
+
 function Home() {
   return (
     <div className="App">    
-      
-      <ListSafs />  
+      <ListSafs />     
     </div>
   );
 }

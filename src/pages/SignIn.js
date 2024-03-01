@@ -65,7 +65,7 @@ export default function SignInSide() {
       .then((result) => {
         // Usuário logado com Google
         var user = result.user;
-        console.log('Usuário logado com Google:', user);  
+        // console.log('Usuário logado com Google:', user);  
   
         // Salva o usuário no contexto
         setUser({
