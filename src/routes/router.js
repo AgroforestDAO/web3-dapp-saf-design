@@ -5,7 +5,8 @@ import ProtectedRoute from './ProtectedRoute'; // Caminho do arquivo ProtectedRo
 import Home from '../pages/Home';
 import SignInSide from '../pages/SignIn';
 import Profile from '../pages/Profile';
-import Details from '../components/saf/Details'; // Importe o componente Details
+import Details from '../components/saf/Details';
+import AddSaf from "../components/saf/AddSaf"; // Importe o componente Details
 
 function AppRouter() {
  return (
@@ -14,6 +15,7 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={<SignInSide />} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/add-saf" element={<ProtectedRoute><AddSaf /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/details/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} /> {/* Adicione a rota para Details */}
         </Routes>

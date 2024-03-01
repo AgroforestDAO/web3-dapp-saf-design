@@ -135,98 +135,98 @@ const especies = [
   },
   {
     name: "AÇAÍ",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "6 E MAIS DE 30 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "ACEROLA",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "3 E 15 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "ARAÇÁ PIRANGA",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "10 E MAIS DE 30 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "BABUÇU",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "10 E 30 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "BANANA DA TERRA",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "1 E 3 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "BANANA NANICA",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "1,5 E 3 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "CAQUI",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "3 E 30 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "CEREJA DO RIO GRANDE",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "10 E MAIS DE 30 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "FIGO",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "2 E 30 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "GOIABA",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "3 E 30 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "GUARANÁ",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "6 E 15 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "INGÁ",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "3 E 15 ANOS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "JACA",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "7 E MAIS",
     highBiomassProducer: "FALSE"
   },
   {
     name: "JAMBO",
-    stratum: "ESTRATO ALTO",
+    stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
     growth_time: "6 E MAIS DE 30 ANOS",
     highBiomassProducer: "FALSE"

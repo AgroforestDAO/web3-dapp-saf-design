@@ -28,7 +28,7 @@ function AddSaf() {
   const [guardian, setGuardian] = useState("");
   const [mentor, setMentor] = useState("");
   const [local, setLocal] = useState("");
-  const [selectedSpecies, setSelectedSpecies] = useState({});
+  const [selectedSpecies, setSelectedSpecies] = useState([]);
 
   const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
   const timePeriods = ["0-6 meses", "6-18 meses", "2-10 anos", "10-30 anos"];

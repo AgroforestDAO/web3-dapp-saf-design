@@ -17,17 +17,17 @@ const Sidebar = () => {
       paddingTop: '60px', // Ajusta o padding superior para manter o conteúdo centralizado verticalmente
     }}>
       <List style={{ paddingTop: '42px' }}>
-        <ListItem button component={Link} to="/" style={{ color: 'white' }}>
+        <ListItem button component={Link} to="/home" style={{ color: 'white' }}>
           <ListItemIcon>
             <HomeIcon style={{ color: 'white' }} />
           </ListItemIcon>
           <ListItemText primary="Home" primaryTypographyProps={{ style: { color: 'white' } }} />
         </ListItem>
-        <ListItem button component={Link} to="/settings" style={{ color: 'white' }}>
+        <ListItem button component={Link} to="/add-saf" style={{ color: 'white' }}>
           <ListItemIcon>
             <SettingsIcon style={{ color: 'white' }} />
           </ListItemIcon>
-          <ListItemText primary="Settings" primaryTypographyProps={{ style: { color: 'white' } }} />
+          <ListItemText primary="Novo SAF" primaryTypographyProps={{ style: { color: 'white' } }} />
         </ListItem>
         {/* Adicione mais itens conforme necessário */}
       </List>

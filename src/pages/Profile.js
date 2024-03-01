@@ -31,7 +31,7 @@ const ProfileAvatar = styled(Avatar)`
 `;
 
 const Profile = () => {
- const { user } = useAuthContext();
+ const { user } = useAuthContext({});
  const [displayName, setDisplayName] = useState("");
  const [email, setEmail] = useState("");
  const [photoURL, setPhotoURL] = useState("");

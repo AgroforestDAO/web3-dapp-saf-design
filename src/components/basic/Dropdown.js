@@ -1,13 +1,14 @@
 import React, { useState, useMemo } from "react";
-import { useAppContext } from "../../context/AuthContext";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import { createFilterOptions } from '@mui/material/Autocomplete';
 
-function Dropdown({ selected = [], onSelect, stratumName }) {
- const { speciesList = [] } = useAppContext();
+// Supondo que speciesData.js está no mesmo diretório que este arquivo
+import speciesData from '../../especies'; // Ajuste o caminho conforme necessário
 
+function Dropdown({ selected = [], onSelect, stratumName }) {
+ // Removido o uso do contexto
  const [inputValue, setInputValue] = useState('');
  const [chips, setChips] = useState([]);
 
@@ -27,8 +28,8 @@ function Dropdown({ selected = [], onSelect, stratumName }) {
     stringify: (option) => option.name,
  });
 
- // Filtra as espécies com o estrato especificado
- const filteredSpeciesList = useMemo(() => speciesList.filter(species => species.stratum === stratumName), [speciesList, stratumName]);
+ // Usando os dados importados diretamente
+ const filteredSpeciesList = useMemo(() => speciesData.filter(species => species.stratum === stratumName), [stratumName]);
 
  const handleChange = (event, newValue) => {
     onSelect(newValue);
