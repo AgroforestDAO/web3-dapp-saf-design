@@ -1,7 +1,9 @@
 // ProtectedRoute.js
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext'; // Caminho do arquivo AppContext.js
+import { useAuthContext } from '../context/AuthContext'; 
+import Sidebar from '../components/Sidebar';
+import Navbar from "../components/Navbar";
 
 const ProtectedRoute = ({ children }) => {
  const { user, loading } = useAuthContext();
@@ -14,7 +16,15 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/" />; // Redireciona para a página de login
  }
 
- return children;
+ return (
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Navbar style={{ width: '100%', position: 'fixed', top: 0, left: 0, zIndex: 1 }} />
+      <Sidebar style={{ width: '250px', position: 'fixed', top: 0, left: 0, height: '100vh', zIndex: 0 }} />
+      <div style={{ flexGrow: 1, marginLeft: '250px' }}>
+        {children}
+      </div>
+    </div>
+ );
 };
 
 export default ProtectedRoute;

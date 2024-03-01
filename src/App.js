@@ -1,11 +1,10 @@
 import React from "react";
 import AppRouter from "./routes/router";
 import { AuthProvider } from './context/AuthContext';
-import style from "./styles/styles";
 
 function App() {
   return (
-    <div style={style.body.app}>
+    <div>
       <AuthProvider>
         <AppRouter />
       </AuthProvider>

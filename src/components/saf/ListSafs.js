@@ -32,7 +32,7 @@ const ListSafs = () => {
   }, []);
  
   return (
-     <div>
+     <div style={{ marginTop:"81px", padding:"10px"}}>
        <Typography variant="h5" component="div" style={{ fontFamily: "Roboto" }}>
          Meus SAF´s
        </Typography>
