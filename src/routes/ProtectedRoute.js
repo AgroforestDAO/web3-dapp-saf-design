@@ -1,10 +1,10 @@
 // ProtectedRoute.js
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext'; // Caminho do arquivo AppContext.js
+import { useAuthContext } from '../context/AuthContext'; // Caminho do arquivo AppContext.js
 
 const ProtectedRoute = ({ children }) => {
- const { user, loading } = useAppContext();
+ const { user, loading } = useAuthContext();
 
  if (loading) {
     return <div>Carregando...</div>; // Pode ser substituído por um componente de carregamento personalizado

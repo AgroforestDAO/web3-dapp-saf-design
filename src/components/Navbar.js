@@ -22,10 +22,7 @@ const NavBar = () => {
   };
   const goToHome = () => {
     navigate('/home');
-  };
-  const goToDashboard = () => {
-    navigate('/dashboard');
-  };
+  }; 
 
   return (
     <AppBar style={{ backgroundColor: '#617c59' }}>
@@ -42,8 +39,7 @@ const NavBar = () => {
         <Box sx={{ flexGrow: 1 }} />
 
         {/* Links à direita */}
-        <Button color="inherit" onClick={goToHome}>+ SAF</Button>
-        <Button color="inherit" onClick={goToDashboard}>Dashboard</Button>
+        <Button color="inherit" onClick={goToHome}>Dashboard</Button>       
         <Button color="inherit" onClick={goToProfile}>Perfil</Button>
         <Button color="inherit" onClick={handleLogout}>Sair</Button>
         {/* <Button color="inherit">Link 2</Button>

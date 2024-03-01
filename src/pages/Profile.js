@@ -1,49 +1,43 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/Navbar";
 import { db } from "../firebase";
-import { doc, getDoc, addDoc, collection } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import {
-  Avatar,
-  Button,
-  TextField,
-  Typography,
-  Container,
-  Grid,
-  Card,
-  CardContent,
+ Avatar,
+ Typography,
+ Container, 
+ Card,
+ CardContent,
 } from "@mui/material";
-import { Edit as EditIcon } from "@mui/icons-material";
-import { useAppContext } from "../context/AppContext";
+import { useAuthContext } from "../context/AuthContext";
 import styled from "@emotion/styled";
 
 const ProfileContainer = styled(Container)`
-  && {
+ && {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     margin-top: 20px;
-  }
+ }
 `;
 
 const ProfileAvatar = styled(Avatar)`
-  && {
+ && {
     width: 150px;
     height: 150px;
     margin-bottom: 20px;
-  }
+ }
 `;
 
 const Profile = () => {
-  const { user } = useAppContext();
-  const [displayName, setDisplayName] = useState(user ? user.displayName : "");
-  const [email, setEmail] = useState(user ? user.email : "");
-  const [photoURL, setPhotoURL] = useState(user ? user.photoURL : "");
-  const [phoneNumber, setPhoneNumber] = useState(user ? user.phoneNumber : "");
+ const { user } = useAuthContext();
+ const [displayName, setDisplayName] = useState("");
+ const [email, setEmail] = useState("");
+ const [photoURL, setPhotoURL] = useState("");
+ const [phoneNumber, setPhoneNumber] = useState("");
 
-  const [isEditing, setIsEditing] = useState(false);
-
-  useEffect(() => {
+ useEffect(() => {
     if (user) {
       const docRef = doc(db, "users", user.uid);
       getDoc(docRef)
@@ -60,30 +54,9 @@ const Profile = () => {
           console.error("Erro ao buscar dados do usuário: ", error);
         });
     }
-  }, [user]);
+ }, [user]);
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleSave = async () => {    
-    await addDoc(collection(db, "users"), {
-      displayName: displayName,
-      email: email,
-      phoneNumber: phoneNumber,
-    })
-      .then((docRef) => {
-        console.log("Usuário escrito com ID: ", docRef.id);
-    })
-      .catch((error) => {
-        alert(error.message);
-      });
-    setDisplayName("");
-    setEmail("");
-    setPhoneNumber("");
-  };
-
-  return (
+ return (
     <>
       <NavBar />
       <ProfileContainer>
@@ -92,7 +65,7 @@ const Profile = () => {
             <Typography variant="h4" gutterBottom style={{ color: "black" }}>
               Perfil
             </Typography>
-            {user && photoURL ? (
+            {photoURL ? (
               <ProfileAvatar src={photoURL} />
             ) : (
               <ProfileAvatar />
@@ -106,52 +79,11 @@ const Profile = () => {
             <Typography variant="body1" style={{ color: "black" }}>
               Telefone: {phoneNumber}
             </Typography>
-            {isEditing ? (
-              <Grid container spacing={3} style={{ marginTop: "63px" }}>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    label="Nome"
-                    fullWidth
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    label="Email"
-                    fullWidth
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    label="Telefone"
-                    fullWidth
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button variant="contained" onClick={handleSave}>
-                    Salvar
-                  </Button>
-                </Grid>
-              </Grid>
-            ) : (
-              <Button
-                startIcon={<EditIcon />}
-                onClick={handleEdit}
-                style={{ marginTop: "20px" }}
-              >
-                Editar
-              </Button>
-            )}
           </CardContent>
         </Card>
       </ProfileContainer>
     </>
-  );
+ );
 };
 
 export default Profile;

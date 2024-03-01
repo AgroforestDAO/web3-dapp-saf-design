@@ -43,7 +43,7 @@ const ListSafs = ({ onSafSelect }) => {
          sx={{ marginBottom: "15px", width: "600px", cursor: "pointer", transition: "0.3s", '&:hover': { transform: "scale(1.02)", backgroundColor: "#C3E3B9" } }} 
          onClick={() => {
            console.log("SAF selecionado:", saf);
-           onSafSelect(saf.id);
+           onSafSelect(saf);
            navigate(`/details/${saf.id}`); // Navegação programática para a página de detalhes
           }}
          >

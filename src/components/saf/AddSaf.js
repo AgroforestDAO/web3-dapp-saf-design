@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../basic/Dropdown";
 import TimePeriodStepper from "./TimePeriodStepper"; 
-import { AppProvider } from "../../context/AppContext";
+import { AuthProvider } from "../../context/AuthContext";
 import image from "../../assets/Tempo.jpeg";
 import {
   Box,
@@ -58,11 +58,11 @@ function AddSaf() {
     setSelectedSpecies(selectedSpecies);
 
     await addSaf(payload);
-    navigate("/dashboard");
+    navigate("/home");
   }
 
   return (
-    <AppProvider value={{ selectedSpecies, setSelectedSpecies }}>
+    <AuthProvider value={{ selectedSpecies, setSelectedSpecies }}>
       <Container maxWidth="lg">
         <Box
           component="form"
@@ -195,7 +195,7 @@ function AddSaf() {
           </Box>
         </Box>
       </Container>
-    </AppProvider>
+    </AuthProvider>
   );
 }
 

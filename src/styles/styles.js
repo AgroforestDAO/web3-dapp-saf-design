@@ -1,5 +1,9 @@
 // styles.js
 const styles = {
+  app: {
+    padding:'10px',
+    marginTop: "72px"
+  },
   color:{
     darkGreen: "#617c59",
   },

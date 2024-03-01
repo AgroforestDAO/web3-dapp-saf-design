@@ -1,13 +1,14 @@
 import React from "react";
 import AppRouter from "./routes/router";
-import { AppProvider } from './context/AppContext'; // Importe o AppProvider
+import { AuthProvider } from './context/AuthContext';
+import style from "./styles/styles";
 
 function App() {
   return (
-    <div className="App">
-      <AppProvider> {/* Envolver a aplicação com o AppProvider */}
+    <div style={style.body.app}>
+      <AuthProvider>
         <AppRouter />
-      </AppProvider>
+      </AuthProvider>
     </div>
   );
 }

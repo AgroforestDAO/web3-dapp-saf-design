@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { auth } from '../firebase'; // Importe o auth do seu arquivo firebase.js
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useAppContext } from '../context/AppContext';
+import { useAuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
@@ -34,7 +34,7 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
   const navigate = useNavigate();
-  const { setUser } = useAppContext();
+  const { setUser } = useAuthContext();
 
 
   const handleSubmit = (event) => {
@@ -59,7 +59,7 @@ export default function SignInSide() {
   };
 
   const handleGoogleSignIn = () => {
-     // Use o useAppContext para obter o setUser
+     // Use o useAuthContext para obter o setUser
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {

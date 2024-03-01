@@ -1,12 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth } from '../firebase';
-import speciesList from '../especies'; // Certifique-se de que este caminho esteja correto
 
-const AppContext = createContext();
+const AuthContext = createContext();
 
-export function AppProvider({ children }) {
- const [user, setUser] = useState(null);
- const [selectedSpecies, setSelectedSpecies] = useState({});
+export function AuthProvider({ children }) {
+ const [user, setUser] = useState({}); 
  const [loading, setLoading] = useState(true);
 
  useEffect(() => {
@@ -18,7 +16,7 @@ export function AppProvider({ children }) {
           phoneNumber: user.phoneNumber,
         });
       } else {
-        setUser(null);
+        setUser();
       }
       setLoading(false);
     });
@@ -27,12 +25,12 @@ export function AppProvider({ children }) {
  }, []);
 
  return (
-    <AppContext.Provider value={{ speciesList, selectedSpecies, setSelectedSpecies, user, setUser, loading }}>
+    <AuthContext.Provider value={{ user, setUser, loading }}>
       {children}
-    </AppContext.Provider>
+    </AuthContext.Provider>
  );
 }
 
-export function useAppContext() {
- return useContext(AppContext);
+export function useAuthContext() {
+ return useContext(AuthContext);
 }

@@ -1,7 +1,8 @@
 // MainSaf.js
 import React, { useState } from 'react';
-import Details from '../components/saf/Details';
-import ListSafs from '../components/saf/ListSafs';
+import Details from './Details';
+import ListSafs from './ListSafs';
+import style from "../../styles/styles";
 
 const MainSaf = () => {
  const [selectedSaf, setSelectedSaf] = useState(null);
@@ -11,7 +12,7 @@ const MainSaf = () => {
  };
 
  return (
-    <div>
+    <div style={style.app}>
       {selectedSaf ? (
         <Details saf={selectedSaf} />
       ) : (
