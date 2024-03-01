@@ -124,13 +124,14 @@ export async function getMentors() {
  
 
 export async function addMentor(payload){
+  const _user = await getCurrentUser();
   const currentTime = new Date();
   let data = {
     name: payload.name,
     email: payload.email,
-    createdByUID: payload.uid,
-    createdByName: payload.displayName,
-    createdByEmail: payload.email,
+    createdByUID: _user.uid,
+    createdByName: _user.displayName,
+    createdByEmail: _user.email,
     createdAt: currentTime,
     updatedAt: currentTime
   }
