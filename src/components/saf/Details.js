@@ -1,17 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, Container, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 
-function Details({saf}) {
+import { useParams } from 'react-router-dom';
+import { db } from '../../firebase';
+import { doc, getDoc } from 'firebase/firestore';
+
+function Details() {
+ const { id } = useParams(); // Acessa o ID do SAF a partir do parâmetro de rota
+ const [safDetails, setSafDetails] = useState(null);
+ const [loading, setLoading] = useState(true);
+
  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
  const timePeriods = ['0-6 meses', '6-18 meses', '2-10 anos', '10-30 anos'];
-  
- const [savedSpecies, setSavedSpecies] = useState([]);
-  
+ const [savedSpecies, setSavedSpecies] = useState({});
+
  useEffect(() => {
-    if(saf){
-      setSavedSpecies(saf.species || []); // Inicializa corretamente o estado com os dados de species
-    }
- }, [saf]);
+    const fetchSafDetails = async () => {
+      try {
+        const docRef = doc(db, 'safs', id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setSafDetails(docSnap.data());
+          setSavedSpecies(docSnap.data().species || {});
+        } else {
+          console.log('No such document!');
+        }
+      } catch (error) {
+        console.error("Erro ao buscar detalhes do SAF:", error);
+      } finally {
+        setLoading(false); // Certifique-se de que o estado de carregamento seja atualizado para false após a busca
+      }
+    };
+
+    fetchSafDetails();
+ }, [id]); // Dependência do useEffect para re-executar ao mudar o ID
+
+ if (loading) {
+    return <div>Carregando detalhes do SAF...</div>;
+ }
 
  return (
     <div>
@@ -20,19 +47,19 @@ function Details({saf}) {
           Detalhes
         </Typography>   
         <Typography variant="h4" component="h4" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
-          SAF: {saf.safName}
+          SAF: {safDetails.safName}
         </Typography>   
         <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
-          Guardião: {saf.guardian}
+          Guardião: {safDetails.guardian}
         </Typography>      
         <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
-          Mentor: {saf.mentor}
+          Mentor: {safDetails.mentor}
         </Typography>      
         <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
-          Tipo: {saf.safType}
+          Tipo: {safDetails.safType}
         </Typography>      
         <Typography variant="h5" component="h1" gutterBottom style={{ fontFamily: 'Roboto' }}>
-          Local: {saf.local}
+          Local: {safDetails.local}
         </Typography>      
         <Typography variant="h5" component="h5" gutterBottom style={{ fontFamily: 'Roboto', fontWeight: 'bold', marginTop: '33px' }}>
           Planejamento geral
@@ -48,19 +75,20 @@ function Details({saf}) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {stratumNames.map((stratumName) => (
-                <TableRow key={stratumName}>
-                 <TableCell align="center" style={{ fontWeight: 'bold' }}>{stratumName}</TableCell>
-                 {timePeriods.map((timePeriod) => (
-                    <TableCell align="center" key={timePeriod}>
-                      {/* Aqui você precisa ajustar a lógica de acesso aos dados com base na estrutura correta de savedSpecies */}
-                      {/* Exemplo genérico, ajuste conforme necessário */}
-                      {savedSpecies.length > 0 ? savedSpecies.map(species => species.name).join(', ') : ''}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
+            {stratumNames.map((stratumName) => (
+              <TableRow key={stratumName}>
+                <TableCell align="center" style={{ fontWeight: 'bold' }}>{stratumName}</TableCell>
+                {timePeriods.map((timePeriod) => (
+                  <TableCell align="center" key={timePeriod}>
+                    {savedSpecies[stratumName] &&
+                    savedSpecies[stratumName][timePeriod] !== undefined
+                      ? savedSpecies[stratumName][timePeriod].map(species => species.name).join(', ')
+                      : '-'}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
           </Table>
         </TableContainer>
       </Container>

@@ -1,14 +1,14 @@
 // Home.js
 import React from "react";
 import Navbar from "../components/Navbar";
-import MainSaf from "../components/saf/MainSaf";
+import ListSafs from "../components/saf/ListSafs";
 
 function Home() {
   return (
     <div className="App">
       <Navbar />      
       
-      <MainSaf />  
+      <ListSafs />  
     </div>
   );
 }

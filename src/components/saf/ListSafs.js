@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-const ListSafs = ({ onSafSelect }) => {
+const ListSafs = () => {
   const [safs, setSafs] = useState([]);
   const navigate = useNavigate(); // Utilização do useNavigate
  
@@ -43,7 +43,6 @@ const ListSafs = ({ onSafSelect }) => {
          sx={{ marginBottom: "15px", width: "600px", cursor: "pointer", transition: "0.3s", '&:hover': { transform: "scale(1.02)", backgroundColor: "#C3E3B9" } }} 
          onClick={() => {
            console.log("SAF selecionado:", saf);
-           onSafSelect(saf);
            navigate(`/details/${saf.id}`); // Navegação programática para a página de detalhes
           }}
          >
