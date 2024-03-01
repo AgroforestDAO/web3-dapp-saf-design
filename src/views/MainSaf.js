@@ -1,15 +1,16 @@
+// MainSaf.js
 import React, { useState } from 'react';
-import ListSafs from '../components/saf/ListSafs';
 import Details from '../components/saf/Details';
+import ListSafs from '../components/saf/ListSafs';
 
 const MainSaf = () => {
-  const [selectedSaf, setSelectedSaf] = useState(null);
+ const [selectedSaf, setSelectedSaf] = useState(null);
 
-  const handleSafSelect = (saf) => {
+ const handleSafSelect = (saf) => {
     setSelectedSaf(saf);
-  };
+ };
 
-  return (
+ return (
     <div>
       {selectedSaf ? (
         <Details saf={selectedSaf} />
@@ -17,7 +18,7 @@ const MainSaf = () => {
         <ListSafs onSafSelect={handleSafSelect} />
       )}
     </div>
-  );
+ );
 };
 
 export default MainSaf;
