@@ -1,32 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  Container,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Typography,
-  Card,
-  CardContent,
+ Table,
+ TableBody,
+ TableCell,
+ Container,
+ TableContainer,
+ TableHead,
+ TableRow,
+ Paper,
+ Typography,
+ Card,
+ CardContent,
+ Button,
+ Dialog,
+ DialogActions,
+ DialogContent,
+ DialogContentText,
+ DialogTitle
 } from "@mui/material";
 
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
 
 function Details() {
-  const { id } = useParams(); // Acessa o ID do SAF a partir do parâmetro de rota
-  const [safDetails, setSafDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
+ const navigate = useNavigate();
+ const { id } = useParams(); // Acessa o ID do SAF a partir do parâmetro de rota
+ const [safDetails, setSafDetails] = useState(null);
+ const [loading, setLoading] = useState(true);
+ const [open, setOpen] = useState(false);
 
-  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
-  const timePeriods = ["0-6 meses", "6-18 meses", "2-10 anos", "10-30 anos"];
-  const [savedSpecies, setSavedSpecies] = useState({});
+ const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
+ const timePeriods = ["0-6 meses", "6-18 meses", "2-10 anos", "10-30 anos"];
+ const [savedSpecies, setSavedSpecies] = useState({});
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchSafDetails = async () => {
       try {
         const docRef = doc(db, "safs", id);
@@ -46,18 +55,40 @@ function Details() {
     };
 
     fetchSafDetails();
-  }, [id]); // Dependência do useEffect para re-executar ao mudar o ID
+ }, [id]); // Dependência do useEffect para re-executar ao mudar o ID
 
-  if (loading) {
+ const handleClickOpen = () => {
+    setOpen(true);
+ };
+
+ const handleClose = () => {
+    setOpen(false);
+ };
+
+ const handleDelete = async () => {
+    try {
+      const docRef = doc(db, "safs", id);
+      await deleteDoc(docRef);
+      console.log("SAF removido com sucesso!");
+      // Redirecionar para outra página ou atualizar a lista de SAFs, conforme necessário
+    } catch (error) {
+      console.error("Erro ao remover o SAF:", error);
+    } finally {
+      handleClose();
+      navigate("/home")
+    }
+ };
+
+ if (loading) {
     return <div>Carregando detalhes do SAF...</div>;
-  }
+ }
 
-  return (
+ return (
     <div style={{ marginTop: "90px" }}>
       <Container maxWidth="lg">
-            <Typography variant="h5" component="div" style={{ fontFamily: "Roboto" }}>
-              Detalhes
-            </Typography>
+        <Typography variant="h5" component="div" style={{ fontFamily: "Roboto" }}>
+          Detalhes
+        </Typography>
         <Card>
           <CardContent>
             <Typography
@@ -151,9 +182,35 @@ function Details() {
                 </TableBody>
               </Table>
             </TableContainer>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+              <Button variant="contained" color="error" onClick={handleClickOpen}>
+                Remover
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </Container>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Confirmação</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Você tem certeza que deseja remover este SAF? Esta ação não pode ser desfeita.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancelar
+          </Button>
+          <Button onClick={handleDelete} color="error" autoFocus>
+            Sim, remover
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

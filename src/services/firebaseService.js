@@ -1,5 +1,5 @@
 // firebaseService.js
-import { doc, setDoc, getDoc, updateDoc, addDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, addDoc, deleteDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebase'; // Importando db de firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -104,7 +104,19 @@ export async function addSaf(payload) {
         console.error("Erro ao adicionar o documento: ", error);
   });
   
-};
+}
+
+export async function deleteSaf(id) {
+  const safRef = collection(db, "safs");
+  const safDoc = doc(safRef, id);
+ 
+  try {
+     await deleteDoc(safDoc);
+     console.log("SAF excluído com sucesso!");
+  } catch (error) {
+     console.error("Erro ao excluir SAF: ", error);
+  }
+ }
 
 export async function getMentors() {
   const mentorsRef = collection(db, "mentors");
@@ -143,3 +155,27 @@ export async function addMentor(payload){
     console.error("Erro ao adicionar mentor", error)
   })
 }
+
+export async function editMentor(id, updatedData) {
+  const mentorsRef = collection(db, "mentors");
+  const mentorDoc = doc(mentorsRef, id);
+ 
+  try {
+     await updateDoc(mentorDoc, updatedData);
+     console.log("Mentor editado com sucesso!");
+  } catch (error) {
+     console.error("Erro ao editar mentor: ", error);
+  }
+ }
+
+ export async function deleteMentor(id) {
+  const mentorsRef = collection(db, "mentors");
+  const mentorDoc = doc(mentorsRef, id);
+ 
+  try {
+     await deleteDoc(mentorDoc);
+     console.log("Mentor excluído com sucesso!");
+  } catch (error) {
+     console.error("Erro ao excluir mentor: ", error);
+  }
+ }
