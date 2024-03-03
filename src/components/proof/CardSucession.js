@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useEffect, useState } from 'react';
 import { getProofs } from '../../services/firebaseService'; // Ajuste o caminho conforme necessário
+import { format } from 'date-fns';
 
 const ExpandMore = styled((props) => {
  const { expand, ...other } = props;
@@ -47,7 +48,7 @@ export default function CardSucession() {
  };
 
  if (!data) {
-    return <div>Loading...</div>;
+    return <div>Você ainda não tem nenhuma foto da Prova de Sucessão. Baixe o App AgroforestDAO no seu celular e envie as fotos.</div>;
  }
 
  return (
@@ -78,6 +79,9 @@ export default function CardSucession() {
       <CardContent>
         <Typography variant="body2" color="text.secondary" style={{ fontFamily: "Roboto" }}>
           {data.description}
+        </Typography>
+        <Typography variant="caption" color="text.secondary" style={{ fontFamily: "Roboto" }}>
+          Criado em: {format(new Date(data.createdAt.toDate()), 'dd/MM/yyyy HH:mm')}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
