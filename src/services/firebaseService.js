@@ -46,6 +46,18 @@ export async function getSaf(uid) {
   return data;
 }
 
+export async function getProofs() {
+  const _user = await getCurrentUser();
+  const proofsRef = collection(db, 'proof-of-sucessions');
+  const q = query(proofsRef, where('createdByUID', '==', _user.uid));
+  const querySnapshot = await getDocs(q);
+  let data = null;
+  querySnapshot.forEach((doc) => {
+    data = doc.data();
+  });
+  return data;
+}
+
 export async function addUser(user) {
   const userRef = doc(db, 'users', user.uid);
   const docSnap = await getDoc(userRef);

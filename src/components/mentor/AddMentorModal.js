@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent } from '@mui/material';
-import { addMentor, getCurrentUser } from '../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
+import { addMentor, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
 
 const AddMentorModal = () => {
  const [open, setOpen] = useState(false);

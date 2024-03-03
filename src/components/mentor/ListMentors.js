@@ -15,7 +15,7 @@ import {
  DialogContentText,
  DialogTitle
 } from "@mui/material";
-import { getMentors, deleteMentor } from "../services/firebaseService"; // Ajuste o caminho conforme necessário
+import { getMentors, deleteMentor } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
 
 const ListMentors = () => {
  const [mentors, setMentors] = useState([]);

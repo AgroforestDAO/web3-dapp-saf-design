@@ -1,7 +1,7 @@
 // Admin.js
 import React from "react";
-import AddMentorModal from "../components/AddMentorModal";
-import ListMentors from "../components/ListMentors";
+import AddMentorModal from "../components/mentor/AddMentorModal";
+import ListMentors from "../components/mentor/ListMentors";
 
 function Admin() {
   return (

@@ -23,6 +23,7 @@ import {
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import MainPageProofs from "../proof/index";
 
 function Details() {
  const navigate = useNavigate();
@@ -131,6 +132,9 @@ function Details() {
             >
               Local: {safDetails.local}
             </Typography>
+
+            <MainPageProofs />
+
             <Typography
               variant="h5"
               component="h5"
