@@ -3,7 +3,7 @@ import CardSucession from "../proof/CardSucession";
 
 function MainPageProofs() {
   return (
-    <div className="App">    
+    <div style={{ marginTop: '21px'}}>    
       <CardSucession />     
     </div>
   );

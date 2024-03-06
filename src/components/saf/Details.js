@@ -131,9 +131,7 @@ function Details() {
               style={{ fontFamily: "Roboto" }}
             >
               Local: {safDetails.local}
-            </Typography>
-
-            <MainPageProofs />
+            </Typography>           
 
             <Typography
               variant="h5"
@@ -186,6 +184,9 @@ function Details() {
                 </TableBody>
               </Table>
             </TableContainer>
+            
+            <MainPageProofs />
+
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button variant="contained" color="error" onClick={handleClickOpen}>
                 Remover
