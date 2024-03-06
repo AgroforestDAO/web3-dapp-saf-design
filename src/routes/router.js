@@ -1,3 +1,4 @@
+// router.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
@@ -18,8 +19,8 @@ function AppRouter() {
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/add-saf" element={<ProtectedRoute><AddSaf /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="/details/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} /> {/* Adicione a rota para Details */}
-          <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} /> {/* Adicione a rota para Details */}
+          <Route path="/details/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
         </Routes>
       </Router>
     </AuthProvider>
