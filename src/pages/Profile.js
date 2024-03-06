@@ -31,30 +31,30 @@ const ProfileAvatar = styled(Avatar)`
 `;
 
 const Profile = () => {
- const { user } = useAuthContext({});
- const [displayName, setDisplayName] = useState("");
- const [email, setEmail] = useState("");
- const [photoURL, setPhotoURL] = useState("");
- const [phoneNumber, setPhoneNumber] = useState("");
-
- useEffect(() => {
-    if (user) {
-      const docRef = doc(db, "users", user.uid);
-      getDoc(docRef)
-        .then((docSnapshot) => {
-          if (docSnapshot.exists()) {
-            const data = docSnapshot.data();
-            setDisplayName(data.displayName);
-            setEmail(data.email);
-            setPhotoURL(data.photoURL);
-            setPhoneNumber(data.phoneNumber);
-          }
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar dados do usuário: ", error);
-        });
-    }
- }, [user]);
+  const { user } = useAuthContext();
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+ 
+  useEffect(() => {
+     if (user) {
+       const docRef = doc(db, "users", user.uid);
+       getDoc(docRef)
+         .then((docSnapshot) => {
+           if (docSnapshot.exists()) {
+             const data = docSnapshot.data();
+             setDisplayName(data.displayName);
+             setEmail(data.email);
+             setPhotoURL(data.photoURL);
+             setPhoneNumber(data.phoneNumber);
+           }
+         })
+         .catch((error) => {
+           console.error("Erro ao buscar dados do usuário: ", error);
+         });
+     }
+  }, [user]);
 
  return (
     <>

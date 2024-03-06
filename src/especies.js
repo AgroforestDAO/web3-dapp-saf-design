@@ -228,9 +228,44 @@ const especies = [
     name: "JAMBO",
     stratum: "ALTO",
     occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "6 E MAIS DE 30 ANOS",
-    highBiomassProducer: "FALSE"
-  }
+    growth_time: "6 E MAIS DE 30 ANOS"
+  },
+  {
+    name: "Banana Nanica",
+    stratum: "Alto",
+    occupied_space: "Não se poda",
+    growth_time: "Pioneira"
+},
+{
+    name: "Bananas Prata, Pão",
+    stratum: "Alto",
+    occupied_space: "Não se poda",
+    growth_time: "Secundária média"
+},
+{
+    name: "Maçã Tropical",
+    stratum: "Alto",
+    occupied_space: "5m",
+    growth_time: "Secundária inicial"
+},
+{
+    name: "Caja Mirim",
+    stratum: "Emergente",
+    occupied_space: "7m",
+    growth_time: "Transição de pioneira a climax"
+},
+{
+    name: "Sinamomo",
+    stratum: "Emergente",
+    occupied_space: "7m",
+    growth_time: "Transição de pioneira a climax"
+},
+{
+    name: "Eucalipto",
+    stratum: "Emergente",
+    occupied_space: "7m",
+    growth_time: "Transição de pioneira a climax"
+}
 ];
 
 export default especies;
