@@ -33,7 +33,7 @@ function Details() {
  const [open, setOpen] = useState(false);
 
  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
- const timePeriods = ["0-6 meses", "6-18 meses", "2-10 anos", "10-30 anos"];
+ const timePeriods = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
  const [savedSpecies, setSavedSpecies] = useState({});
 
  useEffect(() => {

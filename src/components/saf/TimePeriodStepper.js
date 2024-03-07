@@ -5,7 +5,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
 
-const timePeriods = ['Placenta', 'Pioneiras', 'Secundarias I, II e III', 'Primarias'];
+const timePeriods = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
 
 export default function TimePeriodStepper() {
   return (

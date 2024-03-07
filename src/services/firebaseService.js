@@ -3,11 +3,6 @@ import { doc, setDoc, getDoc, updateDoc, addDoc, deleteDoc, collection, query, w
 import { db } from '../firebase'; // Importando db de firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-
-//export const usersRef = db.collection("users");
-//export const safsRef = db.collection("safs");
-//export const mentorsRef = db.collection("mentors");
-
 export async function getCurrentUser() {
   const auth = getAuth();
   return new Promise((resolve, reject) => {
@@ -33,29 +28,6 @@ export async function getCurrentUser() {
       }
     );
   });
-}
-
-export async function getSaf(uid) {
-  const safsRef = collection(db, 'safs');
-  const q = query(safsRef, where('uid', '==', uid));
-  const querySnapshot = await getDocs(q);
-  let data = null;
-  querySnapshot.forEach((doc) => {
-    data = doc.data();
-  });
-  return data;
-}
-
-export async function getProofs() {
-  const _user = await getCurrentUser();
-  const proofsRef = collection(db, 'proof-of-sucessions');
-  const q = query(proofsRef, where('createdByUID', '==', _user.uid));
-  const querySnapshot = await getDocs(q);
-  let data = null;
-  querySnapshot.forEach((doc) => {
-    data = doc.data();
-  });
-  return data;
 }
 
 export async function addUser(user) {
@@ -91,6 +63,34 @@ export async function addUser(user) {
     });
   }
 }
+
+export async function getAllSafs() {
+  const safsRef = collection(db, 'safs');
+  let safs = [];
+ 
+  try {
+     const querySnapshot = await getDocs(safsRef);
+     querySnapshot.forEach((doc) => {
+       safs.push({ id: doc.id, ...doc.data() });
+     });
+  } catch (error) {
+     console.error("Erro ao buscar todos os SAFs: ", error);
+  }
+ 
+  return safs;
+ }
+
+export async function getSaf(uid) {
+  const safsRef = collection(db, 'safs');
+  const q = query(safsRef, where('uid', '==', uid));
+  const querySnapshot = await getDocs(q);
+  let data = null;
+  querySnapshot.forEach((doc) => {
+    data = doc.data();
+  });
+  return data;
+}
+
 
 export async function addSaf(payload) {  
   const currentTime = new Date();
@@ -129,6 +129,7 @@ export async function deleteSaf(id) {
      console.error("Erro ao excluir SAF: ", error);
   }
  }
+ 
 
 export async function getMentors() {
   const mentorsRef = collection(db, "mentors");
@@ -191,3 +192,15 @@ export async function editMentor(id, updatedData) {
      console.error("Erro ao excluir mentor: ", error);
   }
  }
+
+ export async function getProofs() {
+  const _user = await getCurrentUser();
+  const proofsRef = collection(db, 'proof-of-sucessions');
+  const q = query(proofsRef, where('createdByUID', '==', _user.uid));
+  const querySnapshot = await getDocs(q);
+  let data = null;
+  querySnapshot.forEach((doc) => {
+    data = doc.data();
+  });
+  return data;
+}

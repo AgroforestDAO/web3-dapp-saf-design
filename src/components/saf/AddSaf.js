@@ -31,7 +31,7 @@ function AddSaf() {
   const [selectedSpecies, setSelectedSpecies] = useState([]);
 
   const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
-  const timePeriods = ["0-6 meses", "6-18 meses", "2-10 anos", "10-30 anos"];
+  const timePeriods = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
 
   function handleSpeciesSelection(stratumName, timePeriod, species) {
     setSelectedSpecies((prev) => ({

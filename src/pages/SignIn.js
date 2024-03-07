@@ -47,7 +47,7 @@ export default function SignInSide() {
       .then((userCredential) => {
         // Usuário logado
         var user = userCredential.user;
-        console.log('Usuário logado:', user);
+        console.log('Usuário logado:', user.uid);
         navigate('/home');
       })
       .catch((error) => {
