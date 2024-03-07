@@ -5,45 +5,45 @@ import TimePeriodStepper from "./TimePeriodStepper";
 import { AuthProvider } from "../../context/AuthContext";
 import image from "../../assets/Tempo.jpeg";
 import {
-  Box,
-  Button,
-  Container,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TextField,
-  TableRow,
-  Paper,
-  Typography,
+ Box,
+ Button,
+ Container,
+ Table,
+ TableBody,
+ TableCell,
+ TableContainer,
+ TableHead,
+ TextField,
+ TableRow,
+ Paper,
+ Typography,
 } from "@mui/material";
 
 import { getCurrentUser, addSaf } from "../../services/firebaseService";
 
 function AddSaf() {
-  const navigate = useNavigate();
+ const navigate = useNavigate();
 
-  const [safName, setSafName] = useState("");
-  const [guardian, setGuardian] = useState("");
-  const [mentor, setMentor] = useState("");
-  const [local, setLocal] = useState("");
-  const [selectedSpecies, setSelectedSpecies] = useState([]);
+ const [safName, setSafName] = useState("");
+ const [guardian, setGuardian] = useState("");
+ const [mentor, setMentor] = useState("");
+ const [local, setLocal] = useState("");
+ const [selectedSpecies, setSelectedSpecies] = useState({});
 
-  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
-  const timePeriods = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
+ const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
+ const successions = ["PLACENTA I", "PLACENTA II", "PIONEIRAS", "SECUNDÁRIAS", "CLÍMAX"];
 
-  function handleSpeciesSelection(stratumName, timePeriod, species) {
-    setSelectedSpecies((prev) => ({
+ function handleSpeciesSelection(stratumName, succession, species) {
+    setSelectedSpecies(prev => ({
       ...prev,
       [stratumName]: {
         ...prev[stratumName],
-        [timePeriod]: species,
+        [succession]: species,
       },
     }));
-  }
+ }
 
-  async function handleSave() {
+ async function handleSave() {
     const _user = await getCurrentUser();
     let payload = {
       safName: safName,
@@ -56,13 +56,12 @@ function AddSaf() {
       species: selectedSpecies,      
     };
     console.log(payload);
-    setSelectedSpecies(selectedSpecies);
 
     await addSaf(payload);
     navigate("/home");
-  }
+ }
 
-  return (
+ return (
     <AuthProvider value={{ selectedSpecies, setSelectedSpecies }}>
       <Container maxWidth="xlg">
         <Box
@@ -132,7 +131,6 @@ function AddSaf() {
           >
             Planejamento
           </Typography>
-          {/* Inclua o componente Stepper aqui */}
           <img
             src={image}
             alt="Descrição da imagem"
@@ -143,44 +141,45 @@ function AddSaf() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell style={{ fontWeight: "bold" }} align="center">Estrato/Sucessão</TableCell>
-                  {timePeriods.map((timePeriod) => (
+                 <TableCell style={{ fontWeight: "bold" }} align="center">Estrato/Sucessão</TableCell>
+                 {successions.map((succession) => (
                     <TableCell
                       align="center"
                       style={{ fontWeight: "bold" }}
-                      key={timePeriod}
+                      key={succession}
                     >
-                      {timePeriod}
+                      {succession}
                     </TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
                 {stratumNames.map((stratumName) => (
-                  <TableRow key={stratumName}>
+                 <TableRow key={stratumName}>
                     <TableCell align="center" style={{ fontWeight: "bold" }}>
                       {stratumName}
                     </TableCell>
-                    {timePeriods.map((timePeriod) => (
-                      <TableCell key={timePeriod}>
+                    {successions.map((succession) => (
+                      <TableCell key={succession}>
                         <Dropdown
                           selected={
                             selectedSpecies[stratumName]
-                              ? selectedSpecies[stratumName][timePeriod]
+                              ? selectedSpecies[stratumName][succession] || []
                               : []
                           }
                           onSelect={(species) =>
                             handleSpeciesSelection(
                               stratumName,
-                              timePeriod,
+                              succession,
                               species
                             )
                           }
                           stratumName={stratumName}
+                          succession={succession}
                         />
                       </TableCell>
                     ))}
-                  </TableRow>
+                 </TableRow>
                 ))}
               </TableBody>
             </Table>
@@ -197,7 +196,7 @@ function AddSaf() {
         </Box>
       </Container>
     </AuthProvider>
-  );
+ );
 }
 
 export default AddSaf;

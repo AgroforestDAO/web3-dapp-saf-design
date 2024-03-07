@@ -1,41 +1,33 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
-import { createFilterOptions } from '@mui/material/Autocomplete';
+import { createFilterOptions } from "@mui/material/Autocomplete";
 
 // Supondo que speciesData.js está no mesmo diretório que este arquivo
-import speciesData from '../../especies'; // Ajuste o caminho conforme necessário
+import speciesData from "../../especies"; // Ajuste o caminho conforme necessário
 
-function Dropdown({ selected = [], onSelect, stratumName }) {
- // Removido o uso do contexto
- const [inputValue, setInputValue] = useState('');
- const [chips, setChips] = useState([]);
-
- const handleInputChange = ({ target: { value } }) => {
-    setInputValue(value);
- };
-
- const handleKeyDown = ({ key }) => {
-    if (key === 'Enter') {
-      setChips([...chips, inputValue]);
-      setInputValue('');
-    }
- };
-
- const filterOptions = createFilterOptions({
-    matchFrom: 'start',
+function Dropdown({ selected = [], onSelect, stratumName, succession }) {
+  const filterOptions = createFilterOptions({
+    matchFrom: "start",
     stringify: (option) => option.name,
- });
+  });
 
- // Usando os dados importados diretamente
- const filteredSpeciesList = useMemo(() => speciesData.filter(species => species.stratum === stratumName), [stratumName]);
+  // Filtrando as espécies com base no estrato e na sucessão
+  const filteredSpeciesList = useMemo(
+    () =>
+      speciesData.filter(
+        (species) =>
+          species.stratum === stratumName && species.succession === succession
+      ),
+    [stratumName, succession]
+  );
 
- const handleChange = (event, newValue) => {
+  const handleChange = (event, newValue) => {
     onSelect(newValue);
- };
+  };
 
- return (
+  return (
     <Autocomplete
       multiple
       id="species-autocomplete"
@@ -46,22 +38,23 @@ function Dropdown({ selected = [], onSelect, stratumName }) {
       getOptionLabel={(option) => option.name}
       renderTags={(value, getTagProps) =>
         value.map((option, index) => (
-          <Chip variant="outlined" label={option.name} {...getTagProps({ index })} />
+          <Chip
+            variant="outlined"
+            label={option.name}
+            {...getTagProps({ index })}
+          />
         ))
       }
       renderInput={(params) => (
-        <TextField 
-          {...params} 
-          label="Selecione as espécies" 
-          placeholder="Selecionar..." 
-          style={{ width: '230px' }} // Define a largura fixa aqui
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
+        <TextField
+          {...params}
+          label="Selecione as espécies"
+          placeholder="Selecionar..."
+          style={{ width: "230px" }} // Define a largura fixa aqui
         />
       )}
     />
- );
+  );
 }
 
 export default Dropdown;

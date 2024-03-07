@@ -5,13 +5,13 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
 
-const timePeriods = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
+const successions = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
 
 export default function TimePeriodStepper() {
   return (
     <Box sx={{ width: '100%', color: 'darkgreen' }}>
       <Stepper alternativeLabel>
-        {timePeriods.map((label, index) => (
+        {successions.map((label, index) => (
           <Step key={index}>
             <StepLabel StepIconProps={{ style: { color: '#617c59' } }}>{label}</StepLabel>
           </Step>

@@ -33,7 +33,7 @@ function Details() {
  const [open, setOpen] = useState(false);
 
  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
- const timePeriods = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
+ const successions = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
  const [savedSpecies, setSavedSpecies] = useState({});
 
  useEffect(() => {
@@ -152,13 +152,13 @@ function Details() {
                     <TableCell align="center" style={{ fontWeight: "bold" }}>
                       ESTRATO / Sucessão
                     </TableCell>
-                    {timePeriods.map((timePeriod) => (
+                    {successions.map((succession) => (
                       <TableCell
                         align="center"
                         style={{ fontWeight: "bold" }}
-                        key={timePeriod}
+                        key={succession}
                       >
-                        {timePeriod}
+                        {succession}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -169,11 +169,11 @@ function Details() {
                       <TableCell align="center" style={{ fontWeight: "bold" }}>
                         {stratumName}
                       </TableCell>
-                      {timePeriods.map((timePeriod) => (
-                        <TableCell align="center" key={timePeriod}>
+                      {successions.map((succession) => (
+                        <TableCell align="center" key={succession}>
                           {savedSpecies[stratumName] &&
-                          savedSpecies[stratumName][timePeriod] !== undefined
-                            ? savedSpecies[stratumName][timePeriod]
+                          savedSpecies[stratumName][succession] !== undefined
+                            ? savedSpecies[stratumName][succession]
                                 .map((species) => species.name)
                                 .join(", ")
                             : "-"}

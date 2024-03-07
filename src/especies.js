@@ -3,133 +3,133 @@ const especies = [
      name: "CEBOLINHA",
      stratum: "EMERGENTE",
      occupied_space: "20%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "CROTALÁRIA",
      stratum: "EMERGENTE",
      occupied_space: "20%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "MILHO",
      stratum: "EMERGENTE",
      occupied_space: "20%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "MILHETO",
      stratum: "EMERGENTE",
      occupied_space: "20%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "AMARANTO",
      stratum: "EMERGENTE",
      occupied_space: "20%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "MAMONA",
      stratum: "EMERGENTE",
      occupied_space: "20%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "COUVE FLOR",
      stratum: "ALTO",
      occupied_space: "40%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "TOMATE",
      stratum: "ALTO",
      occupied_space: "40%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "MUCUNA",
      stratum: "ALTO",
      occupied_space: "40%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "MANDIOCA",
      stratum: "ALTO",
      occupied_space: "40%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "VITEX",
      stratum: "ALTO",
      occupied_space: "40%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "PITAIA",
      stratum: "ALTO",
      occupied_space: "40%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "ALFACE ROMANA",
      stratum: "MÉDIO",
      occupied_space: "60%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "COUVE",
      stratum: "MÉDIO",
      occupied_space: "60%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "CENOURA",
      stratum: "MÉDIO",
      occupied_space: "60%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "BATATA DOCE",
      stratum: "BAIXO",
      occupied_space: "80%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "ALHO PORÓ",
      stratum: "MÉDIO",
      occupied_space: "60%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "BANANA MACÃ",
      stratum: "MÉDIO",
      occupied_space: "60%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "AMORA",
      stratum: "MÉDIO",
      occupied_space: "60%",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
@@ -164,14 +164,14 @@ const especies = [
      name: "BANANA DA TERRA",
      stratum: "ALTO",
      occupied_space: "NÃO ESPECIFICADO",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
      name: "BANANA NANICA",
      stratum: "ALTO",
      occupied_space: "NÃO ESPECIFICADO",
-     succession: "PLAQUENTA I",
+     succession: "PLACENTA I",
      highBiomassProducer: false
   },
   {
