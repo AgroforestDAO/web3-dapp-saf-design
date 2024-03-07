@@ -33,7 +33,7 @@ function Details() {
  const [open, setOpen] = useState(false);
 
  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
- const successions = ["Placenta I(0-6 meses)", "Placenta II(6-18 meses)", "Pioneiras(2-10 anos)", "Secundárias(10-30 anos)", "Clímax(30-100 anos)"];
+ const successions = ["PLACENTA I", "PLACENTA II", "PIONEIRAS", "SECUNDÁRIAS", "CLÍMAX"];
  const [savedSpecies, setSavedSpecies] = useState({});
 
  useEffect(() => {
@@ -86,7 +86,7 @@ function Details() {
 
  return (
     <div style={{ marginTop: "90px" }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xlg">
         <Typography variant="h5" component="div" style={{ fontFamily: "Roboto" }}>
           Detalhes
         </Typography>
