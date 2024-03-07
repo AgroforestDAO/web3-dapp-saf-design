@@ -460,7 +460,70 @@ const especies = [
    occupied_space: "100%",
    succession: "SECUNDÁRIAS",
    highBiomassProducer: false
- } 
+ },
+ {
+   name: "ARAUCÁRIA",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "CAJÁ MIRIM",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "CASTANHA DO PARÁ",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "COCO DA BAHIA",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "FRUTA PÃO",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "ARAUCÁRIA",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "CAJÁ MIRIM",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "CASTANHA DO PARÁ",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "COCO DA BAHIA",
+   stratum: "EMERGENTE",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ }, 
 ];
 
 export default especies;
