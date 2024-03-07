@@ -255,21 +255,21 @@ const especies = [
     name: "CAJA MIRIN",
     stratum: "EMERGENTE",
     occupied_space: "7M",
-    succession: "TRANSICÃO DE PIONEIRA A CLÍMAX",
+    succession: "PIONEIRAS",
     highBiomassProducer: "FALSE"
  },
  {
     name: "SINAMOMO",
     stratum: "EMERGENTE",
     occupied_space: "7M",
-    succession: "TRANSICÃO DE PIONEIRA A CLÍMAX",
+    succession: "PIONEIRAS",
     highBiomassProducer: "FALSE"
  },
  {
     name: "EUCALIPTO",
     stratum: "EMERGENTE",
     occupied_space: "7M",
-    succession: "TRANSICÃO DE PIONEIRA A CLÍMAX",
+    succession: "PIONEIRAS",
     highBiomassProducer: "FALSE"
  } 
 ];
