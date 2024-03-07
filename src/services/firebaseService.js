@@ -146,6 +146,29 @@ export async function getMentors() {
  
   return mentors;
  }
+
+ export async function addSpecie(payload) {
+  const _user = await getCurrentUser();
+  const currentTime = new Date();
+  let data = {
+     name: payload.name,
+     stratum: payload.stratum,
+     occupied_space: payload.occupied_space,
+     succession: payload.succession,
+     createdByUID: _user.uid,
+     createdByName: _user.displayName,
+     createdByEmail: _user.email,
+     createdAt: currentTime,
+     updatedAt: currentTime
+  };
+ 
+  try {
+     const docRef = await addDoc(collection(db, "species"), data);
+     console.log("Espécie registrada com sucesso no ID: ", docRef.id);
+  } catch (error) {
+     console.error("Erro ao adicionar espécie", error);
+  }
+ }
  
 
 export async function addMentor(payload){

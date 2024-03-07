@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 
 import { getCurrentUser, addSaf } from "../../services/firebaseService";
+import AddSpecieModal from "../AddSpecieModal";
 
 function AddSaf() {
  const navigate = useNavigate();
@@ -137,6 +138,7 @@ function AddSaf() {
             style={{ width: "100%" }}
           />
           <TimePeriodStepper />
+          <AddSpecieModal />
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
