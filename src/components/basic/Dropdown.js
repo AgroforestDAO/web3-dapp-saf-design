@@ -18,7 +18,7 @@ function Dropdown({ selected = [], onSelect, stratumName, succession }) {
     () =>
       speciesData.filter(
         (species) =>
-          species.stratum === stratumName && species.succession === succession
+          species.stratum === stratumName && species.succession.includes(succession)
       ),
     [stratumName, succession]
   );
