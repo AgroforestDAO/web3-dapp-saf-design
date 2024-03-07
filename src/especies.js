@@ -1,271 +1,277 @@
 const especies = [
   {
-    name: "CEBOLINHA",
-    stratum: "EMERGENTE",
-    occupied_space: "20%",
-    growth_time: "ATÉ 45 DIAS",   
-    highBiomassProducer: false
+     name: "CEBOLINHA",
+     stratum: "EMERGENTE",
+     occupied_space: "20%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "CROTALÁRIA",
-    stratum: "EMERGENTE",
-    occupied_space: "20%",
-    growth_time: "ATÉ 60 DIAS",
-    highBiomassProducer: false
-       
+     name: "CROTALÁRIA",
+     stratum: "EMERGENTE",
+     occupied_space: "20%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "MILHO",
-    stratum: "EMERGENTE",
-    occupied_space: "20%",
-    growth_time: "ATÉ 90 DIAS",
-    highBiomassProducer: false
+     name: "MILHO",
+     stratum: "EMERGENTE",
+     occupied_space: "20%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "MILHETO",
-    stratum: "EMERGENTE",
-    occupied_space: "20%",
-    growth_time: "ATÉ 6 MESES",
-    highBiomassProducer: false
+     name: "MILHETO",
+     stratum: "EMERGENTE",
+     occupied_space: "20%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "AMARANTO",
-    stratum: "EMERGENTE",
-    occupied_space: "20%",
-    growth_time: "ATÉ 9 MESES",
-    highBiomassProducer: false
+     name: "AMARANTO",
+     stratum: "EMERGENTE",
+     occupied_space: "20%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "MAMONA",
-    stratum: "EMERGENTE",
-    occupied_space: "20%",
-    growth_time: "+18 MESES",
-    highBiomassProducer: false
+     name: "MAMONA",
+     stratum: "EMERGENTE",
+     occupied_space: "20%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "COUVE FLOR",
-    stratum: "ALTO",
-    occupied_space: "40%",
-    growth_time: "ATÉ 45 DIAS",
-    highBiomassProducer: false
+     name: "COUVE FLOR",
+     stratum: "ALTO",
+     occupied_space: "40%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "TOMATE",
-    stratum: "ALTO",
-    occupied_space: "40%",
-    growth_time: "ATÉ 60 DIAS",
-    highBiomassProducer: false,
+     name: "TOMATE",
+     stratum: "ALTO",
+     occupied_space: "40%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "MUCUNA",
-    stratum: "ALTO",
-    occupied_space: "40%",
-    growth_time: "ATÉ 90 DIAS",
-    highBiomassProducer: false,
+     name: "MUCUNA",
+     stratum: "ALTO",
+     occupied_space: "40%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "MANDIOCA",
-    stratum: "ALTO",
-    occupied_space: "40%",
-    growth_time: "ATÉ 6 MESES",
-    highBiomassProducer: false,
+     name: "MANDIOCA",
+     stratum: "ALTO",
+     occupied_space: "40%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "VITEX",
-    stratum: "ALTO",
-    occupied_space: "40%",
-    growth_time: "ATÉ 9 MESES",
-    highBiomassProducer: false
+     name: "VITEX",
+     stratum: "ALTO",
+     occupied_space: "40%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "PITAIA",
-    stratum: "ALTO",
-    occupied_space: "40%",
-    growth_time: "+18 MESES",
-    highBiomassProducer: false
+     name: "PITAIA",
+     stratum: "ALTO",
+     occupied_space: "40%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "ALFACE ROMANA",
-    stratum: "MÉDIO",
-    occupied_space: "60%",
-    growth_time: "ATÉ 45 DIAS",
-    highBiomassProducer: false
+     name: "ALFACE ROMANA",
+     stratum: "MÉDIO",
+     occupied_space: "60%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "COUVE",
-    stratum: "MÉDIO",
-    occupied_space: "60%",
-    growth_time: "ATÉ 60 DIAS",
-    highBiomassProducer: false
+     name: "COUVE",
+     stratum: "MÉDIO",
+     occupied_space: "60%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "CENOURA",
-    stratum: "MÉDIO",
-    occupied_space: "60%",
-    growth_time: "ATÉ 90 DIAS",
-    highBiomassProducer: false
+     name: "CENOURA",
+     stratum: "MÉDIO",
+     occupied_space: "60%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "BATATA DOCE",
-    stratum: "BAIXO",
-    occupied_space: "80%",
-    growth_time: "ATÉ 6 MESES",
-    highBiomassProducer: false
+     name: "BATATA DOCE",
+     stratum: "BAIXO",
+     occupied_space: "80%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "ALHO PORÓ",
-    stratum: "MÉDIO",
-    occupied_space: "60%",
-    growth_time: "ATÉ 6 MESES",
-    highBiomassProducer: false
+     name: "ALHO PORÓ",
+     stratum: "MÉDIO",
+     occupied_space: "60%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "BANANA MACÃ",
-    stratum: "MÉDIO",
-    occupied_space: "60%",
-    growth_time: "ATÉ 9 MESES",
-    highBiomassProducer: false
+     name: "BANANA MACÃ",
+     stratum: "MÉDIO",
+     occupied_space: "60%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "AMORA",
-    stratum: "MÉDIO",
-    occupied_space: "60%",
-    growth_time: "+18 MESES",
-    highBiomassProducer: false
+     name: "AMORA",
+     stratum: "MÉDIO",
+     occupied_space: "60%",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
   },
   {
-    name: "AÇAÍ",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "6 E MAIS DE 30 ANOS",
-    highBiomassProducer: "FALSE"
+     name: "AÇAÍ",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "CLÍMAX",
+     highBiomassProducer: false
   },
   {
-    name: "ACEROLA",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "3 E 15 ANOS",
-    highBiomassProducer: "FALSE"
+     name: "ACEROLA",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "PIONEIRAS",
+     highBiomassProducer: false
   },
   {
-    name: "ARAÇÁ PIRANGA",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "10 E MAIS DE 30 ANOS",
-    highBiomassProducer: "FALSE"
+     name: "ARAÇÁ PIRANGA",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "CLÍMAX",
+     highBiomassProducer: false
   },
   {
-    name: "BABUÇU",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "10 E 30 ANOS",
-    highBiomassProducer: "FALSE"
+     name: "BABUÇU",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "SECUNDÁRIAS",
+     highBiomassProducer: false
   },
   {
-    name: "BANANA DA TERRA",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "1 E 3 ANOS",
-    highBiomassProducer: "FALSE"
+     name: "BANANA DA TERRA",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
+  },
+  {
+     name: "BANANA NANICA",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "PLAQUENTA I",
+     highBiomassProducer: false
+  },
+  {
+     name: "CAQUI",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "SECUNDÁRIAS",
+     highBiomassProducer: false
+  },
+  {
+     name: "CEREJA DO RIO GRANDE",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "CLÍMAX",
+     highBiomassProducer: false
+  },
+  {
+     name: "FIGO",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "SECUNDÁRIAS",
+     highBiomassProducer: false
+  },
+  {
+     name: "GOIABA",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "SECUNDÁRIAS",
+     highBiomassProducer: false
+  },
+  {
+     name: "GUARANÁ",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "PIONEIRAS",
+     highBiomassProducer: false
+  },
+  {
+     name: "INGÁ",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "PIONEIRAS",
+     highBiomassProducer: false
+  },
+  {
+     name: "JACA",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "CLÍMAX",
+     highBiomassProducer: false
+  },
+  {
+     name: "JAMBO",
+     stratum: "ALTO",
+     occupied_space: "NÃO ESPECIFICADO",
+     succession: "CLÍMAX",
+     highBiomassProducer: false
   },
   {
     name: "BANANA NANICA",
     stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "1,5 E 3 ANOS",
+    occupied_space: "NÃO SE PODA",
+    succession: "PIONEIRAS",
     highBiomassProducer: "FALSE"
-  },
-  {
-    name: "CAQUI",
+ },
+ {
+    name: "BANANAS PRATA, PÃO",
     stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "3 E 30 ANOS",
+    occupied_space: "NÃO SE PODA",
+    succession: "SECUNDÁRIAS",
     highBiomassProducer: "FALSE"
-  },
-  {
-    name: "CEREJA DO RIO GRANDE",
+ },
+ {
+    name: "MAÇÃ TROPICAL",
     stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "10 E MAIS DE 30 ANOS",
+    occupied_space: "5M",
+    succession: "SECUNDÁRIAS",
     highBiomassProducer: "FALSE"
-  },
-  {
-    name: "FIGO",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "2 E 30 ANOS",
+ },
+ {
+    name: "CAJA MIRIN",
+    stratum: "EMERGENTE",
+    occupied_space: "7M",
+    succession: "TRANSICÃO DE PIONEIRA A CLÍMAX",
     highBiomassProducer: "FALSE"
-  },
-  {
-    name: "GOIABA",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "3 E 30 ANOS",
+ },
+ {
+    name: "SINAMOMO",
+    stratum: "EMERGENTE",
+    occupied_space: "7M",
+    succession: "TRANSICÃO DE PIONEIRA A CLÍMAX",
     highBiomassProducer: "FALSE"
-  },
-  {
-    name: "GUARANÁ",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "6 E 15 ANOS",
+ },
+ {
+    name: "EUCALIPTO",
+    stratum: "EMERGENTE",
+    occupied_space: "7M",
+    succession: "TRANSICÃO DE PIONEIRA A CLÍMAX",
     highBiomassProducer: "FALSE"
-  },
-  {
-    name: "INGÁ",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "3 E 15 ANOS",
-    highBiomassProducer: "FALSE"
-  },
-  {
-    name: "JACA",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "7 E MAIS",
-    highBiomassProducer: "FALSE"
-  },
-  {
-    name: "JAMBO",
-    stratum: "ALTO",
-    occupied_space: "NÃO ESPECIFICADO",
-    growth_time: "6 E MAIS DE 30 ANOS"
-  },
-  {
-    name: "Banana Nanica",
-    stratum: "Alto",
-    occupied_space: "Não se poda",
-    growth_time: "Pioneira"
-},
-{
-    name: "Bananas Prata, Pão",
-    stratum: "Alto",
-    occupied_space: "Não se poda",
-    growth_time: "Secundária média"
-},
-{
-    name: "Maçã Tropical",
-    stratum: "Alto",
-    occupied_space: "5m",
-    growth_time: "Secundária inicial"
-},
-{
-    name: "Caja Mirim",
-    stratum: "Emergente",
-    occupied_space: "7m",
-    growth_time: "Transição de pioneira a climax"
-},
-{
-    name: "Sinamomo",
-    stratum: "Emergente",
-    occupied_space: "7m",
-    growth_time: "Transição de pioneira a climax"
-},
-{
-    name: "Eucalipto",
-    stratum: "Emergente",
-    occupied_space: "7m",
-    growth_time: "Transição de pioneira a climax"
-}
+ } 
 ];
 
 export default especies;
