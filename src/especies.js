@@ -271,6 +271,34 @@ const especies = [
     occupied_space: "7M",
     succession: "PIONEIRAS",
     highBiomassProducer: "FALSE"
+ },
+ {
+   name: "GLIRICIDIA OU JASMELÃO",
+   stratum: "ALTO",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "MUTAMBA OU PATA DE VACA",
+   stratum: "NÃO ESPECIFICADO",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "NÃO ESPECIFICADO",
+   highBiomassProducer: false
+ },
+ {
+   name: "UVA DO JAPÃO (MADEIRA)",
+   stratum: "ALTO",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "AROEIRA VERDEADEIRA",
+   stratum: "ALTO",
+   occupied_space: "NÃO ESPECIFICADO",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
  } 
 ];
 
