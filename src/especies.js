@@ -299,6 +299,104 @@ const especies = [
    occupied_space: "NÃO ESPECIFICADO",
    succession: "CLÍMAX",
    highBiomassProducer: false
+ },
+ {
+   name: "ANDIROBA",
+   stratum: "EMERGENTE",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "ARAIRÃ",
+   stratum: "ALTO",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "AROEIRA VERDADEIRA",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "BABOSA",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "BARÚ",
+   stratum: "ALTO",
+   occupied_space: "80%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "CASTANHA DO PARÁ",
+   stratum: "EMERGENTE",
+   occupied_space: "90%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "CEDRO AUSTRALIANO",
+   stratum: "EMERGENTE",
+   occupied_space: "90%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "CINAMOMO",
+   stratum: "EMERGENTE",
+   occupied_space: "90%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "EUCALIPTO",
+   stratum: "EMERGENTE",
+   occupied_space: "90%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "GLIRICÍDIA",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "IPÊ AMARELO",
+   stratum: "EMERGENTE",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "IPÊ ROSA",
+   stratum: "EMERGENTE",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "IPÊ ROXO",
+   stratum: "EMERGENTE",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "JAMELÃO",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
  } 
 ];
 
