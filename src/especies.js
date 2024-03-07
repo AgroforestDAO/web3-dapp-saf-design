@@ -397,6 +397,69 @@ const especies = [
    occupied_space: "100%",
    succession: "SECUNDÁRIAS",
    highBiomassProducer: false
+ },
+ {
+   name: "JATOBÁ",
+   stratum: "EMERGENTE",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "JEQUITIBÁ",
+   stratum: "EMERGENTE",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "MOGNO AFRICANO",
+   stratum: "EMERGENTE",
+   occupied_space: "90%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "MUTAMBA",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "PATA DE VACA",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "PEROBA ROSA",
+   stratum: "EMERGENTE",
+   occupied_space: "80%",
+   succession: "CLÍMAX",
+   highBiomassProducer: false
+ },
+ {
+   name: "PINHEIRO BRAVO (PODOCARPOS/CLIMA FRIO)",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "SOMBRERO MEXICANO",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
+ },
+ {
+   name: "UVA DO JAPÃO",
+   stratum: "ALTO",
+   occupied_space: "100%",
+   succession: "SECUNDÁRIAS",
+   highBiomassProducer: false
  } 
 ];
 
