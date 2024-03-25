@@ -48,7 +48,7 @@ export default function CardSucession() {
  };
 
  if (!data) {
-    return <div>Você ainda não tem nenhuma foto da Prova de Sucessão. Baixe o App AgroforestDAO no seu celular e envie as fotos.</div>;
+    return <div>Você ainda não tem nenhuma foto da Prova de Sucessão.</div>;
  }
 
  return (

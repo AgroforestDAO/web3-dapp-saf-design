@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent } from '@mui/material';
-import { addSpecie, getCurrentUser } from '../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
+import { addSpecie, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
 
 const AddSpecieModal = () => {
  const [open, setOpen] = useState(false);

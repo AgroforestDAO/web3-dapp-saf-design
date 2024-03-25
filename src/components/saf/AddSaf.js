@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 
 import { getCurrentUser, addSaf } from "../../services/firebaseService";
-import AddSpecieModal from "../AddSpecieModal";
+import AddSpecieModal from "../species/AddSpecieModal";
 
 function AddSaf() {
  const navigate = useNavigate();

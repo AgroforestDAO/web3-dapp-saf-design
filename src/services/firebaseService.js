@@ -1,6 +1,17 @@
 // firebaseService.js
-import { doc, setDoc, getDoc, updateDoc, addDoc, deleteDoc, collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../firebase'; // Importando db de firebase.js
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  addDoc,
+  deleteDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../firebase"; // Importando db de firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export async function getCurrentUser() {
@@ -31,7 +42,7 @@ export async function getCurrentUser() {
 }
 
 export async function addUser(user) {
-  const userRef = doc(db, 'users', user.uid);
+  const userRef = doc(db, "users", user.uid);
   const docSnap = await getDoc(userRef);
   const currentTime = new Date();
 
@@ -43,46 +54,49 @@ export async function addUser(user) {
       uid: user.uid,
       photoURL: user.photoURL,
       createdAt: currentTime,
-      lastLogin: currentTime
+      lastLogin: currentTime,
     })
-    .then(() => {
-      console.log('Dados do usuário salvos com sucesso!');
-    })
-    .catch((error) => {
-      console.error('Erro ao salvar os dados do usuário: ', error);
-    });
+      .then(() => {
+        console.log("Dados do usuário salvos com sucesso!");
+      })
+      .catch((error) => {
+        console.error("Erro ao salvar os dados do usuário: ", error);
+      });
   } else {
     await updateDoc(userRef, {
-      lastLogin: currentTime
+      lastLogin: currentTime,
     })
-    .then(() => {
-      console.log('Data e hora do último login atualizadas com sucesso!');
-    })
-    .catch((error) => {
-      console.error('Erro ao atualizar a data e hora do último login: ', error);
-    });
+      .then(() => {
+        console.log("Data e hora do último login atualizadas com sucesso!");
+      })
+      .catch((error) => {
+        console.error(
+          "Erro ao atualizar a data e hora do último login: ",
+          error
+        );
+      });
   }
 }
 
 export async function getAllSafs() {
-  const safsRef = collection(db, 'safs');
+  const safsRef = collection(db, "safs");
   let safs = [];
- 
+
   try {
-     const querySnapshot = await getDocs(safsRef);
-     querySnapshot.forEach((doc) => {
-       safs.push({ id: doc.id, ...doc.data() });
-     });
+    const querySnapshot = await getDocs(safsRef);
+    querySnapshot.forEach((doc) => {
+      safs.push({ id: doc.id, ...doc.data() });
+    });
   } catch (error) {
-     console.error("Erro ao buscar todos os SAFs: ", error);
+    console.error("Erro ao buscar todos os SAFs: ", error);
   }
- 
+
   return safs;
- }
+}
 
 export async function getSaf(uid) {
-  const safsRef = collection(db, 'safs');
-  const q = query(safsRef, where('uid', '==', uid));
+  const safsRef = collection(db, "safs");
+  const q = query(safsRef, where("uid", "==", uid));
   const querySnapshot = await getDocs(q);
   let data = null;
   querySnapshot.forEach((doc) => {
@@ -91,12 +105,11 @@ export async function getSaf(uid) {
   return data;
 }
 
-
-export async function addSaf(payload) {  
+export async function addSaf(payload) {
   const currentTime = new Date();
-  let data = {    
+  let data = {
     safName: payload.safName,
-    createdByUID: payload.uid,    
+    createdByUID: payload.uid,
     createdByName: payload.userName,
     createdByEmail: payload.email,
     mentorName: payload.mentor,
@@ -106,72 +119,69 @@ export async function addSaf(payload) {
     species: payload.species,
     createdAt: currentTime,
     updatedAt: currentTime,
-  }
+  };
 
   await addDoc(collection(db, "safs"), data)
     .then((docRef) => {
-        console.log("Documento escrito com ID: ", docRef.id);
+      console.log("Documento escrito com ID: ", docRef.id);
     })
     .catch((error) => {
-        console.error("Erro ao adicionar o documento: ", error);
-  });
-  
+      console.error("Erro ao adicionar o documento: ", error);
+    });
 }
 
 export async function deleteSaf(id) {
   const safRef = collection(db, "safs");
   const safDoc = doc(safRef, id);
- 
+
   try {
-     await deleteDoc(safDoc);
-     console.log("SAF excluído com sucesso!");
+    await deleteDoc(safDoc);
+    console.log("SAF excluído com sucesso!");
   } catch (error) {
-     console.error("Erro ao excluir SAF: ", error);
+    console.error("Erro ao excluir SAF: ", error);
   }
- }
- 
+}
 
 export async function getMentors() {
   const mentorsRef = collection(db, "mentors");
   let mentors = [];
- 
-  try {
-     const querySnapshot = await getDocs(mentorsRef);
-     querySnapshot.forEach((doc) => {
-       mentors.push({ id: doc.id, ...doc.data() });
-     });
-  } catch (error) {
-     console.error("Erro ao buscar mentores: ", error);
-  }
- 
-  return mentors;
- }
 
- export async function addSpecie(payload) {
+  try {
+    const querySnapshot = await getDocs(mentorsRef);
+    querySnapshot.forEach((doc) => {
+      mentors.push({ id: doc.id, ...doc.data() });
+    });
+  } catch (error) {
+    console.error("Erro ao buscar mentores: ", error);
+  }
+
+  return mentors;
+}
+
+export async function addSpecie(payload) {
   const _user = await getCurrentUser();
   const currentTime = new Date();
   let data = {
-     name: payload.name,
-     stratum: payload.stratum,
-     occupied_space: payload.occupied_space,
-     succession: payload.succession,
-     createdByUID: _user.uid,
-     createdByName: _user.displayName,
-     createdByEmail: _user.email,
-     createdAt: currentTime,
-     updatedAt: currentTime
+    name: payload.name,
+    stratum: payload.stratum,
+    occupied_space: payload.occupied_space,
+    succession: payload.succession,
+    createdByUID: _user.uid,
+    createdByName: _user.displayName,
+    createdByEmail: _user.email,
+    createdAt: currentTime,
+    updatedAt: currentTime,
   };
- 
-  try {
-     const docRef = await addDoc(collection(db, "species"), data);
-     console.log("Espécie registrada com sucesso no ID: ", docRef.id);
-  } catch (error) {
-     console.error("Erro ao adicionar espécie", error);
-  }
- }
- 
 
-export async function addMentor(payload){
+  try {
+    const docRef = await addDoc(collection(db, "species"), data);
+    console.log("Espécie registrada com sucesso no ID: ", docRef.id);
+  } catch (error) {
+    console.error("Erro ao adicionar espécie", error);
+  }
+}
+
+export async function addMentor(payload) {
   const _user = await getCurrentUser();
   const currentTime = new Date();
   let data = {
@@ -181,45 +191,45 @@ export async function addMentor(payload){
     createdByName: _user.displayName,
     createdByEmail: _user.email,
     createdAt: currentTime,
-    updatedAt: currentTime
-  }
+    updatedAt: currentTime,
+  };
   await addDoc(collection(db, "mentors"), data)
-  .then((docRef) => {
-    console.log("Mentor registrado com sucesso no ID: ", docRef.id);
-  })
-  .catch((error) => {
-    console.error("Erro ao adicionar mentor", error)
-  })
+    .then((docRef) => {
+      console.log("Mentor registrado com sucesso no ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.error("Erro ao adicionar mentor", error);
+    });
 }
 
 export async function editMentor(id, updatedData) {
   const mentorsRef = collection(db, "mentors");
   const mentorDoc = doc(mentorsRef, id);
- 
-  try {
-     await updateDoc(mentorDoc, updatedData);
-     console.log("Mentor editado com sucesso!");
-  } catch (error) {
-     console.error("Erro ao editar mentor: ", error);
-  }
- }
 
- export async function deleteMentor(id) {
+  try {
+    await updateDoc(mentorDoc, updatedData);
+    console.log("Mentor editado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao editar mentor: ", error);
+  }
+}
+
+export async function deleteMentor(id) {
   const mentorsRef = collection(db, "mentors");
   const mentorDoc = doc(mentorsRef, id);
- 
-  try {
-     await deleteDoc(mentorDoc);
-     console.log("Mentor excluído com sucesso!");
-  } catch (error) {
-     console.error("Erro ao excluir mentor: ", error);
-  }
- }
 
- export async function getProofs() {
+  try {
+    await deleteDoc(mentorDoc);
+    console.log("Mentor excluído com sucesso!");
+  } catch (error) {
+    console.error("Erro ao excluir mentor: ", error);
+  }
+}
+
+export async function getProofs() {
   const _user = await getCurrentUser();
-  const proofsRef = collection(db, 'proof-of-sucessions');
-  const q = query(proofsRef, where('createdByUID', '==', _user.uid));
+  const proofsRef = collection(db, "proof-of-sucessions");
+  const q = query(proofsRef, where("createdByUID", "==", _user.uid));
   const querySnapshot = await getDocs(q);
   let data = null;
   querySnapshot.forEach((doc) => {
@@ -227,3 +237,35 @@ export async function editMentor(id, updatedData) {
   });
   return data;
 }
+
+export async function getSpecies() {
+  const speciesRef = collection(db, "species");
+  let species = [];
+
+  try {
+    const querySnapshot = await getDocs(speciesRef);
+    querySnapshot.forEach((doc) => {
+      species.push({ id: doc.id, ...doc.data() });
+    });
+  } catch (error) {
+    console.error("Erro ao buscar todas as espécies: ", error);
+  }
+
+  return species;
+};
+
+export async function updateSpecie(id, updatedData) {
+  await db.collection("species").doc(id).update(updatedData);
+};
+
+export async function deleteSpecie(id) {
+  const speciesRef = collection(db, "species");
+  const speciesDoc = doc(speciesRef, id);
+
+  try {
+    await deleteDoc(speciesDoc);
+    console.log("Espécie excluída com sucesso!");
+  } catch (error) {
+    console.error("Erro ao excluir espécie: ", error);
+  }
+};

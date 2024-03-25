@@ -31,7 +31,7 @@ const NavBar = () => {
           <img src={logo} alt="Logo" style={{ maxWidth: '130px', maxHeight: '60px' }} />
         </IconButton>
         <Typography variant="h6">
-          Prova de Sucessão
+          SAF Design
         </Typography>
 
         {/* Espaço entre o título e os botões */}
