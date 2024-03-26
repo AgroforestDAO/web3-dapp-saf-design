@@ -115,6 +115,7 @@ export async function addSaf(payload) {
     createdByEmail: payload.email,
     mentorName: payload.mentor,
     guardianName: payload.guardian,
+    guardianTelegram: payload.guardianTelegram,
     local: payload.local,
     safType: "Lavouras Agroflorestais",
     species: payload.species,

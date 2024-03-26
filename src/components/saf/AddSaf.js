@@ -27,6 +27,7 @@ function AddSaf() {
 
  const [safName, setSafName] = useState("");
  const [guardian, setGuardian] = useState("");
+ const [ guardianTelegramUsername, setGuardianTelegramUsername ] = useState("");
  const [mentor, setMentor] = useState("");
  const [local, setLocal] = useState("");
  const [selectedSpecies, setSelectedSpecies] = useState({});
@@ -52,6 +53,7 @@ function AddSaf() {
       userName: _user.displayName,
       email: _user.email,
       guardian: guardian,
+      guardianTelegram: guardianTelegramUsername,
       mentor: mentor,
       local: local,
       species: selectedSpecies,      
@@ -94,10 +96,21 @@ function AddSaf() {
             required
             fullWidth
             name="guardian"
-            label="Guardião"
+            label="Nome do guardião"
             id="guardian"
             value={guardian}
             onChange={(e) => setGuardian(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="guardianTelegram"
+            label="Telegram @handle do guardião"
+            id="guardianTelegram"
+            value={guardianTelegramUsername}
+            onChange={(e) => setGuardianTelegramUsername(e.target.value)}
           />
           <TextField
             variant="outlined"
