@@ -453,14 +453,6 @@ const especies = [  {
    succession:["CLÍMAX"],
    highBiomassProducer: false
  },
-
- {
-   name: "CASTANHA DO PARÁ",
-   stratum: "EMERGENTE",
-   occupied_space: "NÃO ESPECIFICADO",
-   succession:["CLÍMAX"],
-   highBiomassProducer: false
- },
  {
    name: "COCO DA BAHIA",
    stratum: "EMERGENTE",
@@ -488,14 +480,7 @@ const especies = [  {
    occupied_space: "NÃO ESPECIFICADO",
    succession:["PIONEIRAS"],
    highBiomassProducer: false
- },
- {
-   name: "CASTANHA DO PARÁ",
-   stratum: "EMERGENTE",
-   occupied_space: "NÃO ESPECIFICADO",
-   succession:["CLÍMAX"],
-   highBiomassProducer: false
- },
+ }, 
  {
    name: "COCO DA BAHIA",
    stratum: "EMERGENTE",

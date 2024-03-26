@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent, Autocomplete } from '@mui/material';
 import { addSpecie, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
 
 const AddSpecieModal = () => {
  const [open, setOpen] = useState(false);
  const [specie, setSpecie] = useState({
     name: '',
-    stratum: '',
+    stratum: [],
     occupied_space: '',
-    succession: '',   
+    succession: [],
     createdByName: '', // Ajuste conforme necessário
     createdByEmail: '', // Ajuste conforme necessário
     createdAt: new Date(),
     updatedAt: new Date(),
  });
 
- // Supondo que você tenha uma função para obter o UID do usuário atual
+ const stratumOptions = ['EMERGENTE', 'ALTO', 'MÉDIO', 'BAIXO'];
+ const successionOptions = ['PLACENTA I', 'PLACENTA II', 'PIONEIRAS', 'SECUNDÁRIAS', 'CLÍMAX'];
+ const occupiedSpaceOptions = ['20%', '40%', '60%', '80%'];
+
  const fetchCurrentUser = async () => {
     const _user = await getCurrentUser(); // Função para obter o usuário atual
     setSpecie({ ...specie, createdByUID: _user.uid }); // Atualiza o UID do usuário atual
@@ -35,17 +38,23 @@ const AddSpecieModal = () => {
  };
 
  const handleSubmit = async (event) => {
-  event.preventDefault();
-  // Transforma a string de succession em um array
-  const successionArray = specie.succession.split(',').map(item => item.trim());
-  try {
-     await addSpecie({ ...specie, succession: successionArray });
+ event.preventDefault();
+ // Concatena os valores de stratum em uma única string
+ const stratumString = specie.stratum.join(', ');
+ // Transforma as strings de succession em arrays
+ const successionArray = specie.succession.map(item => item.trim());
+ try {
+     await addSpecie({ ...specie, stratum: stratumString, succession: successionArray });
      console.log('Espécie salva com sucesso');
      setOpen(false);
-  } catch (error) {
+ } catch (error) {
      console.error('Erro ao salvar espécie:', error);
-  }
+ }
  };
+
+ useEffect(() => {
+    setSpecie({ ...specie, name: specie.name.toUpperCase() });
+ }, [specie]);
 
  return (
     <div>
@@ -66,29 +75,40 @@ const AddSpecieModal = () => {
                  onChange={handleChange}
                  fullWidth
                 />
-                <TextField
-                 margin="dense"
-                 label="Stratum"
-                 name="stratum"
+                <Autocomplete
+                 multiple
+                 options={stratumOptions}
+                 getOptionLabel={(option) => option}
                  value={specie.stratum}
-                 onChange={handleChange}
-                 fullWidth
+                 onChange={(event, newValue) => {
+                    setSpecie({ ...specie, stratum: newValue });
+                 }}
+                 renderInput={(params) => (
+                    <TextField {...params} label="Stratum" margin="dense" fullWidth />
+                 )}
                 />
-                <TextField
-                 margin="dense"
-                 label="Espaço Ocupado"
-                 name="occupied_space"
+                <Autocomplete
+                 options={occupiedSpaceOptions}
+                 getOptionLabel={(option) => option}
                  value={specie.occupied_space}
-                 onChange={handleChange}
-                 fullWidth
+                 onChange={(event, newValue) => {
+                    setSpecie({ ...specie, occupied_space: newValue });
+                 }}
+                 renderInput={(params) => (
+                    <TextField {...params} label="Espaço Ocupado" margin="dense" fullWidth />
+                 )}
                 />
-                <TextField
-                 margin="dense"
-                 label="Sucessão"
-                 name="succession"
+                <Autocomplete
+                 multiple
+                 options={successionOptions}
+                 getOptionLabel={(option) => option}
                  value={specie.succession}
-                 onChange={handleChange}
-                 fullWidth
+                 onChange={(event, newValue) => {
+                    setSpecie({ ...specie, succession: newValue });
+                 }}
+                 renderInput={(params) => (
+                    <TextField {...params} label="Succession" margin="dense" fullWidth />
+                 )}
                 />
                 <DialogActions>
                  <Button onClick={handleClose} color="primary">

@@ -1,33 +1,45 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 
-// Supondo que speciesData.js está no mesmo diretório que este arquivo
-import speciesData from "../../especies"; // Ajuste o caminho conforme necessário
+import speciesData from "../../especies";
+import { getSpecies } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
 
 function Dropdown({ selected = [], onSelect, stratumName, succession }) {
-  const filterOptions = createFilterOptions({
+ const filterOptions = createFilterOptions({
     matchFrom: "start",
     stringify: (option) => option.name,
-  });
+ });
 
-  // Filtrando as espécies com base no estrato e na sucessão
-  const filteredSpeciesList = useMemo(
+ const [combinedSpeciesList, setCombinedSpeciesList] = useState([]);
+
+ useEffect(() => {
+    const fetchSpecies = async () => {
+      const remoteSpecies = await getSpecies(); // Supondo que getSpecies retorna uma lista de espécies
+      // Combinando os dados locais com os remotos
+      const combined = [...speciesData, ...remoteSpecies];
+      setCombinedSpeciesList(combined);
+    };
+
+    fetchSpecies();
+ }, []);
+
+ const filteredSpeciesList = useMemo(
     () =>
-      speciesData.filter(
+      combinedSpeciesList.filter(
         (species) =>
           species.stratum === stratumName && species.succession.includes(succession)
       ),
-    [stratumName, succession]
-  );
+    [combinedSpeciesList, stratumName, succession]
+ );
 
-  const handleChange = (event, newValue) => {
+ const handleChange = (event, newValue) => {
     onSelect(newValue);
-  };
+ };
 
-  return (
+ return (
     <Autocomplete
       multiple
       id="species-autocomplete"
@@ -54,7 +66,7 @@ function Dropdown({ selected = [], onSelect, stratumName, succession }) {
         />
       )}
     />
-  );
+ );
 }
 
 export default Dropdown;
