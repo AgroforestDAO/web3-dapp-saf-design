@@ -10,6 +10,7 @@ import {
   query,
   where,
   getDocs,
+  orderBy
 } from "firebase/firestore";
 import { db } from "../firebase"; // Importando db de firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -227,16 +228,23 @@ export async function deleteMentor(id) {
 }
 
 export async function getProofs() {
-  const _user = await getCurrentUser();
   const proofsRef = collection(db, "proof-of-sucessions");
-  const q = query(proofsRef, where("createdByUID", "==", _user.uid));
-  const querySnapshot = await getDocs(q);
-  let data = null;
-  querySnapshot.forEach((doc) => {
-    data = doc.data();
-  });
-  return data;
-}
+  let proofs = [];
+ 
+  try {
+     // Cria uma query para ordenar os documentos por data de criação em ordem descendente
+     const q = query(proofsRef, orderBy("createdAt", "desc"));
+     const querySnapshot = await getDocs(q);
+ 
+     querySnapshot.forEach((doc) => {
+       proofs.push({ id: doc.id, ...doc.data() });
+     });
+  } catch (error) {
+     console.error("Erro ao buscar todas as Provas de sucessão: ", error);
+  }
+ 
+  return proofs;
+ }
 
 export async function getSpecies() {
   const speciesRef = collection(db, "species");
