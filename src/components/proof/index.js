@@ -1,10 +1,10 @@
 import React from "react";
 import CardSucession from "../proof/CardSucession";
 
-function MainPageProofs() {
+function MainPageProofs(safId) {
   return (
     <div style={{ marginTop: '21px'}}>    
-      <CardSucession />     
+      <CardSucession safId={safId}/>     
     </div>
   );
 }

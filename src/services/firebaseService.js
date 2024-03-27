@@ -9,8 +9,7 @@ import {
   collection,
   query,
   where,
-  getDocs,
-  orderBy
+  getDocs
 } from "firebase/firestore";
 import { db } from "../firebase"; // Importando db de firebase.js
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -228,15 +227,15 @@ export async function deleteMentor(id) {
   }
 }
 
-export async function getProofs() {
+export async function getProofs(safId) {
   const proofsRef = collection(db, "proof-of-sucessions");
   let proofs = [];
  
   try {
      // Cria uma query para ordenar os documentos por data de criação em ordem descendente
-     const q = query(proofsRef, orderBy("createdAt", "desc"));
+     const q = query(proofsRef,where("safId", "==", safId.safId));
      const querySnapshot = await getDocs(q);
- 
+      
      querySnapshot.forEach((doc) => {
        proofs.push({ id: doc.id, ...doc.data() });
      });

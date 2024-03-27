@@ -35,15 +35,19 @@ function Details() {
  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
  const successions = ["PLACENTA I", "PLACENTA II", "PIONEIRAS", "SECUNDÁRIAS", "CLÍMAX"];
  const [savedSpecies, setSavedSpecies] = useState({});
+ const [ safId, setSafId ] = useState("")
 
  useEffect(() => {
     const fetchSafDetails = async () => {
       try {
         const docRef = doc(db, "safs", id);
         const docSnap = await getDoc(docRef);
+        const safData = docSnap.data();
 
         if (docSnap.exists()) {
           setSafDetails(docSnap.data());
+          
+          setSafId(safData.safId)
           setSavedSpecies(docSnap.data().species || {});
         } else {
           console.log("No such document!");
@@ -185,7 +189,7 @@ function Details() {
               </Table>
             </TableContainer>
             
-            <MainPageProofs />
+            <MainPageProofs safId={safId} />
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
               <Button variant="contained" color="error" onClick={handleClickOpen}>

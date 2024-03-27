@@ -29,19 +29,20 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function CardSucession() {
+export default function CardSucession(safId) {
   const [expanded, setExpanded] = React.useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchProofs = async () => {
-       const proofsData = await getProofs();
+      
+       const proofsData = await getProofs(safId.safId);
       
        setData(proofsData);
     };
    
     fetchProofs();
-   }, []);
+   }, [safId]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
