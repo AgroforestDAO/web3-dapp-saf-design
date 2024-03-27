@@ -1,21 +1,25 @@
-// Admin.js
 import React from "react";
+import { Grid } from "@mui/material";
 import AddMentorModal from "../components/mentor/AddMentorModal";
 import ListMentors from "../components/mentor/ListMentors";
 import ListAllSafs from "../components/saf/ListAllSafs";
-//import ListSpecies from "../components/species/ListSpecies";
-
-
+import ListSpecies from "../components/species/ListSpecies";
 
 function Admin() {
-  return (
-    <div> 
-      <ListMentors />
-      <AddMentorModal />
-      <ListAllSafs />
-      {/* <ListSpecies /> */}
-    </div>
-  );
+ return (
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={6} md={10}>
+        <ListAllSafs />
+      </Grid>       
+      <Grid item xs={12} sm={4} md={10}>
+        <ListMentors />
+        <AddMentorModal />
+      </Grid>
+      <Grid item xs={12} sm={6} md={2}>
+        <ListSpecies />
+      </Grid>
+    </Grid>
+ );
 }
 
 export default Admin;

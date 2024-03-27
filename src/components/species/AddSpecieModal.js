@@ -54,7 +54,7 @@ const AddSpecieModal = () => {
 
  useEffect(() => {
     setSpecie({ ...specie, name: specie.name.toUpperCase() });
- }, [specie]);
+ }, []);
 
  return (
     <div>

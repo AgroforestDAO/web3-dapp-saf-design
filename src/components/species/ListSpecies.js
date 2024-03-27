@@ -5,6 +5,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
+  Typography
 } from "@mui/material";
 //import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -44,7 +45,10 @@ const ListSpecies = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: "99px" }}>
+      <Typography variant="h5" component="div" style={{ fontFamily: "Roboto" }}>
+        Espécies cadastradas
+      </Typography>
       <List>
         {data.map((item) => (
           <ListItem key={item.id}>
