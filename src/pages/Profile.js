@@ -1,35 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { db } from '../firebase';
-import { doc, getDoc } from "firebase/firestore";
-import { Avatar, Button, TextField } from '@mui/material';
-import { Edit as EditIcon } from '@mui/icons-material';
-import styled from '@emotion/styled';
-import '@fontsource/roboto';
-import { useAppContext } from '../context/AppContext'; // Importe o useAppContext
+import React, { useState, useEffect } from "react";
+import { db } from "../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { TextField, Button } from "@mui/material";
+import { useAuthContext } from "../context/AuthContext";
+import NavBar from "../components/Navbar";
+import { Container, Card, CardContent, Typography, Avatar } from "@mui/material";
+import styled from "@emotion/styled";
 
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+const ProfileContainer = styled(Container)`
+ && {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+ }
 `;
 
 const ProfileAvatar = styled(Avatar)`
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
+ && {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+ }
 `;
 
 const Profile = () => {
-  const { user, setUser } = useAppContext(); // Use o useAppContext para obter o usuário
-  const [isEditing, setIsEditing] = useState(false);
-  const [displayName, setDisplayName] = useState(user ? user.displayName : '');
-  const [email, setEmail] = useState(user ? user.email : '');
-  const [photoURL, setPhotoURL] = useState(user ? user.photoURL : '');
+ const { user } = useAuthContext();
+ const [displayName, setDisplayName] = useState("");
+ const [email, setEmail] = useState("");
+ const [photoURL, setPhotoURL] = useState("");
+ const [phoneNumber, setPhoneNumber] = useState("");
+ const [telegramUsername, setTelegramUsername] = useState("");
 
-  useEffect(() => {
+ useEffect(() => {
     if (user) {
-      const docRef = doc(db, 'users', user.uid); // Crie uma referência para o documento
+      const docRef = doc(db, "users", user.uid);
       getDoc(docRef)
         .then((docSnapshot) => {
           if (docSnapshot.exists()) {
@@ -37,48 +43,87 @@ const Profile = () => {
             setDisplayName(data.displayName);
             setEmail(data.email);
             setPhotoURL(data.photoURL);
+            setPhoneNumber(data.phoneNumber);
+            setTelegramUsername(data.telegramUsername || "");
           }
         })
         .catch((error) => {
           console.error("Erro ao buscar dados do usuário: ", error);
         });
     }
-  }, [user]);
+ }, [user]);
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
+ const updateProfile = async () => {
+    if (user) {
+      const docRef = doc(db, "users", user.uid);
+      await updateDoc(docRef, {
+        displayName,
+        email,
+        phoneNumber,
+        telegramUsername,
+      });
+      alert('Perfil atualizado com sucesso!');
+    }
+ };
 
-  const handleSave = () => {
-    const docRef = db.collection('users').doc(user.uid);
-    docRef.update({
-      displayName,
-      email,
-    }).then(() => {
-      setUser({ ...user, displayName, email }); // Atualize o usuário no contexto após salvar no banco de dados
-    });
-    setIsEditing(false);
-  };
-
-  return (
-    <ProfileContainer>
-      <h1 style={{ color: 'black' }}>Perfil</h1>
-      {user && photoURL ? <ProfileAvatar src={photoURL} /> : <ProfileAvatar />}
-        <h1 style={{ color: 'black' }}>{displayName}</h1>
-        <p style={{ color: 'black' }}>Email: {email}</p>
-      {isEditing ? (
-        <>
-          <TextField label="Nome" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
-          <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Button onClick={handleSave}>Salvar</Button>
-        </>
-      ) : (
-        <Button startIcon={<EditIcon />} onClick={handleEdit}>
-          Editar
-        </Button>
-      )}
-    </ProfileContainer>
-  );
+ return (
+    <>
+      <NavBar />
+      <ProfileContainer>
+        <Card elevation={4} style={{ marginTop: "63px", width:"400px" }}>
+          <CardContent>
+            <Typography variant="h4" gutterBottom style={{ color: "black" }}>
+              Perfil
+            </Typography>
+            {photoURL ? (
+              <ProfileAvatar src={photoURL} />
+            ) : (
+              <ProfileAvatar />
+            )}
+            <Typography variant="h5" style={{ color: "black" }}>
+              {displayName}
+            </Typography>
+            <TextField
+              label="Display Name"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              variant="outlined"
+              style={{ marginTop: 16, width: '100%' }}
+            />
+            <TextField
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              variant="outlined"
+              style={{ marginTop: 16, width: '100%' }}
+            />
+            <TextField
+              label="Telefone"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              variant="outlined"
+              style={{ marginTop: 16, width: '100%' }}
+            />
+            <TextField
+              label="Telegram Username"
+              value={telegramUsername}
+              onChange={(e) => setTelegramUsername(e.target.value)}
+              variant="outlined"
+              style={{ marginTop: 16, width: '100%' }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={updateProfile}
+              style={{ marginTop: 16 }}
+            >
+              Atualizar Perfil
+            </Button>
+          </CardContent>
+        </Card>
+      </ProfileContainer>
+    </>
+ );
 };
 
 export default Profile;

@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.env
 
 
 # testing
@@ -18,7 +19,10 @@
 .env.development.local
 .env.test.local
 .env.production.local
-/src/firebase.js
+firebase.js
+.firebaserc
+hosting*.*
+
 
 
 npm-debug.log*

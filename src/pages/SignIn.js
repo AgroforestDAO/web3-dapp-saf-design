@@ -1,15 +1,12 @@
 import * as React from 'react';
 import { auth } from '../firebase'; // Importe o auth do seu arquivo firebase.js
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useAppContext } from '../context/AppContext';
+import { useAuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-// import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -18,7 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import backgroundImage from "../assets/LoginBanner.png";
 import image from "../assets/safWeb3.png";
-import { addUser } from '../services/firestoreFunctions';
+import { addUser } from '../services/firebaseService';
 
 function Copyright(props) {
   return (
@@ -37,7 +34,7 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
   const navigate = useNavigate();
-  const { setUser } = useAppContext();
+  const { setUser } = useAuthContext();
 
 
   const handleSubmit = (event) => {
@@ -50,7 +47,7 @@ export default function SignInSide() {
       .then((userCredential) => {
         // Usuário logado
         var user = userCredential.user;
-        console.log('Usuário logado:', user);
+        console.log('Usuário logado:', user.uid);
         navigate('/home');
       })
       .catch((error) => {
@@ -62,20 +59,21 @@ export default function SignInSide() {
   };
 
   const handleGoogleSignIn = () => {
-     // Use o useAppContext para obter o setUser
+     // Use o useAuthContext para obter o setUser
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         // Usuário logado com Google
         var user = result.user;
-        console.log('Usuário logado com Google:', user);  
+        // console.log('Usuário logado com Google:', user);  
   
         // Salva o usuário no contexto
         setUser({
           displayName: user.displayName,
           email: user.email,
           uid: user.uid,
-          photoURL: user.photoURL
+          photoURL: user.photoURL,
+          phoneNumber: user.phoneNumber,
         });
 
         // Adiciona o usuário ao Firestore
@@ -83,7 +81,8 @@ export default function SignInSide() {
           displayName: user.displayName,
           email: user.email,
           uid: user.uid,
-          photoURL: user.photoURL
+          photoURL: user.photoURL,
+          phoneNumber: user.phoneNumber
         });
   
         navigate('/home');

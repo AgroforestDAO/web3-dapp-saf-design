@@ -1,15 +1,12 @@
 // Home.js
 import React from "react";
-import Navbar from "../components/Navbar";
-import SafPlaning from "../components/SafPlaning";
+import ListSafs from "../components/saf/ListSafs";
 
 
 function Home() {
   return (
-    <div className="App">
-      <Navbar />
-      
-      <SafPlaning />      
+    <div className="App">    
+      <ListSafs />     
     </div>
   );
 }
