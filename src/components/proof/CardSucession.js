@@ -14,6 +14,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getProofs } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
 import { format } from 'date-fns';
@@ -53,8 +54,9 @@ export default function CardSucession(safId) {
   }
 
   return (
-    <div>
+    <Grid container spacing={2}>
        {data.map((item, index) => (
+        <Grid item xs={12} sm={6} md={3}>
          <Card key={index} sx={{ maxWidth: 345, marginBottom: 2 }}>
            <CardHeader
              avatar={
@@ -116,8 +118,9 @@ export default function CardSucession(safId) {
              </CardContent>
            </Collapse>
          </Card>
+         </Grid>
        ))}
-    </div>
+    </Grid>
    );
    
 }
