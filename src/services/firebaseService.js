@@ -164,9 +164,9 @@ export async function addSpecie(payload) {
   const currentTime = new Date();
   let data = {
     name: payload.name,
-    stratum: payload.stratum,
-    occupied_space: payload.occupied_space,
+    stratum: payload.stratum,    
     succession: payload.succession,
+    productionCicle: payload.productionCicle,
     createdByUID: _user.uid,
     createdByName: _user.displayName,
     createdByEmail: _user.email,
@@ -180,6 +180,33 @@ export async function addSpecie(payload) {
   } catch (error) {
     console.error("Erro ao adicionar espécie", error);
   }
+}
+
+export async function addSeeds(payload) {
+  const _user = await getCurrentUser();
+  const currentTime = new Date();
+  let data = {
+    name: payload.name,
+    stratum: payload.stratum,
+    succession: payload.succession,
+    ownerWallet: payload.ownerWallet,
+    createdByUID: _user.uid,
+    createdByName: _user.displayName,
+    createdByEmail: _user.email,
+    createdAt: currentTime,
+    updatedAt: currentTime,
+  };
+
+  try {
+    const docRef = await addDoc(collection(db, "seeds"), data);
+    console.log("Semente registrada com sucesso no ID: ", docRef.id);
+  } catch (error) {
+    console.error("Erro ao adicionar semente", error);
+  }  
+}
+
+export async function getSeeds() {
+  console.log("Get Seeds functions tem que ser implementada");
 }
 
 export async function addMentor(payload) {

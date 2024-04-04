@@ -32,6 +32,7 @@ const Profile = () => {
  const [photoURL, setPhotoURL] = useState("");
  const [phoneNumber, setPhoneNumber] = useState("");
  const [telegramUsername, setTelegramUsername] = useState("");
+ const [walletAddress, setWalletAddress] = useState("");
 
  useEffect(() => {
     if (user) {
@@ -45,6 +46,7 @@ const Profile = () => {
             setPhotoURL(data.photoURL);
             setPhoneNumber(data.phoneNumber);
             setTelegramUsername(data.telegramUsername || "");
+            setWalletAddress(data.walletAddress || "");
           }
         })
         .catch((error) => {
@@ -61,6 +63,7 @@ const Profile = () => {
         email,
         phoneNumber,
         telegramUsername,
+        walletAddress
       });
       alert('Perfil atualizado com sucesso!');
     }
@@ -108,6 +111,13 @@ const Profile = () => {
               label="Telegram Username"
               value={telegramUsername}
               onChange={(e) => setTelegramUsername(e.target.value)}
+              variant="outlined"
+              style={{ marginTop: 16, width: '100%' }}
+            />
+            <TextField
+              label="Wallet address"
+              value={walletAddress}
+              onChange={(e) => setWalletAddress(e.target.value)}
               variant="outlined"
               style={{ marginTop: 16, width: '100%' }}
             />

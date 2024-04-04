@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent, Autocomplete } from '@mui/material';
-import { addSpecie, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
+import { addSeeds, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
 
-const AddSpecieModal = () => {
+const AddSeedsModal = () => {
  const [open, setOpen] = useState(false);
  const [specie, setSpecie] = useState({
     name: '',
-    stratum: [],    
+    stratum: [],   
     succession: [],
-    productionCicle: '',
-    createdByName: '', // Ajuste conforme necessário
-    createdByEmail: '', // Ajuste conforme necessário
+    createdByName: '',
+    createdByEmail: '',
+    ownerWallet: '', 
     createdAt: new Date(),
     updatedAt: new Date(),
  });
 
  const stratumOptions = ['EMERGENTE', 'ALTO', 'MÉDIO', 'BAIXO'];
  const successionOptions = ['PLACENTA I', 'PLACENTA II', 'PIONEIRAS', 'SECUNDÁRIAS', 'CLÍMAX'];
- 
+
  const fetchCurrentUser = async () => {
     const _user = await getCurrentUser(); // Função para obter o usuário atual
-    setSpecie({ ...specie, createdByUID: _user.uid }); // Atualiza o UID do usuário atual
+    setSpecie({ ...specie, createdByUID: _user.uid, ownerWallet: _user.ownerWallet });
  };
 
  const handleChange = (event) => {
@@ -43,7 +43,9 @@ const AddSpecieModal = () => {
  // Transforma as strings de succession em arrays
  const successionArray = specie.succession.map(item => item.trim());
  try {
-     await addSpecie({ ...specie, stratum: stratumString, succession: successionArray });
+   const payload = { stratum: stratumString, succession: successionArray, ownerWallet: specie.ownerWallet }
+
+     await addSeeds(payload);
      console.log('Espécie salva com sucesso');
      setOpen(false);
  } catch (error) {
@@ -58,10 +60,10 @@ const AddSpecieModal = () => {
  return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Adicionar Espécie
+        Adicionar Semente
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Cadastro de Espécie</DialogTitle>
+        <DialogTitle>Cadastro de Sementes</DialogTitle>
         <DialogContent>
           <Card>
             <CardContent>
@@ -74,14 +76,6 @@ const AddSpecieModal = () => {
                  onChange={handleChange}
                  fullWidth
                 />
-                <TextField
-                 margin="dense"
-                 label="Ciclo de produção(em dias)"
-                 name="productionCicle"
-                 value={specie.productionCicle}
-                 onChange={handleChange}
-                 fullWidth
-                />
                 <Autocomplete
                  multiple
                  options={stratumOptions}
@@ -91,7 +85,7 @@ const AddSpecieModal = () => {
                     setSpecie({ ...specie, stratum: newValue });
                  }}
                  renderInput={(params) => (
-                    <TextField {...params} label="Stratum" margin="dense" fullWidth />
+                    <TextField {...params} label="Estrato" margin="dense" fullWidth />
                  )}
                 />                
                 <Autocomplete
@@ -103,7 +97,7 @@ const AddSpecieModal = () => {
                     setSpecie({ ...specie, succession: newValue });
                  }}
                  renderInput={(params) => (
-                    <TextField {...params} label="Succession" margin="dense" fullWidth />
+                    <TextField {...params} label="Sucessão" margin="dense" fullWidth />
                  )}
                 />
                 <DialogActions>
@@ -123,4 +117,4 @@ const AddSpecieModal = () => {
  );
 };
 
-export default AddSpecieModal;
+export default AddSeedsModal;
