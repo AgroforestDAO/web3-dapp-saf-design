@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent } from '@mui/material';
-import { addMentor, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
+import { addMentor } from '../../services/firebaseService';
+import { useAuthContext } from '../../context/AuthContext';
 
 const AddMentorModal = () => {
  const [open, setOpen] = useState(false);
@@ -13,11 +14,12 @@ const AddMentorModal = () => {
     createdAt: new Date(),
     updatedAt: new Date(),
  });
+ 
+ const { user } = useAuthContext(); // Função para obter o usuário atual
 
  // Supondo que você tenha uma função para obter o UID do usuário atual
  const fetchCurrentUser = async () => {
-    const _user = await getCurrentUser(); // Função para obter o usuário atual
-    setMentor({ ...mentor, createdByUID: _user.uid }); // Atualiza o UID do usuário atual
+    setMentor({ ...mentor, createdByUID: user.uid }); // Atualiza o UID do usuário atual
  };
 
  const handleChange = (event) => {
