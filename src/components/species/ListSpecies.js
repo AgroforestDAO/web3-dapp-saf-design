@@ -31,7 +31,7 @@ const ListSpecies = () => {
     };
 
     fetchSpecies();
- }, [species]);
+ }, []);
 
   const handleClickOpen = (specie) => {
     setSelectedSpecie(specie);

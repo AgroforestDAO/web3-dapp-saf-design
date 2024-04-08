@@ -29,7 +29,7 @@ const ListMentors = () => {
     };
 
     fetchMentors();
- }, [mentors]);
+ }, []);
 
  const handleClickOpen = (mentor) => {
     setSelectedMentor(mentor);
@@ -41,18 +41,18 @@ const ListMentors = () => {
  };
 
  const handleDelete = async () => {
-    try {
-      await deleteMentor(selectedMentor.id);
-      console.log("Mentor excluído com sucesso!");
-      // Recarregar a lista de mentores após a exclusão
-      const updatedMentors = await getMentors();
-      setMentors(updatedMentors);
-    } catch (error) {
-      console.error("Erro ao excluir mentor: ", error);
-    } finally {
-      handleClose();
-    }
- };
+  try {
+    await deleteMentor(selectedMentor.id);
+    console.log("Mentor excluído com sucesso!");
+    // Recarregar a lista de mentores após a exclusão
+    const updatedMentors = await getMentors();
+    setMentors(updatedMentors);
+  } catch (error) {
+    console.error("Erro ao excluir mentor: ", error);
+  } finally {
+    handleClose();
+  }
+};
 
  return (
     <div style={{ marginTop: "100px" }}>

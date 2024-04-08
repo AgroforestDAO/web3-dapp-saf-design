@@ -43,7 +43,7 @@ export default function CardSucession(safId) {
     };
    
     fetchProofs();
-   }, [safId]);
+   }, []);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
