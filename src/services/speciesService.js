@@ -11,7 +11,8 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { getCurrentUser } from "../services/firebaseService";
+//import { getCurrentUser } from "../services/firebaseService";
+
 
 export async function getSpecies() {
   const speciesRef = collection(db, "species");
@@ -29,41 +30,40 @@ export async function getSpecies() {
   return species;
 }
 
-export async function addSpecie(payload) {
-  const _user = await getCurrentUser();
+export async function addSpecie(payload, user) {
   const currentTime = new Date();
   let data = {
-    name: payload.name,
-    stratum: payload.stratum,
-    succession: payload.succession,
-    productionCicle: payload.productionCicle,
-    createdByUID: _user.uid,
-    createdByName: _user.displayName,
-    createdByEmail: _user.email,
-    creatorAddress: _user.walletAddress,
-    ownerAddress: _user.walletAddress,
-    isValidated: false,
-    createdAt: currentTime,
-    updatedAt: currentTime,
+      name: payload.name,
+      stratum: payload.stratum,
+      succession: payload.succession,
+      productionCicle: payload.productionCicle,
+      createdByUID: user.uid,
+      createdByName: user.displayName,
+      createdByEmail: user.email,
+      creatorAddress: user.walletAddress,
+      ownerAddress: user.walletAddress,
+      isValidated: false,
+      createdAt: currentTime,
+      updatedAt: currentTime,
   };
-
+  
   try {
-    const docRef = await addDoc(collection(db, "species"), data);
-    console.log("Espécie registrada com sucesso no ID: ", docRef.id);
-    return {
-      success: true,
-      message: "Espécie registrada com sucesso.",
-      id: docRef.id,
-    };
+      const docRef = await addDoc(collection(db, "species"), data);
+      console.log("Espécie registrada com sucesso no ID: ", docRef.id);
+      return {
+        success: true,
+        message: "Espécie registrada com sucesso.",
+        id: docRef.id,
+      };
   } catch (error) {
-    console.error("Erro ao adicionar espécie", error);
-    return {
-      success: false,
-      message: "Erro ao adicionar espécie.",
-      error: error,
-    };
+      console.error("Erro ao adicionar espécie", error);
+      return {
+        success: false,
+        message: "Erro ao adicionar espécie.",
+        error: error,
+      };
   }
-}
+ }
 
 export async function updateSpecie(id, updatedData) {
   try {

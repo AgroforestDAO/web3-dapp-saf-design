@@ -1,8 +1,6 @@
-import React, { useState,
-   // useEffect
-    } from 'react';
+import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent, Autocomplete } from '@mui/material';
-import { getCurrentUser } from '../../services/firebaseService';
+import { useAuthContext } from '../../context/AuthContext';
 import { addSpecie } from '../../services/speciesService';
 
 const AddSpecieModal = () => {
@@ -16,6 +14,8 @@ const AddSpecieModal = () => {
     createdByEmail: '',    
  });
 
+ const { user } = useAuthContext(); // Use o useAuthContext para obter o usuário logado
+
  const stratumOptions = ['EMERGENTE', 'ALTO', 'MÉDIO', 'BAIXO'];
  const successionOptions = ['PLACENTA I', 'PLACENTA II', 'PIONEIRAS', 'SECUNDÁRIAS', 'CLÍMAX'];
  
@@ -28,13 +28,8 @@ const AddSpecieModal = () => {
       createdByName: '', 
       createdByEmail: '',      
    });
-  };
- 
- const fetchCurrentUser = async () => {
-    const _user = await getCurrentUser(); // Função para obter o usuário atual
-    setSpecie({ ...specie, createdByUID: _user.uid,  }); // Atualiza o UID do usuário atual
  };
-
+ 
  const handleChange = (event) => {
    const value = event.target.value.toUpperCase();
     setSpecie({ ...specie, [event.target.name]: value });
@@ -43,14 +38,12 @@ const AddSpecieModal = () => {
  const handleClickOpen = () => {
    resetSpecieState(); // Redefine o estado 'specie'
    setOpen(true);
-   fetchCurrentUser();
-  };
+ };
 
  const handleClose = () => {
  resetSpecieState(); // Redefine o estado 'specie'
  setOpen(false);
 };
-
 
  const handleSubmit = async (event) => {
  event.preventDefault();
@@ -59,7 +52,7 @@ const AddSpecieModal = () => {
  // Transforma as strings de succession em arrays
  const successionArray = specie.succession.map(item => item.trim());
  try {
-     await addSpecie({ ...specie, stratum: stratumString, succession: successionArray });
+     await addSpecie({ ...specie, stratum: stratumString, succession: successionArray, createdByUID: user.uid });
      console.log('Espécie salva com sucesso');
      setOpen(false);
  } catch (error) {
@@ -67,7 +60,6 @@ const AddSpecieModal = () => {
  }
  };
 
- 
  return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
