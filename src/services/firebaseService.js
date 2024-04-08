@@ -11,7 +11,7 @@ import {
   where,
   getDocs
 } from "firebase/firestore";
-import { db } from "../firebase"; // Importando db de firebase.js
+import { db } from "../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export async function getCurrentUser() {
@@ -159,28 +159,7 @@ export async function getMentors() {
   return mentors;
 }
 
-export async function addSpecie(payload) {
-  const _user = await getCurrentUser();
-  const currentTime = new Date();
-  let data = {
-    name: payload.name,
-    stratum: payload.stratum,    
-    succession: payload.succession,
-    productionCicle: payload.productionCicle,
-    createdByUID: _user.uid,
-    createdByName: _user.displayName,
-    createdByEmail: _user.email,
-    createdAt: currentTime,
-    updatedAt: currentTime,
-  };
 
-  try {
-    const docRef = await addDoc(collection(db, "species"), data);
-    console.log("Espécie registrada com sucesso no ID: ", docRef.id);
-  } catch (error) {
-    console.error("Erro ao adicionar espécie", error);
-  }
-}
 
 export async function addSeeds(payload) {
   const _user = await getCurrentUser();
@@ -273,34 +252,6 @@ export async function getProofs(safId) {
   return proofs;
  }
 
-export async function getSpecies() {
-  const speciesRef = collection(db, "species");
-  let species = [];
 
-  try {
-    const querySnapshot = await getDocs(speciesRef);
-    querySnapshot.forEach((doc) => {
-      species.push({ id: doc.id, ...doc.data() });
-    });
-  } catch (error) {
-    console.error("Erro ao buscar todas as espécies: ", error);
-  }
 
-  return species;
-};
 
-export async function updateSpecie(id, updatedData) {
-  await db.collection("species").doc(id).update(updatedData);
-};
-
-export async function deleteSpecie(id) {
-  const speciesRef = collection(db, "species");
-  const speciesDoc = doc(speciesRef, id);
-
-  try {
-    await deleteDoc(speciesDoc);
-    console.log("Espécie excluída com sucesso!");
-  } catch (error) {
-    console.error("Erro ao excluir espécie: ", error);
-  }
-};

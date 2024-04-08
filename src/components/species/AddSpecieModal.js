@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent, Autocomplete } from '@mui/material';
-import { addSpecie, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
+import { getCurrentUser } from '../../services/firebaseService';
+import { addSpecie } from '../../services/speciesService';
 
 const AddSpecieModal = () => {
  const [open, setOpen] = useState(false);
@@ -20,11 +21,12 @@ const AddSpecieModal = () => {
  
  const fetchCurrentUser = async () => {
     const _user = await getCurrentUser(); // Função para obter o usuário atual
-    setSpecie({ ...specie, createdByUID: _user.uid }); // Atualiza o UID do usuário atual
+    setSpecie({ ...specie, createdByUID: _user.uid,  }); // Atualiza o UID do usuário atual
  };
 
  const handleChange = (event) => {
-    setSpecie({ ...specie, [event.target.name]: event.target.value });
+   const value = event.target.value.toUpperCase();
+    setSpecie({ ...specie, [event.target.name]: value });
  };
 
  const handleClickOpen = () => {
@@ -70,7 +72,7 @@ const AddSpecieModal = () => {
                  margin="dense"
                  label="Nome"
                  name="name"
-                 value={specie.name.toUpperCase()}
+                 value={specie.name}
                  onChange={handleChange}
                  fullWidth
                 />
@@ -81,6 +83,7 @@ const AddSpecieModal = () => {
                  value={specie.productionCicle}
                  onChange={handleChange}
                  fullWidth
+                 type='number'
                 />
                 <Autocomplete
                  multiple
