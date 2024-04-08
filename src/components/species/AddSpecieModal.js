@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,
+   // useEffect
+    } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent, Autocomplete } from '@mui/material';
 import { getCurrentUser } from '../../services/firebaseService';
 import { addSpecie } from '../../services/speciesService';
@@ -10,14 +12,23 @@ const AddSpecieModal = () => {
     stratum: [],    
     succession: [],
     productionCicle: '',
-    createdByName: '', // Ajuste conforme necessário
-    createdByEmail: '', // Ajuste conforme necessário
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdByName: '',
+    createdByEmail: '',    
  });
 
  const stratumOptions = ['EMERGENTE', 'ALTO', 'MÉDIO', 'BAIXO'];
  const successionOptions = ['PLACENTA I', 'PLACENTA II', 'PIONEIRAS', 'SECUNDÁRIAS', 'CLÍMAX'];
+ 
+ const resetSpecieState = () => {
+   setSpecie({
+      name: '',
+      stratum: [],    
+      succession: [],
+      productionCicle: '',
+      createdByName: '', 
+      createdByEmail: '',      
+   });
+  };
  
  const fetchCurrentUser = async () => {
     const _user = await getCurrentUser(); // Função para obter o usuário atual
@@ -30,13 +41,16 @@ const AddSpecieModal = () => {
  };
 
  const handleClickOpen = () => {
-    setOpen(true);
-    fetchCurrentUser(); // Atualiza o UID do usuário atual antes de abrir o modal
- };
+   resetSpecieState(); // Redefine o estado 'specie'
+   setOpen(true);
+   fetchCurrentUser();
+  };
 
  const handleClose = () => {
-    setOpen(false);
- };
+ resetSpecieState(); // Redefine o estado 'specie'
+ setOpen(false);
+};
+
 
  const handleSubmit = async (event) => {
  event.preventDefault();
@@ -53,10 +67,7 @@ const AddSpecieModal = () => {
  }
  };
 
- useEffect(() => {
-    setSpecie({ ...specie, name: specie.name });
- }, []);
-
+ 
  return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
