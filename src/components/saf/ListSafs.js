@@ -84,7 +84,8 @@ const ListSafs = () => {
           </Box>
         ))
       )}
-      <button onClick={clearUserCache}>Limpar Cache</button> {/* Botão para limpar o cache do usuário */}
+      {/* <button onClick={clearUserCache}>Limpar Cache</button>  */}
+      {/* Botão para limpar o cache do usuário */}
     </div>
  );
 };
