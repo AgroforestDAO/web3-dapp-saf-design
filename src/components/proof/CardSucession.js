@@ -113,7 +113,10 @@ export default function CardSucession(safId) {
            <Collapse in={expanded} timeout="auto" unmountOnExit>
              <CardContent>
                <Typography paragraph>
-                 {/* Aqui você pode adicionar mais detalhes sobre o composto */}
+                 Nome do SAF: {item.safName}
+               </Typography>
+               <Typography paragraph>
+                 Link IPFS: {item.imgURL}
                </Typography>
              </CardContent>
            </Collapse>

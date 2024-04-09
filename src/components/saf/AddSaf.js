@@ -129,7 +129,8 @@ function AddSaf() {
             required
             fullWidth
             name="local"
-            label="Local"
+            label="Cidade, UF"
+            placeholder="Ex.: Bias Fortes, MG"
             id="local"
             value={local}
             onChange={(e) => setLocal(e.target.value)}
