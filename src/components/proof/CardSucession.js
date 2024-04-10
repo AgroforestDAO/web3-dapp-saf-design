@@ -20,43 +20,42 @@ import { getProofs } from "../../services/firebaseService"; // Ajuste o caminho 
 import { format } from 'date-fns';
 
 const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
+ const { expand, ...other } = props;
+ return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
+ transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+ marginLeft: "auto",
+ transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
-  }),
+ }),
 }));
 
-export default function CardSucession(safId) {
-  const [expanded, setExpanded] = React.useState(false);
-  const [data, setData] = useState([]);
+// Corrigindo a forma como o safId é acessado
+export default function CardSucession({ safId }) {
+ const [expanded, setExpanded] = React.useState(false);
+ const [data, setData] = useState([]);
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchProofs = async () => {
-      
-       const proofsData = await getProofs(safId.safId);
-      
-       setData(proofsData);
+      const proofsData = await getProofs(safId); // Corrigindo a chamada para getProofs
+      setData(proofsData);
     };
    
     fetchProofs();
-   }, []);
+ }, [safId]); // Adicionando safId como dependência do useEffect
 
-  const handleExpandClick = () => {
+ const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
+ };
 
-  if (!data) {
-    return <div>Você ainda não tem nenhuma foto da Prova de Sucessão. Vá até o Telegram e envie suas fotos para o bot @Proof_Of_Syntropy</div>;
-  }
+ if (!data) {
+    return <Typography>Você ainda não tem nenhuma foto da Prova de Sucessão. Vá até o Telegram e envie suas fotos para o bot @Proof_Of_Syntropy</Typography>;
+ }
 
-  return (
+ return (
     <Grid container spacing={2}>
        {data.map((item, index) => (
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={4}>
          <Card key={index} sx={{ maxWidth: 345, marginBottom: 2 }}>
            <CardHeader
              avatar={
@@ -124,6 +123,5 @@ export default function CardSucession(safId) {
          </Grid>
        ))}
     </Grid>
-   );
-   
+ );
 }

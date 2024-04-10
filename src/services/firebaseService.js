@@ -239,23 +239,18 @@ export async function deleteMentor(id) {
   }
 }
 
-export async function getProofs(safId) {
-  const proofsRef = collection(db, "proof-of-sucessions");
-  let proofs = [];
+export async function getProofs(safId) {  
+     const docRef = collection(db, "proof-of-sucessions");
+     const q = query(docRef, where("safId", "==", safId));
  
-  try {
-     // Cria uma query para ordenar os documentos por data de criação em ordem descendente
-     const q = query(proofsRef,where("safId", "==", safId.safId));
-     const querySnapshot = await getDocs(q);
-      
-     querySnapshot.forEach((doc) => {
-       proofs.push({ id: doc.id, ...doc.data() });
-     });
-  } catch (error) {
-     console.error("Erro ao buscar todas as Provas de sucessão: ", error);
-  }
- 
-  return proofs;
+     try {
+      const querySnapshot = await getDocs(q);
+      const proofs = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      return proofs;
+   } catch (error) {
+      console.error("Erro ao buscar provas de sucessão:", error);
+      return null;
+   }
  }
 
  export async function getSpecies() {
