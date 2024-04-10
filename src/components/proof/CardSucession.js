@@ -53,9 +53,9 @@ export default function CardSucession({ safId }) {
  }
 
  return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
        {data.map((item, index) => (
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={3}>
          <Card key={index} sx={{ maxWidth: 345, marginBottom: 2 }}>
            <CardHeader
              avatar={
@@ -73,7 +73,7 @@ export default function CardSucession({ safId }) {
            />
            <CardMedia
              component="img"
-             height="194"
+             height="200"
              image={item.imgURL}
              alt={item.title}
            />
@@ -115,7 +115,7 @@ export default function CardSucession({ safId }) {
                  Nome do SAF: {item.safName}
                </Typography>
                <Typography paragraph>
-                 Link IPFS: {item.imgURL}
+                 {item.imgURL}
                </Typography>
              </CardContent>
            </Collapse>
