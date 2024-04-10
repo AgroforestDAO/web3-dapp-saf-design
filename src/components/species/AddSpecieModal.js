@@ -1,60 +1,81 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent, Autocomplete } from '@mui/material';
-import { addSpecie, getCurrentUser } from '../../services/firebaseService'; // Certifique-se de ajustar o caminho conforme necessário
+import { addSpecie, getCurrentUser } from '../../services/firebaseService';
+
 
 const AddSpecieModal = () => {
  const [open, setOpen] = useState(false);
  const [specie, setSpecie] = useState({
     name: '',
-    stratum: [],
-    occupied_space: '',
+    stratum: [],    
     succession: [],
-    createdByName: '', // Ajuste conforme necessário
-    createdByEmail: '', // Ajuste conforme necessário
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    productionCicle: '',
+    createdByName: '',
+    createdByEmail: '',
+    createdByUID: '',    
  });
+
 
  const stratumOptions = ['EMERGENTE', 'ALTO', 'MÉDIO', 'BAIXO'];
  const successionOptions = ['PLACENTA I', 'PLACENTA II', 'PIONEIRAS', 'SECUNDÁRIAS', 'CLÍMAX'];
- const occupiedSpaceOptions = ['20%', '40%', '60%', '80%'];
+ 
+ const resetSpecieState = () => {
+   setSpecie({
+      name: '',
+      stratum: [],    
+      succession: [],
+      productionCicle: '',
+      createdByName: '', 
+      createdByEmail: '',
+      createdByUID: '',      
+      createdByAddress: '',      
+   });
+ };
 
  const fetchCurrentUser = async () => {
-    const _user = await getCurrentUser(); // Função para obter o usuário atual
-    setSpecie({ ...specie, createdByUID: _user.uid }); // Atualiza o UID do usuário atual
- };
-
+  const user = await getCurrentUser(); // Função para obter o usuário atual
+  setSpecie({ ...specie, createdByUID: user.uid, createdByAddress: user.walletAddress }); // Atualiza o UID do usuário atual
+};
+ 
  const handleChange = (event) => {
-    setSpecie({ ...specie, [event.target.name]: event.target.value });
+   const value = event.target.value.toUpperCase();
+    setSpecie({ ...specie, [event.target.name]: value, createdByUID: specie.createdByUID });
  };
 
- const handleClickOpen = () => {
-    setOpen(true);
-    fetchCurrentUser(); // Atualiza o UID do usuário atual antes de abrir o modal
+ const handleClickOpen = () => {  
+   resetSpecieState();
+   fetchCurrentUser();
+   setOpen(true);
+
  };
 
  const handleClose = () => {
-    setOpen(false);
- };
+ resetSpecieState();
+ setOpen(false);
+};
 
- const handleSubmit = async (event) => {
- event.preventDefault();
- // Concatena os valores de stratum em uma única string
- const stratumString = specie.stratum.join(', ');
- // Transforma as strings de succession em arrays
- const successionArray = specie.succession.map(item => item.trim());
- try {
-     await addSpecie({ ...specie, stratum: stratumString, succession: successionArray });
-     console.log('Espécie salva com sucesso');
-     setOpen(false);
- } catch (error) {
-     console.error('Erro ao salvar espécie:', error);
- }
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  // Verifique se o usuário está autenticado
+  const user = await getCurrentUser();
+  if (!user) {
+     console.error('Usuário não autenticado');
+     // Trate o caso em que o usuário não está autenticado
+     return;
+  }
+ 
+  // Concatena os valores de stratum em uma única string
+  const stratumString = specie.stratum.join(', ');
+  // Transforma as strings de succession em arrays
+  const successionArray = specie.succession.map(item => item.trim());
+  try {
+       await addSpecie({ ...specie, stratum: stratumString, succession: successionArray });
+       console.log('Espécie salva com sucesso');
+       setOpen(false);
+  } catch (error) {
+       console.error('Erro ao salvar espécie:', error);
+  }
  };
-
- useEffect(() => {
-    setSpecie({ ...specie, name: specie.name.toUpperCase() });
- }, []);
 
  return (
     <div>
@@ -75,6 +96,15 @@ const AddSpecieModal = () => {
                  onChange={handleChange}
                  fullWidth
                 />
+                {/* <TextField
+                 margin="dense"
+                 label="Ciclo de produção(em dias)"
+                 name="productionCicle"
+                 value={specie.productionCicle}
+                 onChange={handleChange}
+                 fullWidth
+                 type='number'
+                /> */}
                 <Autocomplete
                  multiple
                  options={stratumOptions}
@@ -86,18 +116,7 @@ const AddSpecieModal = () => {
                  renderInput={(params) => (
                     <TextField {...params} label="Stratum" margin="dense" fullWidth />
                  )}
-                />
-                <Autocomplete
-                 options={occupiedSpaceOptions}
-                 getOptionLabel={(option) => option}
-                 value={specie.occupied_space}
-                 onChange={(event, newValue) => {
-                    setSpecie({ ...specie, occupied_space: newValue });
-                 }}
-                 renderInput={(params) => (
-                    <TextField {...params} label="Espaço Ocupado" margin="dense" fullWidth />
-                 )}
-                />
+                />                
                 <Autocomplete
                  multiple
                  options={successionOptions}

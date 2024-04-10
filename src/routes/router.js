@@ -9,6 +9,7 @@ import Profile from '../pages/Profile';
 import Details from '../components/saf/Details';
 import AddSaf from "../components/saf/AddSaf";
 import Admin from "../pages/Admin";
+import AllSafs from '../pages/AllSafs';
 
 function AppRouter() {
  return (
@@ -17,6 +18,7 @@ function AppRouter() {
         <Routes>
           <Route path="/" element={<SignInSide />} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/all-safs" element={<ProtectedRoute><AllSafs /></ProtectedRoute>} />
           <Route path="/add-saf" element={<ProtectedRoute><AddSaf /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/details/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} />

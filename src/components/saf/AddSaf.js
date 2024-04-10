@@ -28,6 +28,7 @@ function AddSaf() {
  const [safName, setSafName] = useState("");
  const [guardian, setGuardian] = useState("");
  const [ guardianTelegramUsername, setGuardianTelegramUsername ] = useState("");
+ const [ guardianEmail, setGuardianEmail ] = useState("");
  const [mentor, setMentor] = useState("");
  const [local, setLocal] = useState("");
  const [selectedSpecies, setSelectedSpecies] = useState({});
@@ -53,6 +54,7 @@ function AddSaf() {
       userName: _user.displayName,
       email: _user.email,
       guardian: guardian,
+      guardianEmail: guardianEmail,
       guardianTelegram: guardianTelegramUsername,
       mentor: mentor,
       local: local,
@@ -106,6 +108,17 @@ function AddSaf() {
             margin="normal"
             required
             fullWidth
+            name="guardianEmail"
+            label="Email do guardião"
+            id="guardianEmail"
+            value={guardianEmail}
+            onChange={(e) => setGuardianEmail(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             name="guardianTelegram"
             label="Telegram @handle do guardião"
             id="guardianTelegram"
@@ -129,7 +142,8 @@ function AddSaf() {
             required
             fullWidth
             name="local"
-            label="Local"
+            label="Cidade, UF"
+            placeholder="Ex.: Bias Fortes, MG"
             id="local"
             value={local}
             onChange={(e) => setLocal(e.target.value)}
