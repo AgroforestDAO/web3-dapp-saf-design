@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Card, CardContent, Autocomplete } from '@mui/material';
-import { useAuthContext } from '../../context/AuthContext';
-import { addSpecie } from '../../services/speciesService';
+import { addSpecie, getCurrentUser } from '../../services/firebaseService';
 
 
 const AddSpecieModal = () => {
@@ -12,10 +11,10 @@ const AddSpecieModal = () => {
     succession: [],
     productionCicle: '',
     createdByName: '',
-    createdByEmail: '',    
+    createdByEmail: '',
+    createdByUID: '',    
  });
 
- const { user } = useAuthContext(); // Use o useAuthContext para obter o usuário logado
 
  const stratumOptions = ['EMERGENTE', 'ALTO', 'MÉDIO', 'BAIXO'];
  const successionOptions = ['PLACENTA I', 'PLACENTA II', 'PIONEIRAS', 'SECUNDÁRIAS', 'CLÍMAX'];
@@ -27,38 +26,55 @@ const AddSpecieModal = () => {
       succession: [],
       productionCicle: '',
       createdByName: '', 
-      createdByEmail: '',      
+      createdByEmail: '',
+      createdByUID: '',      
+      createdByAddress: '',      
    });
  };
+
+ const fetchCurrentUser = async () => {
+  const user = await getCurrentUser(); // Função para obter o usuário atual
+  setSpecie({ ...specie, createdByUID: user.uid, createdByAddress: user.walletAddress }); // Atualiza o UID do usuário atual
+};
  
  const handleChange = (event) => {
    const value = event.target.value.toUpperCase();
-    setSpecie({ ...specie, [event.target.name]: value });
+    setSpecie({ ...specie, [event.target.name]: value, createdByUID: specie.createdByUID });
  };
 
- const handleClickOpen = () => {
-   resetSpecieState(); // Redefine o estado 'specie'
+ const handleClickOpen = () => {  
+   resetSpecieState();
+   fetchCurrentUser();
    setOpen(true);
+
  };
 
  const handleClose = () => {
- resetSpecieState(); // Redefine o estado 'specie'
+ resetSpecieState();
  setOpen(false);
 };
 
- const handleSubmit = async (event) => {
- event.preventDefault();
- // Concatena os valores de stratum em uma única string
- const stratumString = specie.stratum.join(', ');
- // Transforma as strings de succession em arrays
- const successionArray = specie.succession.map(item => item.trim());
- try {
-     await addSpecie({ ...specie, stratum: stratumString, succession: successionArray, createdByUID: user.uid });
-     console.log('Espécie salva com sucesso');
-     setOpen(false);
- } catch (error) {
-     console.error('Erro ao salvar espécie:', error);
- }
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  // Verifique se o usuário está autenticado
+  const user = await getCurrentUser();
+  if (!user) {
+     console.error('Usuário não autenticado');
+     // Trate o caso em que o usuário não está autenticado
+     return;
+  }
+ 
+  // Concatena os valores de stratum em uma única string
+  const stratumString = specie.stratum.join(', ');
+  // Transforma as strings de succession em arrays
+  const successionArray = specie.succession.map(item => item.trim());
+  try {
+       await addSpecie({ ...specie, stratum: stratumString, succession: successionArray });
+       console.log('Espécie salva com sucesso');
+       setOpen(false);
+  } catch (error) {
+       console.error('Erro ao salvar espécie:', error);
+  }
  };
 
  return (

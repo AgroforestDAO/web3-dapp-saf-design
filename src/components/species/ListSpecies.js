@@ -16,7 +16,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-import { getSpecies, updateSpecie, deleteSpecie } from "../../services/speciesService"; // Ajuste o caminho conforme necessário
+import { getSpecies, updateSpecie, deleteSpecie } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
 
 const ListSpecies = () => {
  const [species, setSpecies] = useState([]);
@@ -86,7 +86,7 @@ const ListSpecies = () => {
                 <TableCell>{specie.name}</TableCell>
                 <TableCell>{specie.createdByName}</TableCell>
                 <TableCell>{specie.createdByEmail}</TableCell>
-                <TableCell>{specie.ownerAddress}</TableCell>
+                <TableCell>{specie.creatorAddress}</TableCell>
                 <TableCell align="right">
                  <Button color="error" variant="outlined" onClick={() => handleClickOpen(specie)}>Remover</Button>
                 </TableCell>

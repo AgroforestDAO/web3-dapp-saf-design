@@ -178,8 +178,13 @@ export async function addSeeds(payload) {
   };
 
   try {
-    const docRef = await addDoc(collection(db, "seeds"), data);
-    console.log("Semente registrada com sucesso no ID: ", docRef.id);
+    await addDoc(collection(db, "seeds"), data)
+    .then((docRef) => {
+      console.log("Documento escrito com ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.error("Erro ao adicionar o documento: ", error);
+    });
   } catch (error) {
     console.error("Erro ao adicionar semente", error);
   }  
@@ -252,6 +257,73 @@ export async function getProofs(safId) {
  
   return proofs;
  }
+
+ export async function getSpecies() {
+  const speciesRef = collection(db, "species");
+  let species = [];
+
+  try {
+    const querySnapshot = await getDocs(speciesRef);
+    querySnapshot.forEach((doc) => {
+      species.push({ id: doc.id, ...doc.data() });
+    });
+  } catch (error) {
+    console.error("Erro ao buscar todas as espécies: ", error);
+  }
+
+  return species;
+}
+
+export async function addSpecie(payload) {
+  const _user = await getCurrentUser();
+  const currentTime = new Date();
+  let data = {
+    name: payload.name,
+    stratum: payload.stratum,
+    succession: payload.succession,
+    createdByUID: _user.uid,
+    createdByName: _user.displayName,
+    createdByEmail: _user.email,
+    creatorAddress: _user.walletAddress,
+    ownerAddress: _user.walletAddress,
+    createdAt: currentTime,
+    updatedAt: currentTime,
+  };
+
+  try {
+    const docRef = await addDoc(collection(db, "species"), data);
+    console.log("Espécie registrada com sucesso no ID: ", docRef.id);
+  } catch (error) {
+    console.error("Erro ao adicionar espécie", error);
+  }
+}
+
+export async function updateSpecie(id, updatedData) {
+  try {
+    await db.collection("species").doc(id).update(updatedData);
+    console.log("Espécie atualizada com sucesso.");
+    return { success: true, message: "Espécie atualizada com sucesso." };
+  } catch (error) {
+    console.error("Erro ao atualizar espécie", error);
+    return {
+      success: false,
+      message: "Erro ao atualizar espécie.",
+      error: error,
+    };
+  }
+}
+
+export async function deleteSpecie(id) {
+  const speciesRef = collection(db, "species");
+  const speciesDoc = doc(speciesRef, id);
+
+  try {
+    await deleteDoc(speciesDoc);
+    console.log("Espécie excluída com sucesso!");
+  } catch (error) {
+    console.error("Erro ao excluir espécie: ", error);
+  }
+}
 
 
 
