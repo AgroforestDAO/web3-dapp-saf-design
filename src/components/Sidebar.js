@@ -22,7 +22,13 @@ const Sidebar = () => {
           <ListItemIcon>
             <HomeIcon style={{ color: 'white' }} />
           </ListItemIcon>
-          <ListItemText primary="Home" primaryTypographyProps={{ style: { color: 'white' } }} />
+          <ListItemText primary="My Safs" primaryTypographyProps={{ style: { color: 'white' } }} />
+        </ListItem>
+        <ListItem button component={Link} to="/all-safs" style={{ color: 'white' }}>
+          <ListItemIcon>
+            <HomeIcon style={{ color: 'white' }} />
+          </ListItemIcon>
+          <ListItemText primary="All Safs" primaryTypographyProps={{ style: { color: 'white' } }} />
         </ListItem>
         <ListItem button component={Link} to="/add-saf" style={{ color: 'white' }}>
           <ListItemIcon>

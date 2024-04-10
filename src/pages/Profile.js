@@ -6,6 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 import NavBar from "../components/Navbar";
 import { Container, Card, CardContent, Typography, Avatar } from "@mui/material";
 import styled from "@emotion/styled";
+import { getCache, setCache } from '../services/cacheService';
 
 const ProfileContainer = styled(Container)`
  && {
@@ -26,45 +27,66 @@ const ProfileAvatar = styled(Avatar)`
 `;
 
 const Profile = () => {
- const { user } = useAuthContext();
- const [displayName, setDisplayName] = useState("");
- const [email, setEmail] = useState("");
- const [photoURL, setPhotoURL] = useState("");
- const [phoneNumber, setPhoneNumber] = useState("");
- const [telegramUsername, setTelegramUsername] = useState("");
+  const { user } = useAuthContext();
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [telegramUsername, setTelegramUsername] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
+ 
+  useEffect(() => {
+     if (user) {
+       const cacheKey = `userProfile_${user.uid}`; // Chave de cache específica para o usuário
+       const cachedProfile = getCache(cacheKey);
+       if (cachedProfile) {
+         setDisplayName(cachedProfile.displayName);
+         setEmail(cachedProfile.email);
+         setPhotoURL(cachedProfile.photoURL);
+         setPhoneNumber(cachedProfile.phoneNumber);
+         setTelegramUsername(cachedProfile.telegramUsername || "");
+         setWalletAddress(cachedProfile.walletAddress || "");
+       } else {
+         const docRef = doc(db, "users", user.uid);
+         getDoc(docRef)
+           .then((docSnapshot) => {
+             if (docSnapshot.exists()) {
+               const data = docSnapshot.data();
+               setDisplayName(data.displayName);
+               setEmail(data.email);
+               setPhotoURL(data.photoURL);
+               setPhoneNumber(data.phoneNumber);
+               setTelegramUsername(data.telegramUsername || "");
+               setWalletAddress(data.walletAddress || "");
+               // Armazena os dados do perfil no cache
+               setCache(cacheKey, data);
+             }
+           })
+           .catch((error) => {
+             console.error("Erro ao buscar dados do usuário: ", error);
+           });
+       }
+     }
+  }, [user]);
 
- useEffect(() => {
-    if (user) {
-      const docRef = doc(db, "users", user.uid);
-      getDoc(docRef)
-        .then((docSnapshot) => {
-          if (docSnapshot.exists()) {
-            const data = docSnapshot.data();
-            setDisplayName(data.displayName);
-            setEmail(data.email);
-            setPhotoURL(data.photoURL);
-            setPhoneNumber(data.phoneNumber);
-            setTelegramUsername(data.telegramUsername || "");
-          }
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar dados do usuário: ", error);
-        });
+  const updateProfile = async () => {
+    try {
+       const docRef = doc(db, "users", user.uid);
+       await updateDoc(docRef, {
+         displayName,
+         email,
+         phoneNumber,
+         telegramUsername,
+         walletAddress
+       });
+       alert('Perfil atualizado com sucesso!');
+       // Limpa o cache do perfil do usuário após a atualização
+      //  removeCache(`userProfile_${user.uid}`);
+    } catch (error) {
+       console.error('Erro ao atualizar o perfil:', error);
+       alert('Ocorreu um erro ao atualizar o perfil. Por favor, tente novamente.');
     }
- }, [user]);
-
- const updateProfile = async () => {
-    if (user) {
-      const docRef = doc(db, "users", user.uid);
-      await updateDoc(docRef, {
-        displayName,
-        email,
-        phoneNumber,
-        telegramUsername,
-      });
-      alert('Perfil atualizado com sucesso!');
-    }
- };
+   };
 
  return (
     <>
@@ -108,6 +130,13 @@ const Profile = () => {
               label="Telegram Username"
               value={telegramUsername}
               onChange={(e) => setTelegramUsername(e.target.value)}
+              variant="outlined"
+              style={{ marginTop: 16, width: '100%' }}
+            />
+            <TextField
+              label="Wallet address"
+              value={walletAddress}
+              onChange={(e) => setWalletAddress(e.target.value)}
               variant="outlined"
               style={{ marginTop: 16, width: '100%' }}
             />

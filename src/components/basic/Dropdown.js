@@ -5,7 +5,7 @@ import Chip from "@mui/material/Chip";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 
 import speciesData from "../../especies";
-import { getSpecies } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
+import { getSpecies } from "../../services/speciesService"; // Ajuste o caminho conforme necessário
 
 function Dropdown({ selected = [], onSelect, stratumName, succession }) {
  const filterOptions = createFilterOptions({
