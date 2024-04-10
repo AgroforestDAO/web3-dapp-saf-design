@@ -96,7 +96,7 @@ const handleSubmit = async (event) => {
                  onChange={handleChange}
                  fullWidth
                 />
-                <TextField
+                {/* <TextField
                  margin="dense"
                  label="Ciclo de produção(em dias)"
                  name="productionCicle"
@@ -104,7 +104,7 @@ const handleSubmit = async (event) => {
                  onChange={handleChange}
                  fullWidth
                  type='number'
-                />
+                /> */}
                 <Autocomplete
                  multiple
                  options={stratumOptions}
