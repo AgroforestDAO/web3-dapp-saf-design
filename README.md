@@ -1,6 +1,6 @@
 # Documentação da Aplicação Web para Agroflorestas
 
-Esta aplicação web interage com o Firestore para gerenciar dados relacionados aos sistemas agroflorestais, incluindo usuários, SAFs (Sistemas Agroflorestais), mentores, espécies e provas de sucessão. A documentação abaixo detalha as principais funcionalidades e como utilizá-las.
+Esta aplicação web interage com o Firestore e IPFS para gerenciar dados relacionados aos sistemas agroflorestais, incluindo usuários, SAFs (Sistemas Agroflorestais), mentores, espécies e provas de sucessão. A documentação abaixo detalha as principais funcionalidades e como utilizá-las.
 
 ## Configuração e Autenticação
 
