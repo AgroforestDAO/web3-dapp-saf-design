@@ -75,11 +75,11 @@ const ListSpecies = () => {
           <TableHead>
             <TableRow>
               <TableCell>Nome da espécie</TableCell>
-              <TableCell>Registro criado por</TableCell>
-              <TableCell>Criado com o Email</TableCell>
-              <TableCell>Endereço ETH do criador</TableCell>
+              {/* <TableCell>Criado com o Email</TableCell>
+              <TableCell>Endereço ETH do criador</TableCell> */}
               <TableCell>Estrato</TableCell>
               <TableCell>Sucessão</TableCell>
+              <TableCell>Registro criado por</TableCell>
               <TableCell align="right">Ações</TableCell>
             </TableRow>
           </TableHead>
@@ -87,11 +87,11 @@ const ListSpecies = () => {
             {species.map((specie) => (
               <TableRow key={specie.id}>
                 <TableCell>{specie.name}</TableCell>
-                <TableCell>{specie.createdByName}</TableCell>
-                <TableCell>{specie.createdByEmail}</TableCell>
-                <TableCell>{specie.creatorAddress}</TableCell>
+                {/* <TableCell>{specie.createdByEmail}</TableCell>
+                <TableCell>{specie.creatorAddress}</TableCell> */}
                 <TableCell>{specie.stratum}</TableCell>
                 <TableCell>{specie.succession}</TableCell>
+                <TableCell>{specie.createdByName}</TableCell>
                 <TableCell align="right">
                  <Button color="error" variant="outlined" onClick={() => handleClickOpen(specie)}>Remover</Button>
                 </TableCell>
