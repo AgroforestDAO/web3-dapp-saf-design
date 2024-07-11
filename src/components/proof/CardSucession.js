@@ -94,12 +94,12 @@ export default function CardSucession({ safId }) {
              </Typography>
            </CardContent>
            <CardActions disableSpacing>
-             <IconButton aria-label="add to favorites">
+             {/* <IconButton aria-label="add to favorites">
                <FavoriteIcon />
              </IconButton>
              <IconButton aria-label="share">
                <ShareIcon />
-             </IconButton>
+             </IconButton> */}
              <ExpandMore
                expand={expanded}
                onClick={handleExpandClick}
@@ -111,11 +111,8 @@ export default function CardSucession({ safId }) {
            </CardActions>
            <Collapse in={expanded} timeout="auto" unmountOnExit>
              <CardContent>
-               <Typography paragraph>
-                 Nome do SAF: {item.safName}
-               </Typography>
-               <Typography paragraph>
-                 {item.imgURL}
+               <Typography fontSize="10px" paragraph>
+                 IPFS CID: {item.ipfsCID}
                </Typography>
              </CardContent>
            </Collapse>
