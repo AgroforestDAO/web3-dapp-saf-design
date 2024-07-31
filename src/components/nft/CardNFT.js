@@ -579,7 +579,7 @@ export default function CardNFT({ nftIds = [0,1,2,3,4,5] }) {
     <Grid container spacing={1}>
        {data.map((item, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
-         <Card sx={{ maxWidth: 700, marginBottom: 2 }}>
+         <Card sx={{ maxWidth: 600, marginBottom: 2 }}>
            <CardHeader
              avatar={
                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
