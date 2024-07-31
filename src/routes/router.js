@@ -10,6 +10,7 @@ import Details from '../components/saf/Details';
 import AddSaf from "../components/saf/AddSaf";
 import Admin from "../pages/Admin";
 import AllSafs from '../pages/AllSafs';
+import CardNFT from '../pages/Nfts';
 
 function AppRouter() {
  return (
@@ -23,6 +24,7 @@ function AppRouter() {
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/details/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} />
           <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+          <Route path="/nfts" element={<ProtectedRoute><CardNFT /></ProtectedRoute>} />
         </Routes>
       </Router>
     </AuthProvider>

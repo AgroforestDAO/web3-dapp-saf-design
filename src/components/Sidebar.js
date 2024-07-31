@@ -42,6 +42,12 @@ const Sidebar = () => {
           </ListItemIcon>
           <ListItemText primary="Admin" primaryTypographyProps={{ style: { color: 'white' } }} />
         </ListItem>
+        <ListItem button component={Link} to="/nfts" style={{ color: 'white' }}>
+          <ListItemIcon>
+            <SettingsIcon style={{ color: 'white' }} />
+          </ListItemIcon>
+          <ListItemText primary="NFTs" primaryTypographyProps={{ style: { color: 'white' } }} />
+        </ListItem>
       </List>
     </div>
  );
