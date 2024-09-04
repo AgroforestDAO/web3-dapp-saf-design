@@ -10,14 +10,16 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
+// import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getProofs } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
 import { format } from 'date-fns';
+
+const ipfsGateway = process.env.REACT_APP_IPFS_GATEWAY;
 
 const ExpandMore = styled((props) => {
  const { expand, ...other } = props;
@@ -33,7 +35,7 @@ const ExpandMore = styled((props) => {
 // Corrigindo a forma como o safId é acessado
 export default function CardSucession({ safId }) {
  const [expanded, setExpanded] = React.useState(false);
- const [data, setData] = useState([]);
+ const [data, setData] = useState([]); 
 
  useEffect(() => {
     const fetchProofs = async () => {
@@ -71,12 +73,18 @@ export default function CardSucession({ safId }) {
              title={item.telegramUsername}
              subheader={item.title}
            />
-           <CardMedia
-             component="img"
-             height="200"
-             image={item.imgURL}
-             alt={item.title}
-           />
+            {item.ipfsCID && (
+              <CardMedia
+                component="img"
+                height="200"
+                image={`${ipfsGateway}/${item.ipfsCID.trim().replace('/^+/', '')}`}
+                alt={item.title}
+              />
+            )}
+
+            {!item.ipfsCID && (
+              <div>No image available</div>
+            )}
            <CardContent>
              <Typography
                variant="body2"
