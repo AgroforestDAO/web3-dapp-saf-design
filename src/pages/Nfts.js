@@ -3,7 +3,7 @@ import CardNFT from "../components/nft/CardNFT";
 import Typography from "@mui/material/Typography";
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import safOverviewImage from '../assets/SafOverview.jpg';
 
 function Nfts({nftIds}) {

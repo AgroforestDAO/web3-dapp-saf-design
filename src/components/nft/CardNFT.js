@@ -561,6 +561,7 @@ async function fetchNFTDetails(nftIds) {
 	return Promise.all(detailsPromises);
   }
 
+
 export default function CardNFT({ nftIds = [0,1,2,3,4,5] }) {  
   const [data, setData] = useState([]);
 
@@ -572,6 +573,7 @@ export default function CardNFT({ nftIds = [0,1,2,3,4,5] }) {
     }
    
     fetchData();
+	// eslint-disable-next-line
   }, []);
   
 
