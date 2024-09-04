@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../basic/Dropdown";
 import TimePeriodStepper from "./TimePeriodStepper"; 
 import { AuthProvider } from "../../context/AuthContext";
-import image from "../../assets/Tempo.jpeg";
+import image from "../../assets/Tempo.png";
 import {
  Box,
  Button,
