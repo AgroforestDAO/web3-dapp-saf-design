@@ -24,6 +24,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import MainPageProofs from "../proof/index";
+import { getCurrentUser } from "../../services/firebaseService";
 
 function Details() {
  const navigate = useNavigate();
@@ -31,6 +32,7 @@ function Details() {
  const [safDetails, setSafDetails] = useState(null);
  const [loading, setLoading] = useState(true);
  const [open, setOpen] = useState(false);
+ const [isOwner, setIsOwner] = useState(false);
 
  const stratumNames = ["EMERGENTE", "ALTO", "MÉDIO", "BAIXO"];
  const successions = ["PLACENTA I", "PLACENTA II", "PIONEIRAS", "SECUNDÁRIAS", "CLÍMAX"];
@@ -56,17 +58,28 @@ function Details() {
         setLoading(false); // Certifique-se de que o estado de carregamento seja atualizado para false após a busca
       }
     };
+    
 
     fetchSafDetails();
  }, [id]); // Dependência do useEffect para re-executar ao mudar o ID
+ 
+ useEffect(() => {
+  const checkOwner = async () => {
+    if (!loading && safDetails) {
+      const currentUser = await getCurrentUser();
+      setIsOwner(currentUser.uid === safDetails.createdByUID);
+    }
+  };
+  checkOwner();
+}, [loading, safDetails]);
 
- const handleClickOpen = () => {
-    setOpen(true);
- };
+const handleClickOpen = () => {
+  setOpen(true);
+};
 
- const handleClose = () => {
-    setOpen(false);
- };
+const handleClose = () => {
+  setOpen(false);
+};
 
  const handleDelete = async () => {
     try {
@@ -190,9 +203,13 @@ function Details() {
             <MainPageProofs safId={id} />
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-              <Button variant="contained" color="error" onClick={handleClickOpen}>
-                Remover
-              </Button>
+              {isOwner && (
+                <>
+                  <Button variant="contained" color="error" onClick={handleClickOpen}>
+                    Remover
+                  </Button>
+                </>
+              )}
             </div>
           </CardContent>
         </Card>
