@@ -6,7 +6,7 @@ function MainPageProofs({safId}) {
   return (
     <div style={{ marginTop: '21px'}}>
       <Typography variant="h4" component="div" style={{ fontFamily: "Roboto", fontWeight: "bold" }}>Provas de sucessão</Typography>   
-      <CardSucession safId={safId}/>     
+      <CardSucession safId={safId} key={safId}/>     
     </div>
   );
 }

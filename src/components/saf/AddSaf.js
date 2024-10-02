@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from "../basic/Dropdown";
 import TimePeriodStepper from "./TimePeriodStepper"; 
 import { AuthProvider } from "../../context/AuthContext";
-import image from "../../assets/Tempo.jpeg";
+import image from "../../assets/Tempo.png";
 import {
  Box,
  Button,
@@ -17,9 +17,11 @@ import {
  TableRow,
  Paper,
  Typography,
+ FormControl,
 } from "@mui/material";
 
 import { getCurrentUser, addSaf } from "../../services/firebaseService";
+
 import AddSpecieModal from "../species/AddSpecieModal";
 
 function AddSaf() {
@@ -27,8 +29,8 @@ function AddSaf() {
 
  const [safName, setSafName] = useState("");
  const [guardian, setGuardian] = useState("");
- const [ guardianTelegramUsername, setGuardianTelegramUsername ] = useState("");
- const [ guardianEmail, setGuardianEmail ] = useState("");
+ const [guardianTelegramUsername, setGuardianTelegramUsername] = useState("");
+ const [guardianEmail, setGuardianEmail] = useState("");
  const [mentor, setMentor] = useState("");
  const [local, setLocal] = useState("");
  const [selectedSpecies, setSelectedSpecies] = useState({});
@@ -47,6 +49,8 @@ function AddSaf() {
  }
 
  async function handleSave() {
+    if (!validateForm()) return;
+
     const _user = await getCurrentUser();
     let payload = {
       safName: safName,
@@ -66,6 +70,36 @@ function AddSaf() {
     navigate("/home");
  }
 
+ function validateForm() {
+   let isValid = true;
+   
+   if (!safName.trim()) {
+     isValid = false;
+   }
+
+   if (!guardian.trim()) {
+     isValid = false;
+   }
+
+   if (!guardianTelegramUsername.trim()) {
+     isValid = false;
+   }
+
+   if (!guardianEmail.trim()) {
+     isValid = false;
+   }
+
+   if (!mentor.trim()) {
+     isValid = false;
+   }
+
+   if (!local.trim()) {
+     isValid = false;
+   }
+
+   return isValid;
+ }
+
  return (
     <AuthProvider value={{ selectedSpecies, setSelectedSpecies }}>
       <Container maxWidth="xlg">
@@ -80,74 +114,80 @@ function AddSaf() {
             gutterBottom
             style={{ fontFamily: "Roboto" }}>Novo SAF
           </Typography>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="safName"
-            label="Nome do SAF"
-            name="safName"
-            autoFocus
-            value={safName}
-            onChange={(e) => setSafName(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="guardian"
-            label="Nome do guardião"
-            id="guardian"
-            value={guardian}
-            onChange={(e) => setGuardian(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="guardianEmail"
-            label="Email do guardião"
-            id="guardianEmail"
-            value={guardianEmail}
-            onChange={(e) => setGuardianEmail(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="guardianTelegram"
-            label="Telegram @handle do guardião"
-            id="guardianTelegram"
-            value={guardianTelegramUsername}
-            onChange={(e) => setGuardianTelegramUsername(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="mentor"
-            label="Mentor da sucessão"
-            id="mentor"
-            value={mentor}
-            onChange={(e) => setMentor(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="local"
-            label="Cidade, UF"
-            placeholder="Ex.: Bias Fortes, MG"
-            id="local"
-            value={local}
-            onChange={(e) => setLocal(e.target.value)}
-          />
+          <FormControl fullWidth margin="normal" error={!validateForm()}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="safName"
+              label="Nome do SAF"
+              name="safName"
+              autoFocus
+              value={safName}
+              onChange={(e) => setSafName(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth margin="normal" error={!validateForm()}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              name="guardian"
+              label="Nome do guardião"
+              id="guardian"
+              value={guardian}
+              onChange={(e) => setGuardian(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth margin="normal" error={!validateForm()}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              name="guardianEmail"
+              label="Email do guardião"
+              id="guardianEmail"
+              value={guardianEmail}
+              onChange={(e) => setGuardianEmail(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth margin="normal" error={!validateForm()}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              name="guardianTelegram"
+              label="Telegram @handle do guardião"
+              id="guardianTelegram"
+              value={guardianTelegramUsername}
+              onChange={(e) => setGuardianTelegramUsername(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth margin="normal" error={!validateForm()}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              name="mentor"
+              label="Mentor da sucessão"
+              id="mentor"
+              value={mentor}
+              onChange={(e) => setMentor(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth margin="normal" error={!validateForm()}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              name="local"
+              label="Cidade, UF"
+              placeholder="Ex.: Bias Fortes, MG"
+              id="local"
+              value={local}
+              onChange={(e) => setLocal(e.target.value)}
+            />
+          </FormControl>
           
         </Box>
         <Box my={4}>
@@ -164,6 +204,17 @@ function AddSaf() {
             alt="Descrição da imagem"
             style={{ width: "100%" }}
           />
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            align="left"
+            style={{ marginTop: "1px", marginBottom: "20px" }}
+          >
+            Quadrinhos de João Lotufo e César Trevelin. Fonte:{" "}
+            <a href="https://issuu.com/joao13/docs/agrofloresta-em-quadrinhos-e-book" target="_blank" rel="noopener noreferrer">
+              https://issuu.com/joao13/docs/agrofloresta-em-quadrinhos-e-book
+            </a>
+          </Typography>
           <TimePeriodStepper />
           <AddSpecieModal />
           <TableContainer component={Paper}>
@@ -214,6 +265,9 @@ function AddSaf() {
             </Table>
           </TableContainer>
           <Box my={4} display="flex" justifyContent="center">
+          {!validateForm() ? (
+            <Typography variant="body2" color="error">Por favor, preencha todos os campos obrigatórios.</Typography>
+          ) : (
             <Button
               variant="contained"
               style={{ backgroundColor: "#617c59", marginBottom:"50px" }}
@@ -221,7 +275,8 @@ function AddSaf() {
             >
               Salvar
             </Button>
-          </Box>
+          )}
+        </Box>
         </Box>
       </Container>
     </AuthProvider>

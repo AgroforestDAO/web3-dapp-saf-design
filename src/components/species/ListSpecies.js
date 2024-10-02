@@ -16,18 +16,19 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-import { getSpecies, updateSpecie, deleteSpecie } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
+import { getSpecies, deleteSpecie } from "../../services/firebaseService"; // Ajuste o caminho conforme necessário
 
 const ListSpecies = () => {
  const [species, setSpecies] = useState([]);
  const [open, setOpen] = useState(false);
  const [selectedSpecie, setSelectedSpecie] = useState(null);
- const [data, setData] = useState([]);
+ // const [data, setData] = useState([]);
 
  useEffect(() => {
     const fetchSpecies = async () => {
       const speciesList = await getSpecies();
       setSpecies(speciesList);
+      console.log(speciesList);
     };
 
     fetchSpecies();
@@ -42,13 +43,13 @@ const ListSpecies = () => {
     setOpen(false);
  };
 
-  const handleEdit = (specie, id) => {
-    const updatedData = { name: "Item Atualizado" }; // Ajuste conforme necessário
-    updateSpecie(specie, updatedData);
-    setData(
-      data.map((specie) => (specie.id === id ? { ...specie, ...updatedData } : specie))
-    );
-  };
+  // const handleEdit = (specie, id) => {
+  //   const updatedData = { name: "Item Atualizado" }; // Ajuste conforme necessário
+  //   updateSpecie(specie, updatedData);
+  //   setData(
+  //     data.map((specie) => (specie.id === id ? { ...specie, ...updatedData } : specie))
+  //   );
+  // };
 
   const handleDelete = async () => {
     try {
@@ -74,9 +75,11 @@ const ListSpecies = () => {
           <TableHead>
             <TableRow>
               <TableCell>Nome da espécie</TableCell>
+              {/* <TableCell>Criado com o Email</TableCell>
+              <TableCell>Endereço ETH do criador</TableCell> */}
+              <TableCell>Estrato</TableCell>
+              <TableCell>Sucessão</TableCell>
               <TableCell>Registro criado por</TableCell>
-              <TableCell>Criado com o Email</TableCell>
-              <TableCell>Endereço ETH do criador</TableCell>
               <TableCell align="right">Ações</TableCell>
             </TableRow>
           </TableHead>
@@ -84,9 +87,11 @@ const ListSpecies = () => {
             {species.map((specie) => (
               <TableRow key={specie.id}>
                 <TableCell>{specie.name}</TableCell>
+                {/* <TableCell>{specie.createdByEmail}</TableCell>
+                <TableCell>{specie.creatorAddress}</TableCell> */}
+                <TableCell>{specie.stratum}</TableCell>
+                <TableCell>{specie.succession}</TableCell>
                 <TableCell>{specie.createdByName}</TableCell>
-                <TableCell>{specie.createdByEmail}</TableCell>
-                <TableCell>{specie.creatorAddress}</TableCell>
                 <TableCell align="right">
                  <Button color="error" variant="outlined" onClick={() => handleClickOpen(specie)}>Remover</Button>
                 </TableCell>

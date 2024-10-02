@@ -79,7 +79,7 @@ const handleSubmit = async (event) => {
 
  return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} style={{marginBottom: "40px"}}>
         Adicionar Espécie
       </Button>
       <Dialog open={open} onClose={handleClose}>

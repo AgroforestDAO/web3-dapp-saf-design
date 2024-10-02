@@ -4,8 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 
-import speciesData from "../../especies";
-import { getSpecies } from "../../services/speciesService"; // Ajuste o caminho conforme necessário
+import { getSpecies } from "../../services/firebaseService";
 
 function Dropdown({ selected = [], onSelect, stratumName, succession }) {
  const filterOptions = createFilterOptions({
@@ -17,10 +16,9 @@ function Dropdown({ selected = [], onSelect, stratumName, succession }) {
 
  useEffect(() => {
     const fetchSpecies = async () => {
-      const remoteSpecies = await getSpecies(); // Supondo que getSpecies retorna uma lista de espécies
-      // Combinando os dados locais com os remotos
-      const combined = [...speciesData, ...remoteSpecies];
-      setCombinedSpeciesList(combined);
+      const remoteSpecies = await getSpecies();
+      
+      setCombinedSpeciesList(remoteSpecies);
     };
 
     fetchSpecies();
